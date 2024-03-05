@@ -1,12 +1,13 @@
 import Container from "@/shared/ui/container/Container";
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import styles from "./skills.module.scss";
+import styles from "./experience.module.scss";
 import Image from "next/image";
 import elips from "../../../../public/images/gradients/grad.png";
 import { Slider } from "@/shared/ui/slider/Slider";
 import { useInView } from "react-intersection-observer";
-const Skills = () => {
+import Company from "./companies/Company";
+const Expericene = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
@@ -18,7 +19,7 @@ const Skills = () => {
   }, [inView]);
 
   return (
-    <div className={styles.wrapper} id="skills">
+    <div className={styles.wrapper} id="Expericene">
       <Container>
         <div className={styles.skill} ref={ref}>
           <motion.h3
@@ -33,8 +34,8 @@ const Skills = () => {
             }}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            >
-            My{" "}
+          >
+            Experience
           </motion.h3>
           <motion.h4
             variants={{
@@ -48,15 +49,15 @@ const Skills = () => {
             }}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            >
-            Skillset{" "}
+          >
+            history{" "}
           </motion.h4>
         </div>
+        <Company />
       </Container>
-      <Slider />
       <Image src={elips} className={styles.gradient} alt="" />
     </div>
   );
 };
 
-export default Skills;
+export default Expericene;

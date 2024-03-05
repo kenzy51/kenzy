@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/shared/ui/cursor/Cursor.jsx", "src/widgets/developerPage/Portfolio/Portfolio.tsx"  ],
   "exclude": [
     "node_modules"
   ]

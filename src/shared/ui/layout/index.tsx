@@ -6,7 +6,7 @@ interface IChildren {
 }
 const Layout = ({ children }: IChildren) => {
   return (
-    <div>
+    <div style={{ overflowY: "hidden" }}>
       <Header />
       {children}
       <Footer />
