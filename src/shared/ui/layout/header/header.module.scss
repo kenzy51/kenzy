@@ -1,0 +1,25 @@
+.header {
+  height: 100px;
+  background: transparent;
+  display: flex;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .logoImage {
+    z-index: 22;
+    width: 120px;
+    height: 80px;
+  }
+  .info {
+    width: auto;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+    p {
+      cursor: pointer;
+    }
+  }
+}

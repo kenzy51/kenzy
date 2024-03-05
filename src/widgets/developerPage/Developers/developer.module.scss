@@ -1,0 +1,26 @@
+.about {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  max-width: 600px;
+  h2 {
+    font-size: 88px;
+    font-weight: 400;
+  }
+  h6 {
+    line-height: 50px;
+    font-weight: 300;
+    font-size: 28px;
+  }
+}
+
+.avatar {
+  border-radius: 10px;
+}
+
+.wrapper {
+  padding-top: 160px;
+  height: 100vh;
+}

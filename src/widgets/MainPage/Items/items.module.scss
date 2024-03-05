@@ -1,0 +1,49 @@
+.main {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+.item {
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+// .item::after {
+//   content: "";
+//   position: absolute;
+//   bottom: -10px;
+//   left: 50%;
+//   width: 0;
+//   height: 2px;
+//   background: white;
+//   transition: width 0.5s, left 0.5s;
+// }
+
+// .item::after {
+//   content: "";
+//   position: absolute;
+//   bottom: 500px;
+//   right: 50%;
+//   width: 0;
+//   height: 2px;
+//   background: white;
+//   transition: width 0.5s, left 0.5s;
+// }
+
+// .item:hover::after {
+//   width: 100%;
+//   left: 0;
+// }
+
+.title{
+  font-weight: 400;
+}
+
+.inner {
+  width: 45%;
+  display: flex;
+  justify-content: space-around;
+}

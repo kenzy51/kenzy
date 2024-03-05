@@ -1,0 +1,16 @@
+.main {
+  transition-duration: 1s;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url("../../public/images/background1.webp");
+  background-position: center; /* Center the background image */
+  background-size: cover; /* Cover the entire area of the container */
+  background-repeat: no-repeat; /* Do not repeat the image */
+}
+
+.innerBlock {
+  display: flex;
+  flex-direction: column;
+  row-gap: 100px;
+}

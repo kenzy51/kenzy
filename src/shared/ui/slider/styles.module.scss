@@ -1,0 +1,24 @@
+.block {
+  width: 240px;
+  height: 240px;
+  border-radius: 30px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+ 
+}
+
+.slide {
+  max-height: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  object-fit: contain;
+  width: 160px;
+  height: 160px;
+}
