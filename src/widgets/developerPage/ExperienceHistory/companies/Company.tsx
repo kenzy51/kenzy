@@ -5,19 +5,29 @@ import { useInView } from "react-intersection-observer";
 
 const companiesData = [
   {
-    title: "Senior Frontend Developer",
-    company: "Agency Self Estate",
-    duration: "January 2021 - September",
+    title: "Full Stack Engineer",
+    company: "Jal Group Asia",
+    duration: "October 2023 - present ",
   },
   {
-    title: "Middle Frontend Developer",
-    company: "Agency Self Estate",
-    duration: "January 2022 - September",
+    title: "Software Engineer",
+    company: "Sigma Software Solutions",
+    duration: "September 2023 - present ",
   },
   {
-    title: "Junior Frontend Developer",
-    company: "Agency Self Estate",
-    duration: "January 2019 - September",
+    title: "Full Stack Developer",
+    company: "DataXWay",
+    duration: "Febrary 2023 - August 2023",
+  },
+  {
+    title: "Full Stack Developer",
+    company: "Discovery Studio",
+    duration: "January 2022 - Febrary 2023",
+  },
+  {
+    title: "Frontend Developer",
+    company: "Discovery Studio",
+    duration: "August 2020 - Febrary 2023",
   },
 ];
 

@@ -1,8 +1,18 @@
 import { motion, useTransform, useScroll } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./portfolio.module.scss";
 import { useInView } from "react-intersection-observer";
+import antd from "../../../../public/images/skills/antd.png";
+import Image from "next/image";
+import react from "../../../../public/images/skills/react.png";
+import redux from "../../../../public/images/skills/redux-icon.webp";
+import nest from "../../../../public/images/skills/nest.png";
+import postgres from "../../../../public/images/skills/postgres.png";
+import git from "../../../../public/images/skills/git.png";
+// portfolio
+import jalgroup from "../../../../public/images/portfolio/jalGroup.png";
+
 const Example = () => {
   return (
     <div>
@@ -79,11 +89,29 @@ const HorizontalScrollCarousel = () => {
   );
 };
 
+const AdditionalBlock = ({ card }: any) => {
+  return (
+    <div className="absolute inset-0 z-20 grid p-5 place-content-center bg-black/70 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+      <p className={styles.text}>{card?.description}</p>
+      <div className="flex gap-4 mt-[20px]">
+        {card?.technologies?.map((image: any, index: any) => (
+          <div className={styles.imageBlock}>
+            <Image key={index} src={image} className={styles.image} alt="asd" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Card = ({ card }: { card: CardType }) => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div
       key={card.id}
-      className="group relative h-[450px] w-[450px] overflow-hidden bg-neutral-200 rounded-[20px]"
+      className="group  h-[450px] w-[450px] overflow-hidden bg-neutral-200 rounded-[20px] relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div
         style={{
@@ -94,35 +122,44 @@ const Card = ({ card }: { card: CardType }) => {
         className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
       ></div>
       <div className="absolute inset-0 z-10 grid place-content-center">
-        <p className="bg-gradient-to-br from-white/20 to-white/0 p-8 text-6xl font-black uppercase text-white backdrop-blur-lg">
-          {card.title}
-        </p>
+        {isHovered ? (
+          <AdditionalBlock info={card} />
+        ) : (
+          <p className="bg-gradient-to-br from-white/40 to-black/90 p-8 text-6xl font-semibold uppercase text-white backdrop-blur-lg">
+            {card.title}
+          </p>
+        )}
       </div>
+      <AdditionalBlock card={card} />
     </div>
   );
 };
-
 export default Example;
 
 type CardType = {
-  url: string;
+  url: string | any;
   title: string;
+  description?: string;
+  technologies?: Array<any>;
   id: number;
 };
 
 const cards: CardType[] = [
   {
-    url: "/imgs/abstract/1.jpg",
+    url: "/images/portfolio/jalGroup.png", // Update the URL
     title: "Jal Group Asia",
+    technologies: [antd, nest, postgres, redux, react, git],
+    description:
+      "Jal Group Asia- is a platform building modern residential complexes, green areas, public spaces, and more.",
     id: 1,
   },
   {
-    url: "/imgs/abstract/2.jpg",
+    url: "/images/portfolio/barca.png",
     title: "Barca experience KG",
     id: 2,
   },
   {
-    url: "/imgs/abstract/3.jpg",
+    url: "/images/portfolio/ergotech.png",
     title: "Ergotech io",
     id: 3,
   },

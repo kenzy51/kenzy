@@ -44,7 +44,7 @@ export const Slider = () => {
       <div ref={ref}>
         <Swiper
           loop={true}
-          slidesPerView={4}
+          slidesPerView={5}
           spaceBetween={30}
           grabCursor={true}
           className="mySwiper"
