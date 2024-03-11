@@ -10,8 +10,13 @@ import redux from "../../../../public/images/skills/redux-icon.webp";
 import nest from "../../../../public/images/skills/nest.png";
 import postgres from "../../../../public/images/skills/postgres.png";
 import git from "../../../../public/images/skills/git.png";
+import next from "../../../../public/images/skills/next.png";
+import framer from "../../../../public/images/skills/framer.png";
+import fsd from "../../../../public/images/skills/fsd.avif";
+
 // portfolio
 import jalgroup from "../../../../public/images/portfolio/jalGroup.png";
+import ButtonLink from "@/shared/ui/buttons/buttonLink";
 
 const Example = () => {
   return (
@@ -100,6 +105,9 @@ const AdditionalBlock = ({ card }: any) => {
           </div>
         ))}
       </div>
+      <div className={styles.forButton}>
+        {card?.link && <ButtonLink link={card.link} />}
+      </div>
     </div>
   );
 };
@@ -142,25 +150,35 @@ type CardType = {
   description?: string;
   technologies?: Array<any>;
   id: number;
+  link?: string;
 };
 
 const cards: CardType[] = [
   {
     url: "/images/portfolio/jalGroup.png", // Update the URL
     title: "Jal Group Asia",
-    technologies: [antd, nest, postgres, redux, react, git],
+    technologies: [antd, nest, postgres, redux, react, git, fsd],
     description:
-      "Jal Group Asia- is a platform building modern residential complexes, green areas, public spaces, and more.",
+      "Jal Group Asia - is a platform building modern residential complexes, green areas, public spaces, and more.",
+    link: "https://mfc.barcelona.kg/",
     id: 1,
   },
   {
     url: "/images/portfolio/barca.png",
     title: "Barca experience KG",
+    link: "https://experience.barcelona.kg/",
+    description:
+      "Barca Experience KG - is a kyrgyz barcelona academy, which is inherited by official barcelona academy.",
+    technologies: [antd, nest, postgres, redux, react, git, fsd],
     id: 2,
   },
   {
     url: "/images/portfolio/ergotech.png",
     title: "Ergotech io",
+    technologies: [next, react, git, framer],
+    link: "https://ergotech.io/",
+    description:
+      "ErgoTech.io - is a company, which specializes in developing cross-platform mobile applications, dynamic web solutions, and a spectrum of innovative technologies to meet diverse business needs",
     id: 3,
   },
   {
