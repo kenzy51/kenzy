@@ -13,6 +13,7 @@ import git from "../../../../public/images/skills/git.png";
 import next from "../../../../public/images/skills/next.png";
 import framer from "../../../../public/images/skills/framer.png";
 import fsd from "../../../../public/images/skills/fsd.avif";
+import mui from "../../../../public/images/skills/mui.png";
 
 // portfolio
 import jalgroup from "../../../../public/images/portfolio/jalGroup.png";
@@ -20,7 +21,7 @@ import ButtonLink from "@/shared/ui/buttons/buttonLink";
 
 const Example = () => {
   return (
-    <div>
+    <div id="portfolio">
       <HorizontalScrollCarousel />
     </div>
   );
@@ -182,23 +183,49 @@ const cards: CardType[] = [
     id: 3,
   },
   {
-    url: "/imgs/abstract/4.jpg",
-    title: "",
+    url: "/images/portfolio/effafa.png",
+    title: "Effafa",
+    technologies: [next, react, git, framer],
+    description:
+      "Effafa - is a project to help deaf people to gain some knowledge and experience in real world",
+    link: "https://effafa.com/",
     id: 4,
   },
   {
-    url: "/imgs/abstract/5.jpg",
-    title: "Title 5",
+    url: "/images/portfolio/myPost.png",
+    title: "My Post",
+    link: "https://kyrgyz-post.vercel.app/",
+    technologies: [postgres, react, git, framer, mui, nest],
+    description:
+      "My Post - is a project to make faster delivers in Central Asia. Also make automatization of postal processes in country. This project includes also admin panel",
     id: 5,
   },
   {
-    url: "/imgs/abstract/6.jpg",
-    title: "Title 6",
+    url: "/images/portfolio/tenloc.png",
+    link: " https://tenloc-pi.vercel.app/",
+    title: "Tenloc",
+    description:
+      "Tenloc - is a project to search and book excursions. This project also was aimed to help to find appropriate destinations",
+
+    technologies: [react, git],
     id: 6,
   },
   {
-    url: "/imgs/abstract/7.jpg",
-    title: "Title 7",
+    url: "/images/portfolio/tunukOi.png",
+    link: "https://ku-tengri-landing.vercel.app/",
+    title: "Tunuk-Oi",
+    description:
+      "Tunuk Oi - is a landing page to make psychological game. It was aimed to make online consultation with psychologist to determine inner psychotype",
+    technologies: [react, git],
+    id: 7,
+  },
+  {
+    url: "/images/portfolio/dataxway.jpg",
+    link: "https://dataxway-front.vercel.app/",
+    title: "Dataxway",
+    description:
+      "Dataxway - is a IT company's website which develops high end features for web and mobile.",
+    technologies: [next, react, git, framer],
     id: 7,
   },
 ];

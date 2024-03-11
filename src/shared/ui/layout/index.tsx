@@ -9,7 +9,6 @@ const Layout = ({ children }: IChildren) => {
     <div style={{ overflowY: "hidden" }}>
       <Header />
       {children}
-      <Footer />
     </div>
   );
 };

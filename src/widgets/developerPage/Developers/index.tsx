@@ -7,7 +7,7 @@ import me from "../../../../public/images/non.png";
 import { motion } from "framer-motion";
 const Developer = () => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id="bio">
       <Container>
         <motion.div className={styles.about}>
           <motion.div

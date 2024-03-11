@@ -7,6 +7,7 @@ import Expericene from "@/widgets/developerPage/ExperienceHistory/Experience";
 import Cursor from "@/shared/ui/cursor/Cursor";
 import AnimatedCursor from "react-animated-cursor";
 import Example from "@/widgets/developerPage/Portfolio/Portfolio";
+import Footer from "@/shared/ui/layout/footer/Footer";
 const index = () => {
   return (
     <>
@@ -24,6 +25,7 @@ const index = () => {
         <Expericene />
       </Layout>
       <Example />
+      <Footer/>
     </>
   );
 };

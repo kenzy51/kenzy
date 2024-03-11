@@ -19,7 +19,7 @@ const Expericene = () => {
   }, [inView]);
 
   return (
-    <div className={styles.wrapper} id="Expericene">
+    <div className={styles.wrapper} id="experience">
       <Container>
         <div className={styles.skill} ref={ref}>
           <motion.h3
