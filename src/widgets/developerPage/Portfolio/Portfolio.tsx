@@ -159,7 +159,7 @@ const cards: CardType[] = [
     title: "Jal Group Asia",
     technologies: [antd, nest, postgres, redux, react, git],
     description:
-      "Jal Group Asia - is a platform building modern residential complexes, green areas, public spaces, and more.",
+      "Jal Group Asia - is a platform building modern residential complexes, green areas, public spaces, and more.This project also includes CRM system",
     link: "https://mfc.barcelona.kg/",
     id: 1,
   },
@@ -168,7 +168,7 @@ const cards: CardType[] = [
     title: "Barca experience KG",
     link: "https://experience.barcelona.kg/",
     description:
-      "Barca Experience KG - is a kyrgyz barcelona academy, which is inherited by official barcelona academy.",
+      "Barca Experience KG - is a kyrgyz barcelona academy, which is inherited by official barcelona academy. This project also includes CRM system",
     technologies: [antd, nest, postgres, redux, react, git],
     id: 2,
   },
