@@ -12,7 +12,6 @@ import postgres from "../../../../public/images/skills/postgres.png";
 import git from "../../../../public/images/skills/git.png";
 import next from "../../../../public/images/skills/next.png";
 import framer from "../../../../public/images/skills/framer.png";
-import fsd from "../../../../public/images/skills/fsd.avif";
 import mui from "../../../../public/images/skills/mui.png";
 
 // portfolio
@@ -156,9 +155,9 @@ type CardType = {
 
 const cards: CardType[] = [
   {
-    url: "/images/portfolio/jalGroup.png", // Update the URL
+    url: "/images/portfolio/jalGroup.png",
     title: "Jal Group Asia",
-    technologies: [antd, nest, postgres, redux, react, git, fsd],
+    technologies: [antd, nest, postgres, redux, react, git],
     description:
       "Jal Group Asia - is a platform building modern residential complexes, green areas, public spaces, and more.",
     link: "https://mfc.barcelona.kg/",
@@ -170,7 +169,7 @@ const cards: CardType[] = [
     link: "https://experience.barcelona.kg/",
     description:
       "Barca Experience KG - is a kyrgyz barcelona academy, which is inherited by official barcelona academy.",
-    technologies: [antd, nest, postgres, redux, react, git, fsd],
+    technologies: [antd, nest, postgres, redux, react, git],
     id: 2,
   },
   {
