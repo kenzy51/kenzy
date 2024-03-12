@@ -28,8 +28,15 @@ const smallBlocksData = [
     description: "Look at my experience to know my qualification better.",
     link: "experience",
   },
+  // {
+  //   header: "Resume",
+  //   description: "You can check my CV to learn me better.",
+  //   link: "experience",
+  // },
 ];
 
+const resume =
+  "https://drive.google.com/file/d/1MrydNwHyQJv_xMvli9bHvrvlsr5OGGW4/view";
 const Footer = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -126,6 +133,25 @@ const Footer = () => {
                 <p>{block.description}</p>
               </motion.div>
             ))}
+            <motion.div
+              className={styles.small}
+              variants={{
+                hidden: { opacity: 0, y: -50 },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                  transition: { duration: 0.5, delay: 1.4 },
+                },
+              }}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+            >
+              <a href={resume} target="_blank">
+                <h5 className={styles.header}>Resume</h5>
+              </a>
+              <p>You can check my CV to learn me better.</p>
+            </motion.div>
           </div>
         </div>
       </Container>
