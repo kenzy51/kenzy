@@ -8,7 +8,10 @@ import { Link } from "react-scroll";
 
 import github from "../../../../../public/images/githubW.svg";
 import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
+import { useTranslations } from "next-intl";
 const Header = () => {
+  const t = useTranslations();
+
   return (
     <Container>
       <div className={styles.header}>
@@ -17,19 +20,19 @@ const Header = () => {
         </div>
         <div className={styles.info}>
           <Link to="bio" smooth={true} duration={500}>
-            <p>Bio</p>
+            <p>{t("bio")}</p>
           </Link>{" "}
           <Link to="skills" smooth={true} duration={500}>
-            <p>Skillset</p>
+            <p>{t("skills")}</p>
           </Link>
           <Link to="experience" smooth={true} duration={500}>
-            <p>Experience</p>
+            <p>{t("experience")}</p>
           </Link>{" "}
           <Link to="portfolio" smooth={true} duration={500}>
-            <p>Portfolio</p>
+            <p>{t("portfolio")}</p>
           </Link>{" "}
           <Link to="contact" smooth={true} duration={500}>
-            <p>Contact</p>
+            <p>{t("contact")}</p>
           </Link>
           <div className={styles.icons}>
             <a

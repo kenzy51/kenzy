@@ -17,6 +17,7 @@ import mui from "../../../../public/images/skills/mui.png";
 // portfolio
 import jalgroup from "../../../../public/images/portfolio/jalGroup.png";
 import ButtonLink from "@/shared/ui/buttons/buttonLink";
+import { useTranslations } from "next-intl";
 
 const Example = () => {
   return (
@@ -42,7 +43,7 @@ const HorizontalScrollCarousel = () => {
   });
 
   const x = useTransform(scrollYProgress, [0, 1], ["2%", "-95%"]);
-
+  const t = useTranslations();
   return (
     <section ref={targetRef} className="relative h-[300vh]">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
@@ -79,11 +80,7 @@ const HorizontalScrollCarousel = () => {
               my works
             </motion.h4>
 
-            <p className={styles.small}>
-              I've played a key role in developing impactful projects. Here's a
-              curated selection showcasing my expertise and the achieved
-              results.
-            </p>
+            <p className={styles.small}>{t("worksDescription")}</p>
           </div>
           {cards.map((card) => {
             return <Card card={card} key={card.id} />;

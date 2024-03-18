@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
         options={{ showSpinner: false }}
         shallowRouting
       />
-      <Component {...pageProps} />
+      <Component {...pageProps}/>
     </NextIntlClientProvider>
   );
 }

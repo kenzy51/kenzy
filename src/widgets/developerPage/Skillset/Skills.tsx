@@ -6,6 +6,7 @@ import Image from "next/image";
 import elips from "../../../../public/images/gradients/grad.png";
 import { Slider } from "@/shared/ui/slider/Slider";
 import { useInView } from "react-intersection-observer";
+import { useTranslations } from "next-intl";
 const Skills = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -16,6 +17,7 @@ const Skills = () => {
       console.log("Component is in view!");
     }
   }, [inView]);
+  const t = useTranslations();
 
   return (
     <div className={styles.wrapper} id="skills">
@@ -33,8 +35,8 @@ const Skills = () => {
             }}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            >
-            My{" "}
+          >
+            {t("my2")}{" "}
           </motion.h3>
           <motion.h4
             variants={{
@@ -48,8 +50,8 @@ const Skills = () => {
             }}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            >
-            Skillset{" "}
+          >
+            {t("skills")}
           </motion.h4>
         </div>
       </Container>

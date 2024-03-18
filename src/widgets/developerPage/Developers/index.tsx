@@ -5,7 +5,9 @@ import Image from "next/image";
 import me from "../../../../public/images/non.png";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 const Developer = () => {
+  const t = useTranslations();
   return (
     <div className={styles.wrapper} id="bio">
       <Container>
@@ -37,13 +39,9 @@ const Developer = () => {
               initial="hidden"
               animate="visible"
             >
-              Hello, world!
+              {t("hello")}
             </motion.h2>{" "}
-            <h6>
-              My name is Kanat, or just simply Kenzy. I’m a FullStack developer
-              with more than 3 years experience from Central Asia. I bring new
-              ideas to the code and implement any desire in vision!
-            </h6>
+            <h6>{t("description")}</h6>
           </motion.div>
           <motion.div
             variants={{

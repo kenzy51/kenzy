@@ -7,10 +7,12 @@ import elips from "../../../../public/images/gradients/grad.png";
 import { Slider } from "@/shared/ui/slider/Slider";
 import { useInView } from "react-intersection-observer";
 import Company from "./companies/Company";
+import { useTranslations } from "next-intl";
 const Expericene = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
+  const t = useTranslations();
 
   useEffect(() => {
     if (inView) {
@@ -35,7 +37,7 @@ const Expericene = () => {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            Experience
+            {t("experience")}
           </motion.h3>
           <motion.h4
             variants={{
@@ -50,7 +52,7 @@ const Expericene = () => {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            history{" "}
+            {t("work")}
           </motion.h4>
         </div>
         <Company />
