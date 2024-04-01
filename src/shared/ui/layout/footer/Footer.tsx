@@ -106,7 +106,7 @@ const Footer = () => {
               </a>
             </div>
             <div className={styles.bottom}>
-              <p>© 2024 Kenzy Fullstack</p>
+              <p>Designed and Developed by Kenzy Fullstack</p>
               <p>Powered by NextJs 14</p>
             </div>
           </div>

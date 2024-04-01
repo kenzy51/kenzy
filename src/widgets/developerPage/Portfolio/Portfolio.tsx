@@ -1,6 +1,5 @@
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
 import styles from "./portfolio.module.scss";
 import { useInView } from "react-intersection-observer";
 import antd from "../../../../public/images/skills/antd.png";
@@ -43,7 +42,76 @@ const HorizontalScrollCarousel = () => {
   });
 
   const x = useTransform(scrollYProgress, [0, 1], ["2%", "-95%"]);
+
   const t = useTranslations();
+
+  const cards: CardType[] = [
+    {
+      url: "/images/portfolio/jalGroup.png",
+      title: "Jal Group Asia",
+      technologies: [antd, nest, postgres, redux, react, git],
+      description: t("jalGroup"),
+      link: "https://mfc.barcelona.kg/",
+      id: 1,
+    },
+    {
+      url: "/images/portfolio/barca.png",
+      title: "Barca experience KG",
+      link: "https://experience.barcelona.kg/",
+      description: t("barca"),
+      technologies: [antd, nest, postgres, redux, react, git],
+      id: 2,
+    },
+    {
+      url: "/images/portfolio/ergotech.png",
+      title: "Ergotech io",
+      technologies: [next, react, git, framer],
+      link: "https://ergotech.io/",
+      description: t("ergo"),
+      id: 3,
+    },
+    {
+      url: "/images/portfolio/effafa.png",
+      title: "Effafa",
+      technologies: [next, react, git, framer],
+      description: t("effafa"),
+      link: "https://effafa.com/",
+      id: 4,
+    },
+    {
+      url: "/images/portfolio/myPost.png",
+      title: "My Post",
+      link: "https://kyrgyz-post.vercel.app/",
+      technologies: [postgres, react, git, framer, mui, nest],
+      description: t("myPost"),
+      id: 5,
+    },
+    {
+      url: "/images/portfolio/tenloc.png",
+      link: " https://tenloc-pi.vercel.app/",
+      title: "Tenloc",
+      description: t("tenloc"),
+      technologies: [react, git],
+      id: 6,
+    },
+    {
+      url: "/images/portfolio/tunukOi.png",
+      link: "https://ku-tengri-landing.vercel.app/",
+      title: "Tunuk-Oi",
+      description: t("tunuk"),
+      technologies: [react, git],
+      id: 7,
+    },
+    {
+      url: "/images/portfolio/dataxway.jpg",
+      link: "https://dataxway-front.vercel.app/",
+      title: "Dataxway",
+      description: t("dataxway"),
+      technologies: [next, react, git, framer],
+      id: 7,
+    },
+  ];
+
   return (
     <section ref={targetRef} className="relative h-[300vh]">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
@@ -110,6 +178,8 @@ const AdditionalBlock = ({ card }: any) => {
 };
 
 const Card = ({ card }: { card: CardType }) => {
+  const t = useTranslations();
+
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
@@ -149,79 +219,3 @@ type CardType = {
   id: number;
   link?: string;
 };
-
-const cards: CardType[] = [
-  {
-    url: "/images/portfolio/jalGroup.png",
-    title: "Jal Group Asia",
-    technologies: [antd, nest, postgres, redux, react, git],
-    description:
-      "Jal Group Asia - is a platform building modern residential complexes, green areas, public spaces, and more.This project also includes CRM system",
-    link: "https://mfc.barcelona.kg/",
-    id: 1,
-  },
-  {
-    url: "/images/portfolio/barca.png",
-    title: "Barca experience KG",
-    link: "https://experience.barcelona.kg/",
-    description:
-      "Barca Experience KG - is a kyrgyz barcelona academy, which is inherited by official barcelona academy. This project also includes CRM system",
-    technologies: [antd, nest, postgres, redux, react, git],
-    id: 2,
-  },
-  {
-    url: "/images/portfolio/ergotech.png",
-    title: "Ergotech io",
-    technologies: [next, react, git, framer],
-    link: "https://ergotech.io/",
-    description:
-      "ErgoTech.io - is a company, which specializes in developing cross-platform mobile applications, dynamic web solutions, and a spectrum of innovative technologies to meet diverse business needs",
-    id: 3,
-  },
-  {
-    url: "/images/portfolio/effafa.png",
-    title: "Effafa",
-    technologies: [next, react, git, framer],
-    description:
-      "Effafa - is a project to help deaf people to gain some knowledge and experience in real world",
-    link: "https://effafa.com/",
-    id: 4,
-  },
-  {
-    url: "/images/portfolio/myPost.png",
-    title: "My Post",
-    link: "https://kyrgyz-post.vercel.app/",
-    technologies: [postgres, react, git, framer, mui, nest],
-    description:
-      "My Post - is a project to make faster delivers in Central Asia. Also make automatization of postal processes in country. This project includes also admin panel",
-    id: 5,
-  },
-  {
-    url: "/images/portfolio/tenloc.png",
-    link: " https://tenloc-pi.vercel.app/",
-    title: "Tenloc",
-    description:
-      "Tenloc - is a project to search and book excursions. This project also was aimed to help to find appropriate destinations",
-
-    technologies: [react, git],
-    id: 6,
-  },
-  {
-    url: "/images/portfolio/tunukOi.png",
-    link: "https://ku-tengri-landing.vercel.app/",
-    title: "Tunuk-Oi",
-    description:
-      "Tunuk Oi - is a landing page to make psychological game. It was aimed to make online consultation with psychologist to determine inner psychotype",
-    technologies: [react, git],
-    id: 7,
-  },
-  {
-    url: "/images/portfolio/dataxway.jpg",
-    link: "https://dataxway-front.vercel.app/",
-    title: "Dataxway",
-    description:
-      "Dataxway - is a IT company's website which develops high end features for web and mobile.",
-    technologies: [next, react, git, framer],
-    id: 7,
-  },
-];
