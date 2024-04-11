@@ -10,6 +10,7 @@ import grad from "../../../../../public/images/gradients/grad.png";
 import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
 import { link } from "fs";
 import { Link } from "react-scroll";
+import { useRouter } from "next/router";
 const smallBlocksData = [
   {
     header: "Works",
@@ -37,10 +38,13 @@ const smallBlocksData = [
 
 const resume =
   "https://drive.google.com/file/d/1MrydNwHyQJv_xMvli9bHvrvlsr5OGGW4/view";
+const resumeRu =
+  " https://drive.google.com/file/d/1nQFYtpUAecz-e0eYa0l376B4Tkvr6Wip/view?usp=sharing";
 const Footer = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
+  const router = useRouter();
 
   useEffect(() => {
     if (inView) {
@@ -147,8 +151,11 @@ const Footer = () => {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
             >
-              <a href={resume} target="_blank">
-                <h5 className={styles.header}>Resume</h5>
+              <a
+                href={(router.locale = "ru" ? resumeRu : resume)}
+                target="_blank"
+              >
+                <h5 className={styles.header}>{(router.locale = "ru" ? 'Резюме' : 'Resume')}</h5>
               </a>
               <p>You can check my CV to learn me better.</p>
             </motion.div>
