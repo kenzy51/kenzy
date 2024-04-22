@@ -37,9 +37,9 @@ const smallBlocksData = [
 ];
 
 const resume =
-  "https://drive.google.com/file/d/1MrydNwHyQJv_xMvli9bHvrvlsr5OGGW4/view";
+  "https://drive.google.com/file/d/1kiv_Rg3z5P_fCLI9OwBORc3j-uzgWBO9/view?usp=sharing";
 const resumeRu =
-  " https://drive.google.com/file/d/1nQFYtpUAecz-e0eYa0l376B4Tkvr6Wip/view?usp=sharing";
+  " https://drive.google.com/file/d/1jQiiIhdiG0KCS-zHnTuxA37Qp-qxnutw/view?usp=sharing";
 const Footer = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -102,7 +102,7 @@ const Footer = () => {
                 <Image alt="" src={git} width={30} />
               </a>{" "}
               <a
-                href="https://www.linkedin.com/in/nazarov-kanat-438baa247/"
+                href="https://www.linkedin.com/in/kanat-nazarov-438baa247/"
                 target="_blank"
                 className={styles.link}
               >
@@ -155,7 +155,9 @@ const Footer = () => {
                 href={(router.locale = "ru" ? resumeRu : resume)}
                 target="_blank"
               >
-                <h5 className={styles.header}>{(router.locale = "ru" ? 'Резюме' : 'Resume')}</h5>
+                <h5 className={styles.header}>
+                  {(router.locale = "ru" ? "Резюме" : "Resume")}
+                </h5>
               </a>
               <p>You can check my CV to learn me better.</p>
             </motion.div>

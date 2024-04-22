@@ -43,7 +43,7 @@ const Header = () => {
               <Image alt="" src={github} width={30} />
             </a>{" "}
             <a
-              href="https://www.linkedin.com/in/nazarov-kanat-438baa247/"
+              href="https://www.linkedin.com/in/kanat-nazarov-438baa247/"
               target="_blank"
               className={styles.link}
             >
