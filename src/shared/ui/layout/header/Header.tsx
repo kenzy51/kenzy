@@ -49,7 +49,7 @@ const Header = () => {
                   </nav>
                   <div className={styles.icons}>
                     <a href="https://github.com/kenzy51" target="_blank" className={styles.link}><Image alt="Github" src={github} width={30} /></a>
-                    <a href="https://www.linkedin.com/in/kanat-nazarov-438baa247/" target="_blank" className={styles.link}><Image alt="LinkedIn" src={linkedin} width={30} /></a>
+                    <a href="https://www.linkedin.com/in/kanat-nazar-a8b55533a/" target="_blank" className={styles.link}><Image alt="LinkedIn" src={linkedin} width={30} /></a>
                   </div>
                 </motion.div>
               )}

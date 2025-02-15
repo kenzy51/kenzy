@@ -53,7 +53,7 @@ const HorizontalScrollCarousel = () => {
       title: "Jal Group Asia",
       technologies: [antd, nest, postgres, redux, react, git],
       description: t("jalGroup"),
-      link: "https://mfc.barcelona.kg/",
+      link: "https://jalgroupasia.kg/",
       id: 1,
     },
     {
