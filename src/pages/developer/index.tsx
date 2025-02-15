@@ -13,7 +13,11 @@ import styles from "./styles.module.scss";
 import Container from "@/shared/ui/container/Container";
 
 import { motion } from "framer-motion";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
+
 const GreetingPage = ({ onClose }: { onClose: () => void }) => {
+  const isMobile = useMediaQuery("md");
+
   const router = useRouter();
   const handleLanguageChange = (locale: string) => {
     onClose();
@@ -37,8 +41,12 @@ const GreetingPage = ({ onClose }: { onClose: () => void }) => {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h1>Hello, World!</h1>
-            <p>Please select your preferred language:</p>
+            <h1 style={{ fontSize: isMobile ? "24px" : "36px" }}>
+              Hello, World!
+            </h1>
+            <p style={{ fontSize: isMobile ? "16px" : "20px" }}>
+              Please select your preferred language:
+            </p>
           </motion.div>{" "}
           {/* division */}
           <motion.div
@@ -48,12 +56,17 @@ const GreetingPage = ({ onClose }: { onClose: () => void }) => {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5, delay: 0.7 }}
           >
-            <h1>Привет, Мир! </h1>
-            <p>Выберите предпочитаемый язык:</p>
+            <h1 style={{ fontSize: isMobile ? "24px" : "36px" }}>
+              Привет, Мир!{" "}
+            </h1>
+            <p style={{ fontSize: isMobile ? "16px" : "20px" }}>
+              Выберите предпочитаемый язык:
+            </p>
           </motion.div>
         </div>
         <div className={styles.langs}>
           <motion.button
+            style={{ fontSize: isMobile ? "16px" : "20px" }}
             onClick={() => handleLanguageChange("en")}
             initial={{ opacity: 0, x: -150 }}
             animate={{ opacity: 1, x: 0 }}
@@ -63,6 +76,7 @@ const GreetingPage = ({ onClose }: { onClose: () => void }) => {
             English
           </motion.button>
           <motion.button
+            style={{ fontSize: isMobile ? "16px" : "20px" }}
             onClick={() => handleLanguageChange("ru")}
             initial={{ opacity: 0, x: 150 }}
             animate={{ opacity: 1, x: 0 }}
@@ -114,8 +128,7 @@ export default Index;
 export async function getStaticProps(context: any) {
   return {
     props: {
-      messages: (await import(`../../../messages/${context.locale}`))
-        .default,
+      messages: (await import(`../../../messages/${context.locale}`)).default,
     },
   };
 }

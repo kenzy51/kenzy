@@ -3,14 +3,12 @@ import { motion } from "framer-motion";
 import styles from "./footer.module.scss";
 import Container from "../../container/Container";
 import { useInView } from "react-intersection-observer";
-import Image from "next/image";
-
 import git from "../../../../../public/images/githubW.svg";
-import grad from "../../../../../public/images/gradients/grad.png";
 import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
 import { link } from "fs";
 import { Link } from "react-scroll";
 import { useRouter } from "next/router";
+import Image from "next/image";
 const smallBlocksData = [
   {
     header: "Works",
@@ -29,17 +27,11 @@ const smallBlocksData = [
     description: "Look at my experience to know my qualification better.",
     link: "experience",
   },
-  // {
-  //   header: "Resume",
-  //   description: "You can check my CV to learn me better.",
-  //   link: "experience",
-  // },
 ];
 
 const resume =
-  "https://drive.google.com/file/d/1kiv_Rg3z5P_fCLI9OwBORc3j-uzgWBO9/view?usp=sharing";
-const resumeRu =
-  " https://drive.google.com/file/d/1jQiiIhdiG0KCS-zHnTuxA37Qp-qxnutw/view?usp=sharing";
+  "https://drive.google.com/file/d/1JlD0TpBVghUE261ZFkMtZqTheEjDaQch/view?usp=sharing";
+
 const Footer = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -151,13 +143,8 @@ const Footer = () => {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
             >
-              <a
-                href={(router.locale = "ru" ? resumeRu : resume)}
-                target="_blank"
-              >
-                <h5 className={styles.header}>
-                  {(router.locale = "ru" ? "Резюме" : "Resume")}
-                </h5>
+              <a href={resume} target="_blank">
+                <h5 className={styles.header}>{"Resume"}</h5>
               </a>
               <p>You can check my CV to learn me better.</p>
             </motion.div>

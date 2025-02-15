@@ -7,6 +7,7 @@ import elips from "../../../../public/images/gradients/grad.png";
 import { Slider } from "@/shared/ui/slider/Slider";
 import { useInView } from "react-intersection-observer";
 import { useTranslations } from "next-intl";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
 const Skills = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -18,6 +19,7 @@ const Skills = () => {
     }
   }, [inView]);
   const t = useTranslations();
+  const isTablet = useMediaQuery("md");
 
   return (
     <div className={styles.wrapper} id="skills">
@@ -39,6 +41,7 @@ const Skills = () => {
             {t("my2")}{" "}
           </motion.h3>
           <motion.h4
+            style={{ fontSize: isTablet ? "24px" : "36px" }}
             variants={{
               hidden: { opacity: 0, x: -50 },
               visible: {

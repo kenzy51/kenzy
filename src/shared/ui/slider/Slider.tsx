@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { Pagination, FreeMode } from "swiper/modules";
 import { useInView } from "react-intersection-observer";
 
 import styles from "./styles.module.scss";
@@ -20,6 +20,7 @@ import mongo from "../../../../public/images/skills/mongodb.svg";
 import nest from "../../../../public/images/skills/nest.png";
 import ts from "../../../../public/images/skills/ts.png";
 import next from "../../../../public/images/skills/nextjs3.webp";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
 
 const images = [react, js, html, git, css, node, mongo, nest, ts, next];
 
@@ -38,15 +39,19 @@ export const Slider = () => {
       console.log("Component is in view!");
     }
   }, [inView]);
-
+  const isMobile = useMediaQuery("exsm");
+  const isTablet = useMediaQuery("md");
+  const slidesPerV = isMobile ? 2 : isTablet ? 3 : 4; 
   return (
     <>
       <div ref={ref}>
         <Swiper
           loop={true}
-          slidesPerView={5}
-          spaceBetween={30}
+          slidesPerView={slidesPerV}
+          spaceBetween={10}
           grabCursor={true}
+          freeMode={true}
+          modules={[FreeMode, Pagination]}
           className="mySwiper"
         >
           {images.map((image, index) => (

@@ -1,6 +1,6 @@
 {
-  "bio": "bio",
-  "contact": "contact",
+  "bio": "Bio",
+  "contact": "Contact",
   "description": "My name is Kanat, or just simply Kenzy. I’m a FullStack developer with more than 3 years experience from Central Asia. I bring new ideas to the code and implement any desire in vision!",
   "experience": "Experience",
   "experienceDesc": "Look at my experience to know my qualification better.",
@@ -11,7 +11,7 @@
   "my2": "My",
   "work": "Work",
   "myWorks": "Let's see my works",
-  "portfolio": "portfolio",
+  "portfolio": "Portfolio",
   "resumeDesc": "You can check my CV to learn me better.",
   "skills": "Skills",
   "skillsDesc": "Check out the things I'm good at, from building websites to design and more.",

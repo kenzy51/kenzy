@@ -50,7 +50,7 @@ const Items = () => {
               transition: { ...variants.visible.transition, delay: 3.3 },
             },
           }}
-          whileHover="hover" // Trigger hover animation
+          whileHover="hover" 
         >
           <motion.h5 variants={hoverVariants} className={styles.title}>
             <Link href="/musician">Kenzy Musician</Link>

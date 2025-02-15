@@ -1,6 +1,5 @@
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import styles from "./portfolio.module.scss";
 import { useInView } from "react-intersection-observer";
 import antd from "../../../../public/images/skills/antd.png";
 import Image from "next/image";
@@ -17,6 +16,9 @@ import mui from "../../../../public/images/skills/mui.png";
 import jalgroup from "../../../../public/images/portfolio/jalGroup.png";
 import ButtonLink from "@/shared/ui/buttons/buttonLink";
 import { useTranslations } from "next-intl";
+
+import styles from "./portfolio.module.scss";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
 
 const Example = () => {
   return (
@@ -47,7 +49,7 @@ const HorizontalScrollCarousel = () => {
 
   const cards: CardType[] = [
     {
-      url: "/images/portfolio/jalGroup.png",
+      url: "/images/portfolio/jalgroupNew.png",
       title: "Jal Group Asia",
       technologies: [antd, nest, postgres, redux, react, git],
       description: t("jalGroup"),
@@ -64,9 +66,9 @@ const HorizontalScrollCarousel = () => {
     },
     {
       url: "/images/portfolio/ergotech.png",
-      title: "Ergotech io",
+      title: "Fusion Web",
       technologies: [next, react, git, framer],
-      link: "https://ergotech.io/",
+      link: "https://fusionweb.vercel.app/",
       description: t("ergo"),
       id: 3,
     },
@@ -181,10 +183,18 @@ const Card = ({ card }: { card: CardType }) => {
   const t = useTranslations();
 
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = useMediaQuery("exsm");
+  const mobileStyles = isMobile
+    ? "group h-[250px] w-[250px] overflow-hidden bg-neutral-200 rounded-[20px] relative"
+    : "group h-[450px] w-[450px] overflow-hidden bg-neutral-200 rounded-[20px] relative";
+
+  const mobileStylesforP = isMobile
+    ? "bg-gradient-to-br from-white/40 to-black/90 p-8 text-2xl font-semibold uppercase text-white backdrop-blur-lg"
+    : "bg-gradient-to-br from-white/40 to-black/90 p-8 text-5xl font-semibold uppercase text-white backdrop-blur-lg";
   return (
     <div
       key={card.id}
-      className="group  h-[450px] w-[450px] overflow-hidden bg-neutral-200 rounded-[20px] relative"
+      className={mobileStyles}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -200,9 +210,7 @@ const Card = ({ card }: { card: CardType }) => {
         {isHovered ? (
           <AdditionalBlock info={card} />
         ) : (
-          <p className="bg-gradient-to-br from-white/40 to-black/90 p-8 text-6xl font-semibold uppercase text-white backdrop-blur-lg">
-            {card.title}
-          </p>
+          <p className={mobileStylesforP}>{card.title}</p>
         )}
       </div>
       <AdditionalBlock card={card} />

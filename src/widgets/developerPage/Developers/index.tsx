@@ -2,16 +2,20 @@ import Container from "@/shared/ui/container/Container";
 import React from "react";
 import styles from "./developer.module.scss";
 import Image from "next/image";
-import me from "../../../../public/images/non.png";
-
+import me from "./non.png";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
+
 const Developer = () => {
   const t = useTranslations();
+  const isMobile = useMediaQuery("md");
+  const imageSize = "auto";
+
   return (
     <div className={styles.wrapper} id="bio">
       <Container>
-        <motion.div className={styles.about}>
+        <motion.div className={styles.about} initial="hidden" animate="visible">
           <motion.div
             className={styles.text}
             variants={{
@@ -19,49 +23,38 @@ const Developer = () => {
               visible: {
                 opacity: 1,
                 x: 0,
-                y: 0,
                 transition: { duration: 0.8, delay: 0.1 },
               },
             }}
-            initial="hidden"
-            animate="visible"
           >
+            <br />
             <motion.h2
               variants={{
                 hidden: { opacity: 0, x: -20 },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  transition: { duration: 0.2 },
-                },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.2 } },
               }}
-              initial="hidden"
-              animate="visible"
             >
               {t("hello")}
-            </motion.h2>{" "}
+            </motion.h2>
             <h6>{t("description")}</h6>
           </motion.div>
+
           <motion.div
+            className={styles.imageWrapper}
             variants={{
               hidden: { opacity: 0, x: 80 },
               visible: {
                 opacity: 1,
                 x: 0,
-                y: 0,
                 transition: { duration: 0.6, delay: 0.5 },
               },
             }}
-            initial="hidden"
-            animate="visible"
           >
             <Image
               src={me}
-              alt=""
-              width={500}
-              height={500}
-              className={styles.avatar}
+              alt="Developer"
+              style={{ width: "100%" }}
+              priority
             />
           </motion.div>
         </motion.div>

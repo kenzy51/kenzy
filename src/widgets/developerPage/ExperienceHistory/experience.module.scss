@@ -2,24 +2,85 @@
   width: 100vw;
   height: auto;
   margin-top: 20px;
+  padding: 0 20px;
+
   h3 {
     font-weight: 300;
     color: grey;
-    font-size: 70px;
+    font-size: 50px;
+
+    @media (max-width: 1024px) {
+      font-size: 40px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 35px;
+    }
+
+    @media (max-width: 480px) {
+      margin-top: -280px;
+
+      font-size: 28px;
+    }
   }
+
   h4 {
-    font-size: 70px;
+    font-size: 50px;
     font-weight: 300;
+
+    @media (max-width: 1024px) {
+      font-size: 40px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 35px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 28px;
+    }
   }
 }
+
 .gradient {
-  top: 1900px;
-  left: -220px;
   position: absolute;
   width: 450px;
   height: 490px;
+  top: 1800px;
+  left: -220px;
+  z-index: -1;
+
+  @media (max-width: 1024px) {
+    width: 350px;
+    height: 390px;
+    top: 1500px;
+    left: -180px;
+  }
+
+  @media (max-width: 768px) {
+    width: 250px;
+    height: 290px;
+    top: 1200px;
+    left: -140px;
+  }
+
+  @media (max-width: 480px) {
+    width: 180px;
+    height: 220px;
+    top: 1000px;
+    left: -100px;
+  }
 }
 
 .skill {
   margin-bottom: 70px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 30px;
+  }
 }

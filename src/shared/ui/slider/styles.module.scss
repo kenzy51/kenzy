@@ -8,17 +8,26 @@
   align-items: center;
   position: relative;
 
- 
+  @media (max-width: 480px) {
+    max-width: 160px;
+    max-height: 160px;
+  }
 }
 
 .slide {
   max-height: 400px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  // min-width: 240px; 
 }
 
 .image {
   object-fit: contain;
   width: 160px;
   height: 160px;
+  @media (max-width: 580px) {
+    max-width: 110px;
+    max-height: 110px;
+  }
 }

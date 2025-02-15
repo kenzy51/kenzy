@@ -3,8 +3,14 @@
   h3 {
     font-weight: 300;
     font-size: 70px;
+    @media (max-width: 480px) {
+      font-size: 30px;
+    }
   }
   h4 {
+    @media (max-width: 480px) {
+      font-size: 30px;
+    }
     font-size: 70px;
     font-weight: 300;
   }
@@ -13,9 +19,18 @@
     line-height: 30px;
     max-width: 400px;
     color: #68727d;
+    @media (max-width: 480px) {
+      font-size: 15px;
+      line-height: 20px;
+      max-width: 300px;
+    }
   }
 }
-
+.small {
+  @media (max-width: 480px) {
+    max-width: 300px;
+  }
+}
 .text {
   font-weight: 300;
   font-size: 19px;
@@ -40,5 +55,3 @@
   top: 20px;
   right: 20px;
 }
-
-

@@ -1,6 +1,7 @@
 import React from "react";
+import { useEffect, useState } from "react";
 
-export const screenSizes = {
+export const screenSizes: any = {
   moreXl: 1700,
   middleXl: 1400,
   xl: 1200,
@@ -19,20 +20,25 @@ export type screenType =
   | "moreXl"
   | "middleXl";
 
-export default function useMediaQuery(screen: screenType): boolean | undefined {
-  const query = `(max-width: ${screenSizes[screen]}px)`;
-  const [matches, setMatches] = React.useState<boolean | undefined>(undefined);
+export default function useMediaQuery(screen: string): boolean {
+  const [matches, setMatches] = useState<boolean>(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia(`(max-width: ${screenSizes[screen]}px)`).matches
+      : false
+  );
 
-  React.useEffect(() => {
-    const media = window.matchMedia(query);
-    setMatches(media.matches);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const media = window.matchMedia(`(max-width: ${screenSizes[screen]}px)`);
+      setMatches(media.matches);
 
-    const updateMatches = (event: MediaQueryListEvent) =>
-      setMatches(event.matches);
-    media.addEventListener("change", updateMatches);
+      const updateMatches = (event: MediaQueryListEvent) =>
+        setMatches(event.matches);
+      media.addEventListener("change", updateMatches);
 
-    return () => media.removeEventListener("change", updateMatches);
-  }, [query]);
+      return () => media.removeEventListener("change", updateMatches);
+    }
+  }, [screen]);
 
   return matches;
 }

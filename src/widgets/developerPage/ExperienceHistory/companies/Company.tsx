@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import styles from "./company.module.scss";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+
+import styles from "./company.module.scss";
+
 const companiesData = [
   {
     title: "Full Stack Engineer",
