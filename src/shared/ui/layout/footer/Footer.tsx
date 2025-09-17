@@ -30,7 +30,7 @@ const smallBlocksData = [
 ];
 
 const resume =
-  "https://drive.google.com/file/d/1JlD0TpBVghUE261ZFkMtZqTheEjDaQch/view?usp=sharing";
+  "https://drive.google.com/file/d/1_cf0scTwCvFotT9oEWp1LDER1cWcRk6z/view?usp=sharing";
 
 const Footer = () => {
   const [ref, inView] = useInView({
@@ -94,7 +94,7 @@ const Footer = () => {
                 <Image alt="" src={git} width={30} />
               </a>{" "}
               <a
-                href="https://www.linkedin.com/in/kanat-nazarov-438baa247/"
+                href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
                 target="_blank"
                 className={styles.link}
               >
@@ -102,7 +102,7 @@ const Footer = () => {
               </a>
             </div>
             <div className={styles.bottom}>
-              <p>Designed and Developed by Kenzy Fullstack</p>
+              <p>Designed and Developed by Kenzy Full Stack</p>
               <p>Powered by NextJs 14</p>
             </div>
           </div>

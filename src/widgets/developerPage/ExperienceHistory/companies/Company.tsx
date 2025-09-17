@@ -6,29 +6,24 @@ import styles from "./company.module.scss";
 
 const companiesData = [
   {
-    title: "Full Stack Engineer",
-    company: "Jal Group Asia",
-    duration: "October 2023 - present ",
+    title: "CEO & Full Stack Developer",
+    company: "Fusion Web Works",
+    duration: "March 2025 - present",
   },
   {
-    title: "Software Engineer",
-    company: "Sigma Software Solutions",
-    duration: "September 2023 - present ",
+    title: "Frontend Engineer",
+    company: "StreamTech",
+    duration: "March 2023 to Mar 2025"
   },
   {
-    title: "Full Stack Developer",
+    title: "Frontend Engineer",
     company: "DataXWay",
-    duration: "Febrary 2023 - August 2023",
+    duration: "Feb 2022 - Feb 2023",
   },
   {
     title: "Full Stack Developer",
     company: "Discovery Studio",
-    duration: "January 2022 - Febrary 2023",
-  },
-  {
-    title: "Frontend Developer",
-    company: "Discovery Studio",
-    duration: "August 2020 - Febrary 2023",
+    duration: "Feb 2021 - Febrary 2022",
   },
 ];
 interface CompanyProps {

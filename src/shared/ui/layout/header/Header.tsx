@@ -47,9 +47,10 @@ const Header = () => {
                     <Link to="portfolio" smooth={true} duration={500} onClick={toggleMenu}><p>{t("portfolio")}</p></Link>
                     <Link to="contact" smooth={true} duration={500} onClick={toggleMenu}><p>{t("contact")}</p></Link>
                   </nav>
+                  {/* SOME CODE to commit*/}
                   <div className={styles.icons}>
                     <a href="https://github.com/kenzy51" target="_blank" className={styles.link}><Image alt="Github" src={github} width={30} /></a>
-                    <a href="https://www.linkedin.com/in/kanat-nazar-a8b55533a/" target="_blank" className={styles.link}><Image alt="LinkedIn" src={linkedin} width={30} /></a>
+                    <a href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/" target="_blank" className={styles.link}><Image alt="LinkedIn" src={linkedin} width={30} /></a>
                   </div>
                 </motion.div>
               )}
@@ -66,7 +67,7 @@ const Header = () => {
             </nav>
             <div className={styles.icons}>
               <a href="https://github.com/kenzy51" target="_blank" className={styles.link}><Image alt="Github" src={github} width={30} /></a>
-              <a href="https://www.linkedin.com/in/kanat-nazarov-438baa247/" target="_blank" className={styles.link}><Image alt="LinkedIn" src={linkedin} width={30} /></a>
+              <a href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/" target="_blank" className={styles.link}><Image alt="LinkedIn" src={linkedin} width={30} /></a>
             </div>
           </div>
         )}
