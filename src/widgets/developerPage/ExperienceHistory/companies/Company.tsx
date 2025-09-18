@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import antd from "../../../../../public/images/skills/antd.png";
 import react from "../../../../../public/images/skills/react.png";
@@ -68,16 +68,19 @@ const companiesData = [
     icons: [react, antd, nest, postgres, git],
   },
 ];
+
 interface CompanyProps {
   title: string;
   company: string;
   duration: string;
   index: number;
-  description?: any[];
-  icons?: any;
+  description?: string[];
+  icons?: any[];
 }
+
 const classNameBlock =
   "backdrop-blur-xl bg-[rgba(44,44,44,0.5)] border border-[rgba(246,246,249,0.08)] rounded-lg p-6 text-white transition-all duration-300 ease-in-out hover:scale-[1.01] hover:bg-[rgba(60,60,60,0.6)] hover:shadow-lg hover:shadow-[rgba(0,0,0,0.4)]";
+
 const SingleCompany: React.FC<CompanyProps> = ({
   title,
   company,
@@ -86,28 +89,18 @@ const SingleCompany: React.FC<CompanyProps> = ({
   index,
   icons,
 }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      console.log("Component is in view!");
-    }
-  }, [inView]);
+  const [ref, inView] = useInView({ triggerOnce: true });
 
   return (
     <motion.div
       ref={ref}
       className={styles.mainWrapper}
-      key={index}
       variants={{
-        hidden: { opacity: 0, y: -50 },
+        hidden: { opacity: 0, y: -80 },
         visible: {
           opacity: 1,
-          x: 0,
           y: 0,
-          transition: { duration: 0.2, delay: 0.1 * index },
+          transition: { duration: 0.4, delay: 0.15 * index },
         },
       }}
       initial="hidden"
@@ -120,6 +113,7 @@ const SingleCompany: React.FC<CompanyProps> = ({
         </div>
         <div className={styles.rightBlock}>{duration}</div>
       </div>
+
       <div className={classNameBlock}>
         {Array.isArray(description) ? (
           <ul className="list-disc list-inside space-y-2 text-gray-300">
@@ -130,8 +124,9 @@ const SingleCompany: React.FC<CompanyProps> = ({
         ) : (
           <p className="text-gray-300">{description}</p>
         )}
+
         <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-5 mt-4 sm:mt-6">
-          {icons?.map((icon: any, i: number) => (
+          {icons?.map((icon, i) => (
             <div
               key={i}
               className="p-2 sm:p-3 rounded-xl border border-[rgba(246,246,249,0.08)] bg-[rgba(60,60,60,0.35)] backdrop-blur-md shadow-md hover:scale-110 hover:shadow-lg hover:shadow-[rgba(0,0,0,0.35)] transition-all duration-300"
@@ -147,85 +142,25 @@ const SingleCompany: React.FC<CompanyProps> = ({
           ))}
         </div>
       </div>
+
       <div className={styles.border}></div>
     </motion.div>
   );
 };
 
 const Company: React.FC = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-  });
-
   return (
     <div>
       {companiesData.map((company, index) => (
-        <React.Fragment key={index}>
-          {index === 0 ? (
-            <SingleCompany
-              title={company.title}
-              company={company.company}
-              duration={company.duration}
-              index={index}
-              description={company.description}
-              icons={company.icons}
-            />
-          ) : (
-            <motion.div
-              ref={ref}
-              className={styles.mainWrapper}
-              key={index}
-              variants={{
-                hidden: { opacity: 0, y: -150 },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  transition: { duration: 0.2, delay: 0.2 * index },
-                },
-              }}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-            >
-              <div className={styles.wrapper}>
-                <div className={styles.leftBlock}>
-                  <h2>{company.title}</h2>
-                  <p>{company.company}</p>
-                </div>
-                <div className={styles.rightBlock}>{company.duration}</div>
-              </div>
-              <div className={classNameBlock}>
-                {Array.isArray(company.description) ? (
-                  <ul className="list-disc list-inside space-y-2 text-gray-300">
-                    {company.description.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-gray-300">{company.description}</p>
-                )}
-                <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-5 mt-4 sm:mt-6">
-                  {company.icons?.map((icon: any, i: number) => (
-                    <div
-                      key={i}
-                      className="p-2 sm:p-3 rounded-xl border border-[rgba(246,246,249,0.08)] bg-[rgba(60,60,60,0.35)] backdrop-blur-md shadow-md hover:scale-110 hover:shadow-lg hover:shadow-[rgba(0,0,0,0.35)] transition-all duration-300"
-                    >
-                      <Image
-                        src={icon}
-                        alt="tech-icon"
-                        width={32}
-                        height={32}
-                        className="sm:w-9 sm:h-9 rounded-md object-contain"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className={styles.border}></div>
-            </motion.div>
-          )}
-        </React.Fragment>
+        <SingleCompany
+          key={index}
+          title={company.title}
+          company={company.company}
+          duration={company.duration}
+          index={index}
+          description={company.description}
+          icons={company.icons}
+        />
       ))}
     </div>
   );
