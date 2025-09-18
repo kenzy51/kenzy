@@ -36,7 +36,7 @@ const Developer = () => {
             >
               {t("hello")}
             </motion.h2>
-            <h6>{t("description")}</h6>
+            <h6 style={{fontSize:'21px'}}>{t("description")}</h6>
           </motion.div>
 
           <motion.div
