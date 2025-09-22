@@ -9,7 +9,6 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import useMediaQuery from "@/shared/hooks/useMediaQuery";
 import ButtonLink from "@/shared/ui/buttons/buttonLink";
 import styles from "./portfolio.module.scss";
 
@@ -22,18 +21,76 @@ import postgres from "../../../../public/images/skills/postgres.png";
 import git from "../../../../public/images/skills/git.png";
 import next from "../../../../public/images/skills/next.png";
 import framer from "../../../../public/images/skills/framer.png";
+import jira from "../../../../public/images/skills/jira.png";
+
 import mui from "../../../../public/images/skills/mui.png";
 import mongo from "../../../../public/images/skills/mongodb.svg";
+import { Card } from "./Card";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
 
 const Example = () => {
+  const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   return (
     <div id="portfolio">
-      <HorizontalScrollCarousel />
+      <HorizontalScrollCarousel onSelectCard={setSelectedCard} />
+      <AnimatePresence>
+        {selectedCard && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            onClick={() => setSelectedCard(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-[90%] max-w-lg rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl p-6 text-white"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedCard(null)}
+                className="absolute top-3 right-3 text-white text-2xl hover:scale-110 transition"
+              >
+                ×
+              </button>
+
+              <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
+              <div className="prose prose-invert mb-4 text-base leading-relaxed">
+                <ReactMarkdown>
+                  {selectedCard?.longDesc || selectedCard?.description}
+                </ReactMarkdown>
+              </div>
+
+              {selectedCard?.technologies && (
+                <div className="flex gap-3 flex-wrap mb-4">
+                  {selectedCard.technologies.map((tech, index) => (
+                    <div
+                      key={index}
+                      className="w-10 h-10 relative rounded-md overflow-hidden"
+                    >
+                      <Image src={tech} alt="tech" fill />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {selectedCard?.link && <ButtonLink link={selectedCard.link} />}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-const HorizontalScrollCarousel = () => {
+const HorizontalScrollCarousel = ({
+  onSelectCard,
+}: {
+  onSelectCard: (card: CardType) => void;
+}) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
@@ -59,7 +116,7 @@ const HorizontalScrollCarousel = () => {
     {
       url: "/images/portfolio/saas.png",
       title: "SaaS CRM System",
-      technologies: [mui, nest, mongo, redux, react, git],
+      technologies: [mui, nest, mongo, redux, react, git,jira],
       description: descSrm,
       longDesc: `
 A full-stack catering management platform built for restaurant chains.
@@ -75,7 +132,7 @@ A full-stack catering management platform built for restaurant chains.
     {
       url: "/images/portfolio/jalgroupNew.png",
       title: "Jal Group Asia",
-      technologies: [antd, nest, postgres, redux, react, git],
+      technologies: [antd, nest, postgres, redux, react, git,jira],
       description: t("jalGroup"),
       link: "https://jalgroupasia.kg/",
       id: 1,
@@ -85,13 +142,13 @@ A full-stack catering management platform built for restaurant chains.
       title: "Barca experience KG",
       link: "https://experience.barcelona.kg/",
       description: t("barca"),
-      technologies: [antd, nest, postgres, redux, react, git],
+      technologies: [antd, nest, postgres, redux, react,jira, git],
       id: 2,
     },
     {
       url: "/images/portfolio/ergotech.png",
       title: "Fusion Web",
-      technologies: [next, react, git, framer],
+      technologies: [next, react, git,jira, framer],
       link: "https://fusionweb.vercel.app/",
       description: t("ergo"),
       id: 3,
@@ -99,7 +156,7 @@ A full-stack catering management platform built for restaurant chains.
     {
       url: "/images/portfolio/effafa.png",
       title: "Effafa",
-      technologies: [next, react, git, framer],
+      technologies: [next, react, git,jira, framer],
       description: t("effafa"),
       link: "https://effafa.com/",
       id: 4,
@@ -108,7 +165,7 @@ A full-stack catering management platform built for restaurant chains.
       url: "/images/portfolio/myPost.png",
       title: "My Post",
       link: "https://kyrgyz-post.vercel.app/",
-      technologies: [postgres, react, git, framer, mui, nest],
+      technologies: [postgres, react, git, framer, mui, jira,nest],
       description: t("myPost"),
       id: 5,
     },
@@ -130,172 +187,89 @@ A full-stack catering management platform built for restaurant chains.
     },
     {
       url: "/images/portfolio/dataxway.jpg",
-      link: "https://dataxway-front.vercel.app/",
+      link: "https://dataxway.com/",
       title: "Dataxway",
       description: t("dataxway"),
       technologies: [next, react, git, framer],
       id: 7,
     },
   ];
-
-  return (
-    <section ref={targetRef} className="relative h-[300vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-4">
-          <div className={styles.skill} ref={ref}>
-            <motion.h3
-              variants={{
-                hidden: { opacity: 0, x: -50 },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  transition: { duration: 0.5, delay: 0.5 },
-                },
-              }}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-            >
-              Let's see
-            </motion.h3>
-            <motion.h4
-              variants={{
-                hidden: { opacity: 0, x: -50 },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  transition: { duration: 0.3, delay: 0.8 },
-                },
-              }}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-            >
-              my works
-            </motion.h4>
-
-            <p className={styles.small}>{t("worksDescription")}</p>
-          </div>
-          {cards.map((card) => {
-            return <Card card={card} key={card.id} />;
-          })}
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-const Card = ({ card }: { card: CardType }) => {
-  const [open, setOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const isMobile = useMediaQuery("exsm");
-
-  const mobileStyles = isMobile
-    ? "group h-[250px] w-[250px] overflow-hidden bg-neutral-200 rounded-[20px] relative"
-    : "group h-[450px] w-[450px] overflow-hidden bg-neutral-200 rounded-[20px] relative";
-
-  const mobileStylesforP = isMobile
-    ? "bg-gradient-to-br from-white/40 to-black/90 p-8 text-2xl font-semibold uppercase text-white backdrop-blur-lg"
-    : "bg-gradient-to-br from-white/40 to-black/90 p-8 text-5xl font-semibold uppercase text-white backdrop-blur-lg";
-
-  return (
-    <>
-      <div
-        className={mobileStyles}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+  const isSmall = useMediaQuery("sm");
+  return isSmall ? (
+    <div className="flex flex-col justify-center items-center gap-7 px-8">
+      <motion.h3
+        className=" font-bold "
+        style={{ color: "white" }}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
       >
-        <div
-          style={{
-            backgroundImage: `url(${card.url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
-        ></div>
+        Let's see my works
+      </motion.h3>
 
-        <div className="absolute inset-0 z-10 grid place-content-center">
-          {isHovered ? (
-            <div className="absolute inset-0 z-20 grid p-5 place-content-center bg-black/70 transition-opacity duration-300">
-              <p className={styles.text}>{card.description}</p>
-
-              <div className="flex gap-4 mt-[20px] flex-wrap justify-center">
-                {card?.technologies?.map((image: any, index: number) => (
-                  <div key={index} className={styles.imageBlock}>
-                    <Image src={image} className={styles.image} alt="tech" />
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-4 flex justify-center">
-                <button
-                  onClick={() => setOpen(true)}
-                  className="px-4 py-2 rounded-lg bg-white/30 backdrop-blur-md border border-white/40 text-white font-semibold hover:bg-white/40 transition"
-                >
-                  See more
-                </button>
-              </div>
-            </div>
-          ) : (
-            <p className={mobileStylesforP}>{card.title}</p>
-          )}
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-[90%] max-w-lg rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl p-6 text-white"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setOpen(false)}
-                className="absolute top-3 right-3 text-white text-2xl hover:scale-110 transition"
+      {cards.map((card) => {
+        return (
+          <Card card={card} key={card.id} onSelect={() => onSelectCard(card)} />
+        );
+      })}
+    </div>
+  ) : (
+    <div>
+      <section ref={targetRef} className="relative h-[300vh]">
+        <div className="sticky top-0 flex h-screen overflow-hidden items-center">
+          <motion.div style={{ x }} className="flex gap-4">
+            <div className={styles.skill} ref={ref}>
+              <motion.h3
+                className="white"
+                variants={{
+                  hidden: { opacity: 0, x: -50 },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    transition: { duration: 0.5, delay: 0.5 },
+                  },
+                }}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
               >
-                ×
-              </button>
+                Let's see
+              </motion.h3>
+              <motion.h4
+                className="white"
+                variants={{
+                  hidden: { opacity: 0, x: -50 },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    transition: { duration: 0.3, delay: 0.8 },
+                  },
+                }}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+              >
+                my works
+              </motion.h4>
 
-              <h2 className="text-2xl font-bold mb-4">{card.title}</h2>
-              <div className="prose prose-invert mb-4 text-base leading-relaxed">
-                <ReactMarkdown>
-                  {card?.longDesc ? card.longDesc : card.description}
-                </ReactMarkdown>
-              </div>
-
-              {card.technologies && (
-                <div className="flex gap-3 flex-wrap mb-4">
-                  {card.technologies.map((tech, index) => (
-                    <div
-                      key={index}
-                      className="w-10 h-10 relative rounded-md overflow-hidden"
-                    >
-                      <Image src={tech} alt="tech" fill />
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {card.link && <ButtonLink link={card.link} />}
-            </motion.div>
+              <p className={styles.small}>{t("worksDescription")}</p>
+            </div>
+            {cards.map((card) => {
+              return (
+                <Card
+                  card={card}
+                  key={card.id}
+                  onSelect={() => onSelectCard(card)}
+                />
+              );
+            })}
           </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+        </div>
+      </section>
+    </div>
   );
 };
 
 export default Example;
 
-type CardType = {
+export type CardType = {
   url: string | any;
   title: string;
   description?: string;
