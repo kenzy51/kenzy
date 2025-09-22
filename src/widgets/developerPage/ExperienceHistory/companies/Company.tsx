@@ -10,7 +10,9 @@ import postgres from "../../../../../public/images/skills/postgres.png";
 import git from "../../../../../public/images/skills/git.png";
 import next from "../../../../../public/images/skills/next.png";
 import framer from "../../../../../public/images/skills/framer.png";
+import jira from "../../../../../public/images/skills/jira.png";
 import mui from "../../../../../public/images/skills/mui.png";
+import mongo from "../../../../../public/images/skills/mongodb.svg";
 import styles from "./company.module.scss";
 
 const companiesData = [
@@ -25,7 +27,7 @@ const companiesData = [
       "Developed CMS & Admin panel with role-based access, inline editing, and React Hook Form + Zod validation.",
       "Led client communication, requirements gathering, and iterative feedback cycles.",
     ],
-    icons: [next, react, framer, redux, git],
+    icons: [next, react, framer, redux, git,jira,nest,mongo],
   },
   {
     title: "Frontend Engineer",
@@ -39,7 +41,7 @@ const companiesData = [
       "Refactored legacy code to functional components with hooks, enhancing maintainability and cutting bug rates in refactored modules.",
       "Collaborated closely with backend engineers, QA, and designers in an Agile environment to ensure reliable real-time data delivery and seamless user experience.",
     ],
-    icons: [react, redux, mui, framer, git],
+    icons: [react, redux, mui, framer, git,jira],
   },
   {
     title: "Frontend Engineer",
@@ -52,7 +54,7 @@ const companiesData = [
       "Enhanced UX with Framer Motion animations.",
       "Improved page load times by 30% and increased engagement by 20%.",
     ],
-    icons: [react, next, mui, redux],
+    icons: [react, next, mui, redux,jira],
   },
   {
     title: "Full Stack Developer",
@@ -65,7 +67,7 @@ const companiesData = [
       "Collaborated with UX/UI designers and enforced SOLID, DRY, KISS, and YAGNI principles.",
       "Delivered Shamal, a high-impact mobile app with a growing user base developed on React Native",
     ],
-    icons: [react, antd, nest, postgres, git],
+    icons: [react, antd, nest, postgres, git,jira],
   },
 ];
 

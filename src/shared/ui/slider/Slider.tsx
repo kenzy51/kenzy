@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 // import react from "../../puv/images/skills/react.png";
 import react from "../../../../public/images/skills/react.png";
-
+import jira from "../../../../public/images/skills/jira.png";
 import js from "../../../../public/images/skills/javascript-3.png";
 import html from "../../../../public/images/skills/html.png";
 import git from "../../../../public/images/skills/git.png";
@@ -22,7 +22,7 @@ import ts from "../../../../public/images/skills/ts.png";
 import next from "../../../../public/images/skills/nextjs3.webp";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
 
-const images = [react, js, html, git, css, node, mongo, nest, ts, next];
+const images = [react, js, html, git, css, node, mongo, nest, ts, next, jira];
 
 const slideVariants = {
   hidden: { opacity: 0, y: -150 },
@@ -41,7 +41,7 @@ export const Slider = () => {
   }, [inView]);
   const isMobile = useMediaQuery("exsm");
   const isTablet = useMediaQuery("md");
-  const slidesPerV = isMobile ? 2 : isTablet ? 3 : 4; 
+  const slidesPerV = isMobile ? 2 : isTablet ? 3 : 4;
   return (
     <>
       <div ref={ref}>
