@@ -2,7 +2,7 @@ import useMediaQuery from "@/shared/hooks/useMediaQuery";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "./portfolio.module.scss";
-import { CardType } from "./Portfolio";
+import { CardType } from "./constants";
 
 interface CardFunction {
   card: CardType;
@@ -12,14 +12,17 @@ export const Card = ({ card, onSelect }: CardFunction) => {
   const [open, setOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const isMobile = useMediaQuery("exsm");
-
   const mobileStyles = isMobile
     ? "group h-[340px] w-[100%] overflow-hidden bg-neutral-200 rounded-[20px] relative"
     : "group h-[450px] w-[450px] overflow-hidden bg-neutral-200 rounded-[20px] relative";
 
   const mobileStylesforP = isMobile
-    ? "bg-gradient-to-br from-white/40 to-black/90 p-8 text-2xl font-semibold uppercase text-white backdrop-blur-lg"
-    : "bg-gradient-to-br from-white/40 to-black/90 p-8 text-5xl font-semibold uppercase text-white backdrop-blur-lg";
+    ? "bg-gradient-to-br from-white/40 to-black/30 p-8 text-2xl font-semibold uppercase text-white backdrop-blur-lg rounded-2xl "
+    : "bg-gradient-to-br from-white/40 to-black/30 p-8 text-5xl font-semibold uppercase text-white backdrop-blur-lg rounded-2xl ";
+
+      const mobileStylesforwP = isMobile
+    ? "rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 p-4 z-10"
+    : "rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 p-4 z-10";
 
   const hasLink = card?.link && card?.link.trim() !== "";
 

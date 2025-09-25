@@ -5,7 +5,6 @@ import Container from "../../container/Container";
 import { useInView } from "react-intersection-observer";
 import git from "../../../../../public/images/githubW.svg";
 import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
-import { link } from "fs";
 import { Link } from "react-scroll";
 import { useRouter } from "next/router";
 import Image from "next/image";
