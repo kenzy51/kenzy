@@ -25,23 +25,8 @@ const Skills = () => {
     <div className={styles.wrapper} id="skills">
       <Container>
         <div className={styles.skill} ref={ref}>
-          <motion.h3
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: {
-                opacity: 1,
-                x: 0,
-                y: 0,
-                transition: { duration: 0.5, delay: 0.5 },
-              },
-            }}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            {t("my2")}{" "}
-          </motion.h3>
           <motion.h4
-            style={{ fontSize: isTablet ? "24px" : "36px" }}
+            style={{ fontSize: isTablet ? "24px" : "66px", fontWeight: "800" }}
             variants={{
               hidden: { opacity: 0, x: -50 },
               visible: {
@@ -54,8 +39,11 @@ const Skills = () => {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            {t("skills")}
+            my skills.
           </motion.h4>
+          <i>
+            swipe to see
+          </i>
         </div>
       </Container>
       <Slider />

@@ -27,9 +27,25 @@ import mui from "../../../../public/images/skills/mui.png";
 import mongo from "../../../../public/images/skills/mongodb.svg";
 import { Card } from "./Card";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
+import { CardType } from "./constants";
+import BulletList from "@/shared/ui/components/BulletList";
 
 const Example = () => {
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
+  const [activeTab, setActiveTab] = useState<
+    "problem" | "solution" | "outcome"
+  >("problem");
+  const RenderedContent = () => {
+    if (!selectedCard) return null;
+    switch (activeTab) {
+      case "problem":
+        return <div className="text-sm">{selectedCard.problem}</div>;
+      case "solution":
+        return <div className="text-sm"> {selectedCard.solution}</div>;
+      case "outcome":
+        return <BulletList text={selectedCard.outcome || ""} />;
+    }
+  };
   return (
     <div id="portfolio">
       <HorizontalScrollCarousel onSelectCard={setSelectedCard} />
@@ -47,23 +63,35 @@ const Example = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative w-[90%] max-w-lg rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl p-6 text-white"
+              className="relative w-[90%] max-w-3xl rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl p-6 text-white"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedCard(null)}
-                className="absolute top-3 right-3 text-white text-2xl hover:scale-110 transition"
+                className="absolute top-3 right-3 text-white text-2xl hover:scale-150 transition"
               >
                 ×
               </button>
-
               <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
               <div className="prose prose-invert mb-4 text-base leading-relaxed">
-                <ReactMarkdown>
-                  {selectedCard?.longDesc || selectedCard?.description}
-                </ReactMarkdown>
+                <div className="flex border-b border-white/30 mb-4 ">
+                  {["problem", "solution", "outcome"].map((tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => setActiveTab(tab as any)}
+                      className={`px-4 py-2 text-sm font-medium transition ${
+                        activeTab === tab
+                          ? "border-b-2 border-cyan-400 text-cyan-400"
+                          : "text-gray-300 hover:text-white"
+                      }`}
+                    >
+                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    </button>
+                  ))}
+                </div>
               </div>
-
+              <RenderedContent />
+              <br />
               {selectedCard?.technologies && (
                 <div className="flex gap-3 flex-wrap mb-4">
                   {selectedCard.technologies.map((tech, index) => (
@@ -112,27 +140,33 @@ const HorizontalScrollCarousel = ({
   const descSrm =
     "A catering SaaS for multi-branch restaurants with tools for managing employees, events, and catering orders at each location.";
 
+  // Content
   const cards: CardType[] = [
     {
       url: "/images/portfolio/saas.png",
       title: "SaaS CRM System",
-      technologies: [mui, nest, mongo, redux, react, git,jira],
+      technologies: [mui, nest, mongo, redux, react, git],
       description: descSrm,
-      longDesc: `
-A full-stack catering management platform built for restaurant chains.
-
-- **Employee Management** – role-based assignments
-- **Event Scheduling** – booking, staffing
-- **Catering Orders** – menu customization
-- **Branch Analytics** – performance dashboards
-`,
+      problem:
+        "Multi-branch restaurants were struggling to manage operations across different locations. Employee scheduling, catering orders, and event coordination were fragmented, often tracked in spreadsheets or disconnected tools. Managers had no unified dashboard for performance analytics, which caused inefficiencies and delays.",
+      solution: `I built a full-stack SaaS platform that centralized restaurant operations into one system. 
+   The frontend was developed with React, Redux, and MUI to deliver a responsive, intuitive interface. 
+   On the backend, I used NestJS with PostgreSQL and MongoDB to handle relational data and flexible content storage. 
+   The system included role-based employee management, event scheduling with resource allocation, customizable catering orders, 
+   and real-time analytics dashboards, giving managers a single source of truth across all branches.`,
+      outcome: ` 
+    Reduced scheduling and order management overhead by ~40%
+    Improved operational visibility across 20+ restaurant branches
+    Enabled 5,000+ staff and managers to coordinate seamlessly in one platform
+    Provided scalable foundation for future modules like inventory and billing
+    `,
       id: 11,
     },
 
     {
       url: "/images/portfolio/jalgroupNew.png",
       title: "Jal Group Asia",
-      technologies: [antd, nest, postgres, redux, react, git,jira],
+      technologies: [antd, nest, postgres, redux, react, git, jira],
       description: t("jalGroup"),
       link: "https://jalgroupasia.kg/",
       id: 1,
@@ -142,13 +176,13 @@ A full-stack catering management platform built for restaurant chains.
       title: "Barca experience KG",
       link: "https://experience.barcelona.kg/",
       description: t("barca"),
-      technologies: [antd, nest, postgres, redux, react,jira, git],
+      technologies: [antd, nest, postgres, redux, react, jira, git],
       id: 2,
     },
     {
       url: "/images/portfolio/ergotech.png",
       title: "Fusion Web",
-      technologies: [next, react, git,jira, framer],
+      technologies: [next, react, git, jira, framer],
       link: "https://fusionweb.vercel.app/",
       description: t("ergo"),
       id: 3,
@@ -156,7 +190,7 @@ A full-stack catering management platform built for restaurant chains.
     {
       url: "/images/portfolio/effafa.png",
       title: "Effafa",
-      technologies: [next, react, git,jira, framer],
+      technologies: [next, react, git, jira, framer],
       description: t("effafa"),
       link: "https://effafa.com/",
       id: 4,
@@ -165,7 +199,7 @@ A full-stack catering management platform built for restaurant chains.
       url: "/images/portfolio/myPost.png",
       title: "My Post",
       link: "https://kyrgyz-post.vercel.app/",
-      technologies: [postgres, react, git, framer, mui, jira,nest],
+      technologies: [postgres, react, git, framer, mui, jira, nest],
       description: t("myPost"),
       id: 5,
     },
@@ -199,7 +233,7 @@ A full-stack catering management platform built for restaurant chains.
     <div className="flex flex-col justify-center items-center gap-7 px-8">
       <motion.h3
         className=" font-bold "
-        style={{ color: "white" }}
+        style={{ color: "white", fontSize: "25px" }}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
       >
@@ -268,13 +302,3 @@ A full-stack catering management platform built for restaurant chains.
 };
 
 export default Example;
-
-export type CardType = {
-  url: string | any;
-  title: string;
-  description?: string;
-  technologies?: Array<any>;
-  id: number;
-  link?: string;
-  longDesc?: any;
-};
