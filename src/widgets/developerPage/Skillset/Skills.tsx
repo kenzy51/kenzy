@@ -1,5 +1,5 @@
 import Container from "@/shared/ui/container/Container";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./skills.module.scss";
 import Image from "next/image";
@@ -8,7 +8,11 @@ import { Slider } from "@/shared/ui/slider/Slider";
 import { useInView } from "react-intersection-observer";
 import { useTranslations } from "next-intl";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
+import { buttonClassNameStyle } from "@/shared/ui/components/ClassNamesStyles";
 const Skills = () => {
+  const [categories, setCategories] = useState<"frontend" | "all" | "backend">(
+    "all"
+  );
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
@@ -41,12 +45,23 @@ const Skills = () => {
           >
             my skills.
           </motion.h4>
-          <i>
-            swipe to see
-          </i>
+          <i>swipe to see</i>
         </div>
+        <div className="flex max-w-[100%] justify-center gap-5">
+          {["all", "frontend", "backend"].map((item) => (
+            <button
+              className={buttonClassNameStyle}
+              // @ts-ignore
+              onClick={() => setCategories(item)}
+            >
+              <strong>{item.toUpperCase()}</strong>{" "}
+            </button>
+          ))}
+        </div>
+        <br />
       </Container>
-      <Slider />
+
+      <Slider status={categories} />
       <Image src={elips} className={styles.gradient} alt="" />
     </div>
   );

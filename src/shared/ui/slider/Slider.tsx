@@ -8,7 +8,6 @@ import { useInView } from "react-intersection-observer";
 
 import styles from "./styles.module.scss";
 import Image from "next/image";
-// import react from "../../puv/images/skills/react.png";
 import react from "../../../../public/images/skills/react.png";
 import jira from "../../../../public/images/skills/jira.png";
 import js from "../../../../public/images/skills/javascript-3.png";
@@ -22,17 +21,31 @@ import ts from "../../../../public/images/skills/ts.png";
 import next from "../../../../public/images/skills/nextjs3.webp";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
 
-const images = [react, js, html, git, css, node, mongo, nest, ts, next, jira];
-
-const slideVariants = {
-  hidden: { opacity: 0, y: -150 },
-  visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.5 } },
+const imagesAll = [
+  react,
+  js,
+  html,
+  git,
+  css,
+  node,
+  mongo,
+  nest,
+  ts,
+  next,
+  jira,
+];
+const imagesFrontend = [react, js, html, git, css, ts, next];
+const imagesBackend = [mongo, js, nest, git, ts, node];
+type Status = "frontend" | "all" | "backend";
+type SliderProps = {
+  status: Status;
 };
 
-export const Slider = () => {
+export const Slider: React.FC<SliderProps> = ({ status }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
+  console.log(status);
 
   useEffect(() => {
     if (inView) {
@@ -42,6 +55,9 @@ export const Slider = () => {
   const isMobile = useMediaQuery("exsm");
   const isTablet = useMediaQuery("md");
   const slidesPerV = isMobile ? 2 : isTablet ? 3 : 4;
+  let selectedImages = imagesAll;
+  if (status == "frontend") selectedImages = imagesFrontend;
+  if (status == "backend") selectedImages = imagesBackend;
   return (
     <>
       <div ref={ref}>
@@ -54,7 +70,7 @@ export const Slider = () => {
           modules={[FreeMode, Pagination]}
           className="mySwiper"
         >
-          {images.map((image, index) => (
+          {selectedImages.map((image, index) => (
             <SwiperSlide key={index} className={styles.slide}>
               <motion.div
                 className={styles.block}

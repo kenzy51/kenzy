@@ -24,7 +24,7 @@ const Expericene = () => {
     <div className={styles.wrapper} id="experience">
       <Container>
         <div className={styles.skill} ref={ref}>
-          <motion.h3
+          <motion.h1
             variants={{
               hidden: { opacity: 0, x: -50 },
               visible: {
@@ -34,26 +34,12 @@ const Expericene = () => {
                 transition: { duration: 0.5, delay: 0.5 },
               },
             }}
+            className="text-[66px]"
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            {t("experience")}
-          </motion.h3>
-          <motion.h4
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: {
-                opacity: 1,
-                x: 0,
-                y: 0,
-                transition: { duration: 0.3, delay: 0.8 },
-              },
-            }}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            {t("work")}
-          </motion.h4>
+            <strong>my experience.</strong>
+          </motion.h1>
         </div>
         <Company />
       </Container>

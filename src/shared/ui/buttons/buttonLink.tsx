@@ -1,5 +1,5 @@
-import arrow from "../../../../public/icon/arrow.svg";
 import React from "react";
+import arrow from "../../../../public/icon/arrow.svg";
 
 import styles from "./styles.module.scss";
 import Image from "next/image";

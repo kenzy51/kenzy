@@ -4,7 +4,6 @@ import {
   useScroll,
   AnimatePresence,
 } from "framer-motion";
-import ReactMarkdown from "react-markdown";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
@@ -35,6 +34,11 @@ const Example = () => {
   const [activeTab, setActiveTab] = useState<
     "problem" | "solution" | "outcome"
   >("problem");
+  useEffect(() => {
+    if (selectedCard) {
+      setActiveTab("problem");
+    }
+  }, [selectedCard]);
   const RenderedContent = () => {
     if (!selectedCard) return null;
     switch (activeTab) {
@@ -46,6 +50,7 @@ const Example = () => {
         return <BulletList text={selectedCard.outcome || ""} />;
     }
   };
+
   return (
     <div id="portfolio">
       <HorizontalScrollCarousel onSelectCard={setSelectedCard} />
@@ -140,7 +145,6 @@ const HorizontalScrollCarousel = ({
   const descSrm =
     "A catering SaaS for multi-branch restaurants with tools for managing employees, events, and catering orders at each location.";
 
-  // Content
   const cards: CardType[] = [
     {
       url: "/images/portfolio/saas.png",
@@ -166,8 +170,16 @@ const HorizontalScrollCarousel = ({
     {
       url: "/images/portfolio/jalgroupNew.png",
       title: "Jal Group Asia",
-      technologies: [antd, nest, postgres, redux, react, git, jira],
+      technologies: [antd, next, mongo, redux, react, git, jira],
       description: t("jalGroup"),
+      problem:
+        " The client’s existing site was static and hard to maintain. They needed a dynamic site to support frequent updates, campaigns, and content changes without developer intervention.",
+      solution: `I rebuilt their site using Next.js with CMS integration. Implemented dynamic routing, on-demand content fetching, image optimization, and SEO best practices. Also added admin interfaces so non-technical users could update content.`,
+      outcome: ` 
+   Content updates now take minutes instead of developer cycles
+   Improved SEO rankings and page speed
+   Lower maintenance burden for the client
+    `,
       link: "https://jalgroupasia.kg/",
       id: 1,
     },
@@ -177,6 +189,20 @@ const HorizontalScrollCarousel = ({
       link: "https://experience.barcelona.kg/",
       description: t("barca"),
       technologies: [antd, nest, postgres, redux, react, jira, git],
+      problem: `  The Barcelona Academy in Bishkek needed both a public-facing website to showcase programs/events and an internal CRM to manage students, registrations, and communications.
+The team had mostly junior developers who required technical guidance, and there was no structured system for code quality, reviews, or delivery.`,
+solution:`Acted as senior developer and team lead, mentoring juniors and conducting code reviews to maintain high standards.
+
+Designed and implemented a CRM system using NestJS + MongoDB to handle student data, registrations, and staff workflows.
+
+Built the frontend with React + Ant Design, ensuring a professional and responsive UI.
+
+Integrated role-based access control for staff/admin, and set up clear Git workflows with CI/CD to improve collaboration.`,
+outcome:`Launched a production-ready academy website and CRM used daily by staff.
+         Juniors gained skills and confidence from mentorship, improving team velocity.
+          Academy staff saved significant time by consolidating student management into one platform.
+
+Delivered a scalable system ready for future modules (payments, attendance tracking, reporting).`,
       id: 2,
     },
     {
