@@ -8,6 +8,8 @@ import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
 import { Link } from "react-scroll";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import LeadForm from "../../components/LeadForm";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
 const smallBlocksData = [
   {
     header: "Works",
@@ -42,43 +44,54 @@ const Footer = () => {
       console.log("Component is in view!");
     }
   }, [inView]);
-
+  const isSmall = useMediaQuery("sm");
   return (
     <footer className={styles.wrapper} ref={ref} id="contact">
       <Container>
         <div className={styles.innerWrapper}>
           <div className={styles.connect}>
-            <div>
-              <motion.h3
-                variants={{
-                  hidden: { opacity: 0, x: -50 },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    y: 0,
-                    transition: { duration: 0.5, delay: 0.5 },
-                  },
-                }}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-              >
-                Let's{" "}
-              </motion.h3>
-              <motion.h4
-                variants={{
-                  hidden: { opacity: 0, x: -50 },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    y: 0,
-                    transition: { duration: 0.3, delay: 0.8 },
-                  },
-                }}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-              >
-                Connect.{" "}
-              </motion.h4>
+            <div
+              className={
+                isSmall
+                  ? "flex w-[100%] flex-col justify-center items-center"
+                  : "flex w-[100%] justify-evenly"
+              }
+            >
+              <div>
+                {" "}
+                <motion.h3
+                  variants={{
+                    hidden: { opacity: 0, x: -50 },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      y: 0,
+                      transition: { duration: 0.5, delay: 0.5 },
+                    },
+                  }}
+                  initial="hidden"
+                  animate={inView ? "visible" : "hidden"}
+                >
+                  Let's{" "}
+                </motion.h3>
+                <motion.h4
+                  variants={{
+                    hidden: { opacity: 0, x: -50 },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      y: 0,
+                      transition: { duration: 0.3, delay: 0.8 },
+                    },
+                  }}
+                  initial="hidden"
+                  animate={inView ? "visible" : "hidden"}
+                >
+                  Connect.{" "}
+                </motion.h4>
+              </div>
+
+              <LeadForm />
             </div>
             <a href="mailto:nazarovkanat7@gmail.com" className={styles.email}>
               nazarovkanat7@gmail.com
