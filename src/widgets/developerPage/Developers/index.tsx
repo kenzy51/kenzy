@@ -1,12 +1,12 @@
 import Container from "@/shared/ui/container/Container";
 import React from "react";
-import styles from "./developer.module.scss";
 import Image from "next/image";
 import me from "./non.png";
 import github from "../../../../public/images/githubW.svg";
 import linkedin from "../../../../public/images/socIcons/linkedin.webp";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import styles from "./developer.module.scss";
 
 const Developer = () => {
   const t = useTranslations();
@@ -71,7 +71,7 @@ const Developer = () => {
           <motion.div
             className={styles.imageWrapper}
             variants={{
-              hidden: { opacity: 0},
+              hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
                 transition: { duration: 0.6, delay: 0.5 },
@@ -86,29 +86,40 @@ const Developer = () => {
                   style={{ width: "100%" }}
                   priority
                 />
-              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4">
                   <div>
-                  <p className="mt-2 text-white font-bold text-xl">Kanat Nazarov</p>
-                  <p className="text-sm text-gray-300">Frontend Dev</p>
-                  <i className="text-sm text-gray-300">5 years at web development</i>
+                    <p className="mt-2 text-white font-bold text-xl">
+                      Kanat Nazarov
+                    </p>
+                    <p className="text-sm text-gray-300">Frontend Dev</p>
+                    <i className="text-sm text-gray-300">
+                      5 years at web development
+                    </i>
+                  </div>
+                  <div className={styles.icons}>
+                    <a
+                      href="https://github.com/kenzy51"
+                      target="_blank"
+                      className={styles.link}
+                    >
+                      <Image alt="Github" src={github} width={30} />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
+                      target="_blank"
+                      className={styles.link}
+                    >
+                      <Image alt="LinkedIn" src={linkedin} width={30} />
+                    </a>{" "}
+                    <a
+                      href="https://drive.google.com/file/d/1_cf0scTwCvFotT9oEWp1LDER1cWcRk6z/view?usp=sharing"
+                      target="_blank"
+                      className={styles.link}
+                    >
+                      <strong>CV</strong>
+                    </a>
+                  </div>
                 </div>
-                <div className={styles.icons}>
-                  <a
-                    href="https://github.com/kenzy51"
-                    target="_blank"
-                    className={styles.link}
-                  >
-                    <Image alt="Github" src={github} width={30} />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
-                    target="_blank"
-                    className={styles.link}
-                  >
-                    <Image alt="LinkedIn" src={linkedin} width={30} />
-                  </a>
-                </div>
-              </div>
               </div>
             </div>
           </motion.div>
@@ -118,4 +129,4 @@ const Developer = () => {
   );
 };
 
-export default Developer; 
+export default Developer;

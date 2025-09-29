@@ -8,7 +8,10 @@ import { Slider } from "@/shared/ui/slider/Slider";
 import { useInView } from "react-intersection-observer";
 import { useTranslations } from "next-intl";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
-import { buttonClassNameStyle } from "@/shared/ui/components/ClassNamesStyles";
+import {
+  buttonClassNameStyle,
+  buttonClassNameStyleActive,
+} from "@/shared/ui/components/ClassNamesStyles";
 const Skills = () => {
   const [categories, setCategories] = useState<"frontend" | "all" | "backend">(
     "all"
@@ -17,6 +20,7 @@ const Skills = () => {
     triggerOnce: true,
   });
 
+  console.log(categories);
   useEffect(() => {
     if (inView) {
       console.log("Component is in view!");
@@ -30,7 +34,7 @@ const Skills = () => {
       <Container>
         <div className={styles.skill} ref={ref}>
           <motion.h4
-            style={{ fontSize: isTablet ? "24px" : "66px", fontWeight: "800" }}
+            style={{ fontSize: isTablet ? "36px" : "66px", fontWeight: "800" }}
             variants={{
               hidden: { opacity: 0, x: -50 },
               visible: {
@@ -50,7 +54,11 @@ const Skills = () => {
         <div className="flex max-w-[100%] justify-center gap-5">
           {["all", "frontend", "backend"].map((item) => (
             <button
-              className={buttonClassNameStyle}
+              className={
+                categories === item
+                  ? buttonClassNameStyleActive
+                  : buttonClassNameStyle
+              }
               // @ts-ignore
               onClick={() => setCategories(item)}
             >

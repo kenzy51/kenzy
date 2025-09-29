@@ -4,15 +4,16 @@ import { motion } from "framer-motion";
 import styles from "./experience.module.scss";
 import Image from "next/image";
 import elips from "../../../../public/images/gradients/grad.png";
-import { Slider } from "@/shared/ui/slider/Slider";
 import { useInView } from "react-intersection-observer";
 import Company from "./companies/Company";
 import { useTranslations } from "next-intl";
+import useMediaQuery from "@/shared/hooks/useMediaQuery";
 const Expericene = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
   const t = useTranslations();
+  const isSmall = useMediaQuery('sm')
 
   useEffect(() => {
     if (inView) {
@@ -34,7 +35,7 @@ const Expericene = () => {
                 transition: { duration: 0.5, delay: 0.5 },
               },
             }}
-            className="text-[66px]"
+            className={isSmall ? "text-[36px]" : "text-[66px]"}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
