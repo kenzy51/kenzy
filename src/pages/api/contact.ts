@@ -11,7 +11,7 @@ const LeadSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+// @ts-ignore
 const Lead = mongoose.models.Lead || mongoose.model("Lead", LeadSchema);
 
 async function connectDB() {
