@@ -20,6 +20,10 @@ export default function Home() {
           Kanat Nazarov | Senior Full-Stack Developer & Software Engineer | NYC
         </title>
         <meta
+          name="google-site-verification"
+          content="VgDRz5M8tNsT6gLPg4D6D7UmgkNA1AM2pqjnh70aX4k"
+        />
+        <meta
           name="description"
           content="Kanat Nazarov — Senior Full-Stack Developer with 5+ years experience in Next.js, React, NestJS, and MongoDB. Building scalable web applications and community platforms in New York City."
         />
