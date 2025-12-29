@@ -17,6 +17,39 @@ const Developer = () => {
     <>
       {/* SEO Head Tags */}
       <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Kanat Nazarov",
+              jobTitle: "Senior Full-Stack Developer",
+              worksFor: {
+                "@type": "Organization",
+                name: "Freelance / Open to opportunities",
+              },
+              url: "https://kenzy.vercel.app",
+              sameAs: [
+                "https://github.com/kenzy51",
+                "https://www.linkedin.com/in/kanat-nazarov-a8b55533a/",
+              ],
+              address: {
+                addressLocality: "New York City",
+                addressRegion: "NY",
+                addressCountry: "US",
+              },
+              knowsAbout: [
+                "Next.js",
+                "React",
+                "NestJS",
+                "TypeScript",
+                "MongoDB",
+                "Full-Stack Development",
+              ],
+            }),
+          }}
+        />
         <title>
           Kanat Nazarov | Full-Stack Developer & Software Engineer | NYC
         </title>
@@ -28,7 +61,6 @@ const Developer = () => {
           name="keywords"
           content="Kanat Nazarov, full stack developer NYC, software engineer New York, frontend engineer NYC, Next.js developer, React developer NYC, NestJS developer, Kyrgyz developer USA"
         />
-        {/* Open Graph — for LinkedIn/Facebook sharing */}
         <meta
           property="og:title"
           content="Kanat Nazarov | Full-Stack Developer NYC"
@@ -75,21 +107,22 @@ const Developer = () => {
               }}
             >
               <br />
-              <motion.h1 // ← Changed from h2 to h1 for SEO
+              <motion.h1
                 className={styles.aboutTitle}
                 variants={{
                   hidden: { opacity: 0, x: -20 },
                   visible: { opacity: 1, x: 0, transition: { duration: 0.2 } },
                 }}
               >
-                Hello, I'm Kanat Nazarov — Full-Stack Developer in NYC
+                Kanat Nazarov | Senior Full-Stack Developer & Software Engineer
+                in NYC{" "}
               </motion.h1>
 
               <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-6">
-                I'm a passionate <strong>full-stack developer</strong> based in
-                New York City with over 5 years of experience building modern,
-                scalable web applications. I specialize in{" "}
-                <strong>Next.js</strong>, <strong>React</strong>,{" "}
+                I'm a <strong>senior full-stack developer</strong> based in{" "}
+                <strong>New York City</strong> with 5+ years of professional
+                experience building modern, scalable web applications. I
+                specialize in <strong>Next.js</strong>, <strong>React</strong>,{" "}
                 <strong>TypeScript</strong>, and <strong>NestJS</strong>,
                 delivering performant and user-focused solutions from frontend
                 to backend.
