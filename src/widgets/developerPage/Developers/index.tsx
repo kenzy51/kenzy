@@ -1,131 +1,190 @@
+// components/Developer/Developer.tsx or wherever it is
+import { motion } from "framer-motion";
 import Container from "@/shared/ui/container/Container";
 import React from "react";
 import Image from "next/image";
-import me from "./non.png";
+import Head from "next/head"; // ← Add this
 import github from "../../../../public/images/githubW.svg";
 import linkedin from "../../../../public/images/socIcons/linkedin.webp";
-import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
 import styles from "./developer.module.scss";
+import { useTranslations } from "next-intl";
+import me from "./non.png";
 
 const Developer = () => {
   const t = useTranslations();
 
   return (
-    <div className={styles.wrapper} id="bio">
-      <Container>
-        <motion.div className={styles.about} initial="hidden" animate="visible">
+    <>
+      {/* SEO Head Tags */}
+      <Head>
+        <title>
+          Kanat Nazarov | Full-Stack Developer & Software Engineer | NYC
+        </title>
+        <meta
+          name="description"
+          content="Kanat Nazarov — Senior Full-Stack Developer in New York City with 5+ years experience in Next.js, React, NestJS, TypeScript, and MongoDB. Building scalable web applications and community platforms."
+        />
+        <meta
+          name="keywords"
+          content="Kanat Nazarov, full stack developer NYC, software engineer New York, frontend engineer NYC, Next.js developer, React developer NYC, NestJS developer, Kyrgyz developer USA"
+        />
+        {/* Open Graph — for LinkedIn/Facebook sharing */}
+        <meta
+          property="og:title"
+          content="Kanat Nazarov | Full-Stack Developer NYC"
+        />
+        <meta
+          property="og:description"
+          content="Senior Full-Stack Developer specializing in Next.js, React, and NestJS. Based in New York City."
+        />
+        <meta
+          property="og:image"
+          content="https://kenzy.vercel.app/og-developer.jpg"
+        />{" "}
+        {/* Add this image */}
+        <meta property="og:url" content="https://kenzy.vercel.app/developer" />
+        <meta property="og:type" content="profile" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Kanat Nazarov | Full-Stack Developer NYC"
+        />
+        <meta
+          name="twitter:description"
+          content="Full-Stack Developer in NYC | Next.js, React, NestJS"
+        />
+      </Head>
+
+      <div className={styles.wrapper} id="bio">
+        <Container>
           <motion.div
-            className={styles.text}
-            variants={{
-              hidden: { opacity: 0, x: -80 },
-              visible: {
-                opacity: 1,
-                x: 0,
-                transition: { duration: 0.8, delay: 0.1 },
-              },
-            }}
+            className={styles.about}
+            initial="hidden"
+            animate="visible"
           >
-            <br />
-            <motion.h2
-              className={styles.aboutTitle}
+            <motion.div
+              className={styles.text}
               variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0, transition: { duration: 0.2 } },
+                hidden: { opacity: 0, x: -80 },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 0.8, delay: 0.1 },
+                },
               }}
             >
-              hello world!{" "}
-            </motion.h2>
-            <h6 style={{ fontSize: "20px" }}>
-              I’m a developer passionate about building accessible, performant,
-              and visually engaging user interfaces. My favorite work sits at
-              the intersection of design and engineering — creating web
-              experiences that not only look elegant but are crafted with
-              attention to scalability, usability, and clean architecture.
               <br />
-              <br />
-              Currently, I focus on frontend engineering with React, Next.js,
-              and TypeScript, while also bringing full-stack experience in
-              NestJS, PostgreSQL, and MongoDB when projects call for end-to-end
-              solutions. My portfolio includes SaaS platforms, enterprise
-              dashboards, and consumer-facing applications — from a multi-branch
-              catering management system to high-traffic fintech and logistics
-              tools.
-              <br />
-              <br />
-              In the past, I’ve collaborated across diverse environments — from
-              fast-moving start-ups to structured teams with Agile processes.
-              Along the way, I’ve driven initiatives like React version
-              migrations, performance optimizations, and UI component libraries,
-              helping products scale smoothly while improving developer
-              experience.
-              <br />
-              <br />
-              Outside of code, I’m usually playing piano or guitar, composing
-              music, exploring NYC, or brainstorming at the crossroads of music
-              and technology, where I see endless opportunities to create new
-              kinds of digital experiences.
-            </h6>
-          </motion.div>
+              <motion.h1 // ← Changed from h2 to h1 for SEO
+                className={styles.aboutTitle}
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.2 } },
+                }}
+              >
+                Hello, I'm Kanat Nazarov — Full-Stack Developer in NYC
+              </motion.h1>
 
-          <motion.div
-            className={styles.imageWrapper}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { duration: 0.6, delay: 0.5 },
-              },
-            }}
-          >
-            <div className="sticky top-[35%] right-6 max-w-[380px] z-10">
-              <div className="rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 p-4">
-                <Image
-                  src={me}
-                  alt="Developer"
-                  style={{ width: "100%" }}
-                  priority
-                />
-                <div className="flex items-center gap-4">
-                  <div>
-                    <p className="mt-2 text-white font-bold text-xl">
-                      Kanat Nazarov
-                    </p>
-                    <p className="text-sm text-gray-300">Frontend Dev</p>
-                    <i className="text-sm text-gray-300">
-                      5 years at web development
-                    </i>
-                  </div>
-                  <div className={styles.icons}>
-                    <a
-                      href="https://github.com/kenzy51"
-                      target="_blank"
-                      className={styles.link}
-                    >
-                      <Image alt="Github" src={github} width={30} />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
-                      target="_blank"
-                      className={styles.link}
-                    >
-                      <Image alt="LinkedIn" src={linkedin} width={30} />
-                    </a>{" "}
-                    <a
-                      href="https://drive.google.com/file/d/1_cf0scTwCvFotT9oEWp1LDER1cWcRk6z/view?usp=sharing"
-                      target="_blank"
-                      className={styles.link}
-                    >
-                      <strong>CV</strong>
-                    </a>
+              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-6">
+                I'm a passionate <strong>full-stack developer</strong> based in
+                New York City with over 5 years of experience building modern,
+                scalable web applications. I specialize in{" "}
+                <strong>Next.js</strong>, <strong>React</strong>,{" "}
+                <strong>TypeScript</strong>, and <strong>NestJS</strong>,
+                delivering performant and user-focused solutions from frontend
+                to backend.
+              </p>
+
+              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-4">
+                My work spans SaaS platforms, enterprise dashboards, fintech
+                tools, and community applications — including a full-stack
+                diaspora platform connecting thousands of Central Asians in the
+                USA.
+              </p>
+
+              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-4">
+                Currently focused on <strong>frontend engineering</strong> and{" "}
+                <strong>full-stack development</strong> in NYC, I love creating
+                clean, accessible, and visually engaging experiences that scale.
+              </p>
+
+              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-4">
+                Outside coding, I play piano and guitar, compose music, and
+                explore the intersection of technology and creativity in New
+                York.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className={styles.imageWrapper}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { duration: 0.6, delay: 0.5 },
+                },
+              }}
+            >
+              <div className="sticky top-[35%] right-6 max-w-[380px] z-10">
+                <div className="rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 p-4">
+                  <Image
+                    src={me}
+                    alt="Kanat Nazarov - Full-Stack Developer in NYC"
+                    style={{ width: "100%" }}
+                    priority
+                  />
+                  <div className="flex items-center gap-4 mt-4">
+                    <div>
+                      <p className="text-white font-bold text-xl">
+                        Kanat Nazarov
+                      </p>
+                      <p className="text-sm text-gray-300">
+                        Senior Full-Stack Developer
+                      </p>
+                      <p className="text-sm text-gray-300">New York City</p>
+                    </div>
+                    <div className={styles.icons}>
+                      <a
+                        href="https://github.com/kenzy51"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.link}
+                      >
+                        <Image
+                          alt="GitHub - Kanat Nazarov"
+                          src={github}
+                          width={30}
+                        />
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.link}
+                      >
+                        <Image
+                          alt="LinkedIn - Kanat Nazarov"
+                          src={linkedin}
+                          width={30}
+                        />
+                      </a>
+                      <a
+                        href="https://drive.google.com/file/d/1_cf0scTwCvFotT9oEWp1LDER1cWcRk6z/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.link}
+                      >
+                        <strong className="text-white">CV</strong>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 };
 
