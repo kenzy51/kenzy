@@ -5,6 +5,15 @@ const nextConfig = {
     locales: ["en", "ru"],
     defaultLocale: "en",
   },
+  async redirects (){
+    return[
+      {
+        source:'/',
+        destination:'/developer',
+        permanent:true
+      }
+    ]
+  }
 };
 
 export default nextConfig;

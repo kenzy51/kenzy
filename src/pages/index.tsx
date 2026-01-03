@@ -7,10 +7,14 @@ import Items from "@/widgets/MainPage/Items";
 import Greeting from "@/widgets/MainPage/Greeting";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  useEffect(()=>{
+
+  })
   const t = useTranslations();
 
   return (

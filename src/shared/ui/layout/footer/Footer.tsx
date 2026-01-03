@@ -8,7 +8,6 @@ import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
 import { Link } from "react-scroll";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import LeadForm from "../../components/LeadForm";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
 const smallBlocksData = [
   {
@@ -91,7 +90,7 @@ const Footer = () => {
                 </motion.h4>
               </div>
 
-              <LeadForm />
+              {/* <LeadForm /> */}
             </div>
             <a href="mailto:nazarovkanat7@gmail.com" className={styles.email}>
               nazarovkanat7@gmail.com
@@ -114,7 +113,7 @@ const Footer = () => {
               </a>
             </div>
             <div className={styles.bottom}>
-              <p>Designed and Developed by Kenzy Full Stack</p>
+              <p>Designed and Developed by Kanat Full Stack</p>
               <p>Powered by NextJs 14</p>
             </div>
           </div>

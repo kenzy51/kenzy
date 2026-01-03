@@ -5,7 +5,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Primary SEO Tags — Appear on EVERY page */}
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -44,7 +43,7 @@ export default function Document() {
         <meta name="google-site-verification" content="VgDRz5M8tNsT6gLPg4D6D7UmgkNA1AM2pqjnh70aX4k" />
 
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/non.png" />
 
         {/* Fonts & CSS (keep your existing) */}
         <link

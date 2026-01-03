@@ -15,7 +15,6 @@ const Developer = () => {
 
   return (
     <>
-      {/* SEO Head Tags */}
       <Head>
         <script
           type="application/ld+json"
@@ -118,7 +117,7 @@ const Developer = () => {
                 in NYC{" "}
               </motion.h1>
 
-              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-6">
+              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-6">
                 I'm a <strong>senior full-stack developer</strong> based in{" "}
                 <strong>New York City</strong> with 5+ years of professional
                 experience building modern, scalable web applications. I
@@ -128,20 +127,20 @@ const Developer = () => {
                 to backend.
               </p>
 
-              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-4">
+              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
                 My work spans SaaS platforms, enterprise dashboards, fintech
                 tools, and community applications — including a full-stack
                 diaspora platform connecting thousands of Central Asians in the
                 USA.
               </p>
 
-              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-4">
+              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
                 Currently focused on <strong>frontend engineering</strong> and{" "}
                 <strong>full-stack development</strong> in NYC, I love creating
                 clean, accessible, and visually engaging experiences that scale.
               </p>
 
-              <p className="text-lg md:text-xl leading-relaxed text-gray-700 mt-4">
+              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
                 Outside coding, I play piano and guitar, compose music, and
                 explore the intersection of technology and creativity in New
                 York.
@@ -171,10 +170,10 @@ const Developer = () => {
                       <p className="text-white font-bold text-xl">
                         Kanat Nazarov
                       </p>
-                      <p className="text-sm text-gray-300">
+                      <p className="text-sm text-gray-400">
                         Senior Full-Stack Developer
                       </p>
-                      <p className="text-sm text-gray-300">New York City</p>
+                      <p className="text-sm text-gray-400">New York City</p>
                     </div>
                     <div className={styles.icons}>
                       <a
