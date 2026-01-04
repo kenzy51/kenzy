@@ -144,8 +144,25 @@ const HorizontalScrollCarousel = ({
   const t = useTranslations();
   const descSrm =
     "A catering SaaS for multi-branch restaurants with tools for managing employees, events, and catering orders at each location.";
-
+  const descKyrgyz =
+    "Full-stack community platform connecting Kyrgyz, Kazakh, and Uzbek diaspora in the USA with events, resources, and multilingual support.";
   const cards: CardType[] = [
+    {
+      url: "/images/portfolio/kyrgyzproject.png",
+      title: "Kyrgyz Diaspora Community Platform",
+      technologies: [next, nest, mongo, react],
+      description:
+        "Full-stack platform connecting Kyrgyz diaspora in USA with events, resources, and community support.",
+      link: "https://kyrgyz-diaspora.vercel.app",
+      problem:
+        "Kyrgyz immigrants in NYC and USA struggled to find community events (Nooruz, cultural gatherings), consular resources, and support. Information was scattered across WhatsApp groups and Facebook — no centralized platform existed.",
+      solution: `I built a full-stack community platform from the ground up using Next.js for a fast, SEO-friendly frontend and NestJS with MongoDB on the backend. I implemented secure JWT authentication to protect user accounts, designed an intuitive event creation system where each event is tied to its creator, and added full multilingual support in English, Russian, and Kyrgyz to make it truly accessible to the diaspora. The app includes a resources section for consular and practical help, plus a public support form open to everyone. Everything is fully responsive, so it works beautifully on mobile — ensuring Kyrgyz people in NYC and across the USA can stay connected no matter what device they're using.`,
+      outcome: `• Live platform used by real community members
+• Central hub for events and cultural connection
+• Secure, scalable architecture with r  eal-world impact
+• Demonstrates end-to-end full-stack development`,
+      id: 11,
+    },
     {
       url: "/images/portfolio/saas.png",
       title: "SaaS CRM System",
@@ -191,14 +208,14 @@ const HorizontalScrollCarousel = ({
       technologies: [antd, nest, postgres, redux, react, jira, git],
       problem: `  The Barcelona Academy in Bishkek needed both a public-facing website to showcase programs/events and an internal CRM to manage students, registrations, and communications.
 The team had mostly junior developers who required technical guidance, and there was no structured system for code quality, reviews, or delivery.`,
-solution:`Acted as senior developer and team lead, mentoring juniors and conducting code reviews to maintain high standards.
+      solution: `Acted as senior developer and team lead, mentoring juniors and conducting code reviews to maintain high standards.
 
 Designed and implemented a CRM system using NestJS + MongoDB to handle student data, registrations, and staff workflows.
 
 Built the frontend with React + Ant Design, ensuring a professional and responsive UI.
 
 Integrated role-based access control for staff/admin, and set up clear Git workflows with CI/CD to improve collaboration.`,
-outcome:`Launched a production-ready academy website and CRM used daily by staff.
+      outcome: `Launched a production-ready academy website and CRM used daily by staff.
          Juniors gained skills and confidence from mentorship, improving team velocity.
           Academy staff saved significant time by consolidating student management into one platform.
 
