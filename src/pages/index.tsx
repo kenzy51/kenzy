@@ -62,7 +62,7 @@ export default function Home() {
         />
         {/* Viewport & Favicon */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/mylogo.png" />
         {/* Google Site Verification (keep if you have it) */}
         <meta
           name="google-site-verification"

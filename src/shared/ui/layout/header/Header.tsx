@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./header.module.scss";
-import logo from "../../../../../public/images/logo.png";
+import logo from "../../../../../public/mylogo.png";
 import Image from "next/image";
 import Container from "../../container/Container";
 import { Link } from "react-scroll";
@@ -47,12 +47,7 @@ const Header = () => {
                       duration={500}
                       onClick={toggleMenu}
                     >
-                      <p
-                        className={styles.about}
-                   
-                      >
-                        About
-                      </p>
+                      <p className={styles.about}>About</p>
                     </Link>
                     <Link
                       to="skills"
