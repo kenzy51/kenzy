@@ -1,0 +1,53 @@
+---
+title: "How I Reduced Page Load Times by 30% in a High-Traffic React App"
+date: "2026-01-15"
+excerpt: "Real lessons from optimizing a real-time betting platform at StreamTech: code splitting, memoization, lazy loading, and performance trade-offs that actually mattered."
+tags: ["react", "performance", "optimization", "nextjs", "frontend"]
+readTime: "7 min"
+author: "Kanat Nazarov"
+---
+
+
+# How I Reduced Page Load Times by 30% in a High-Traffic React App
+
+<time dateTime="2026-01-15" className="text-gray-500 dark:text-gray-400 text-sm">
+  January 15, 2026
+</time>
+
+<div className="my-8">
+{/* <Image
+          {...props}
+          className="rounded-xl shadow-lg object-cover"
+          width={props.width || 1200}
+          height={props.height || 600}
+          sizes="(max-width: 768px) 100vw, 800px"
+          quality={85}
+        /> */}
+</div>
+
+At StreamTech, I was responsible for a real-time betting platform that served thousands of concurrent users. Initial page loads were taking 4–6 seconds on average — unacceptable for a high-traffic, competitive product. Users were bouncing, conversion rates suffered, and Lighthouse scores were in the low 50s.
+
+After two focused optimization sprints, we reduced Time to Interactive (TTI) and Largest Contentful Paint (LCP) by **~30%** across key pages — without rewriting the entire codebase.
+
+Here’s exactly what worked, what didn’t, and the trade-offs we accepted.
+
+## 1. Code Splitting & Lazy Loading (Biggest Win)
+
+The app had several heavy components (charts, live odds tables, user dashboards) loaded on every page — even if the user never scrolled to them.
+
+**What we did:**
+
+- Replaced static imports with `React.lazy` + `Suspense`
+- Used Next.js `dynamic` imports with `{ ssr: false }` for client-only heavy parts
+
+```tsx
+// Before (blocks render)
+import HeavyChart from '../components/HeavyChart';
+
+// After
+import dynamic from 'next/dynamic';
+
+const HeavyChart = dynamic(() => import('../components/HeavyChart'), {
+  ssr: false,
+  loading: () => <div className="h-64 flex items-center justify-center">Loading chart...</div>,
+});

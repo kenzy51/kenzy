@@ -11,18 +11,10 @@ import Footer from "@/shared/ui/layout/footer/Footer";
 const Index = () => {
   return (
     <>
-      <Layout>
-        <AnimatedCursor
-          innerSize={10}
-          outerSize={30}
-          color="255,255,255"
-          outerAlpha={0.4}
-          outerScale={0}
-        />
-        <Developer />
-        <Skills />
-        <Experience />
-      </Layout>
+    
+      <Developer />
+      <Skills />
+      <Experience />
       <Portfolio />
       <Footer />
     </>

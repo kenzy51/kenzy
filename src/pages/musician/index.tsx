@@ -36,6 +36,7 @@ const Index = () => {
           >
             Contact
           </Link>
+          <Link href="/blog">Blog</Link>
         </nav>
       </header>
 

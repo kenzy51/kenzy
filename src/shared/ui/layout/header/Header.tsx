@@ -3,7 +3,8 @@ import styles from "./header.module.scss";
 import logo from "../../../../../public/mylogo.png";
 import Image from "next/image";
 import Container from "../../container/Container";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import github from "../../../../../public/images/githubW.svg";
 import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
@@ -23,9 +24,15 @@ const Header = () => {
   return (
     <Container>
       <div className={styles.header}>
-        <div className={styles.logo}>
-          <Image src={logo} alt="Logo" className={styles.logoImage} />
+       <div className={styles.topBlock}>
+         <div className={styles.logo}>
+          <Link href={"/developer"}>
+            <Image src={logo} alt="Logo" className={styles.logoImage} />
+          </Link>
         </div>
+          {isMobile && <Link href="/blog">Blog</Link>}
+
+       </div>
         {isMobile ? (
           <>
             <button onClick={toggleMenu} className={styles.burgerButton}>
@@ -41,46 +48,46 @@ const Header = () => {
                   className={styles.mobileMenu}
                 >
                   <nav className={styles.navLinks}>
-                    <Link
+                    <ScrollLink
                       to="bio"
                       smooth={true}
                       duration={500}
                       onClick={toggleMenu}
                     >
                       <p className={styles.about}>About</p>
-                    </Link>
-                    <Link
+                    </ScrollLink>
+                    <ScrollLink
                       to="skills"
                       smooth={true}
                       duration={500}
                       onClick={toggleMenu}
                     >
                       <p>{t("skills")}</p>
-                    </Link>
-                    <Link
+                    </ScrollLink>
+                    <ScrollLink
                       to="experience"
                       smooth={true}
                       duration={500}
                       onClick={toggleMenu}
                     >
                       <p>{t("experience")}</p>
-                    </Link>
-                    <Link
+                    </ScrollLink>
+                    <ScrollLink
                       to="portfolio"
                       smooth={true}
                       duration={500}
                       onClick={toggleMenu}
                     >
                       <p>{t("portfolio")}</p>
-                    </Link>
-                    <Link
+                    </ScrollLink>
+                    <ScrollLink
                       to="contact"
                       smooth={true}
                       duration={500}
                       onClick={toggleMenu}
                     >
                       <p>{t("contact")}</p>
-                    </Link>
+                    </ScrollLink>
                   </nav>
                   <div className={styles.icons}>
                     <a
@@ -105,21 +112,22 @@ const Header = () => {
         ) : (
           <div className={styles.info}>
             <nav className={styles.navLinks}>
-              <Link to="bio" smooth={true} duration={500}>
+              <ScrollLink to="bio" smooth={true} duration={500}>
                 <p>about</p>
-              </Link>
-              <Link to="skills" smooth={true} duration={500}>
+              </ScrollLink>
+              <ScrollLink to="skills" smooth={true} duration={500}>
                 <p>{t("skills")}</p>
-              </Link>
-              <Link to="experience" smooth={true} duration={500}>
+              </ScrollLink>
+              <ScrollLink to="experience" smooth={true} duration={500}>
                 <p>{t("experience")}</p>
-              </Link>
-              <Link to="portfolio" smooth={true} duration={500}>
+              </ScrollLink>
+              <ScrollLink to="portfolio" smooth={true} duration={500}>
                 <p>{t("portfolio")}</p>
-              </Link>
-              <Link to="contact" smooth={true} duration={500}>
+              </ScrollLink>
+              <ScrollLink to="contact" smooth={true} duration={500}>
                 <p>{t("contact")}</p>
-              </Link>
+              </ScrollLink>
+              <Link href="/blog">Blog</Link>
             </nav>
             <div className={styles.icons}>
               <a
