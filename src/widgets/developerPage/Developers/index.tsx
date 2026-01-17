@@ -201,7 +201,7 @@ const Developer = () => {
                         />
                       </a>
                       <a
-                        href="https://drive.google.com/file/d/1JdS54cxytztiWD7Y-bczAuGm1WeBf-Ow/view?usp=sharing"
+                        href="https://drive.google.com/file/d/1InOj7W1f1rj8ItFg0YT4uLcdUJAUHGnS/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.link}

@@ -30,7 +30,7 @@ const smallBlocksData = [
 ];
 
 const resume =
-  "https://drive.google.com/file/d/1JdS54cxytztiWD7Y-bczAuGm1WeBf-Ow/view?usp=sharing";
+  "https://drive.google.com/file/d/1InOj7W1f1rj8ItFg0YT4uLcdUJAUHGnS/view?usp=sharing";
 
 const Footer = () => {
   const [ref, inView] = useInView({
