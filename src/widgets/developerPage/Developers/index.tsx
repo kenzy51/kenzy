@@ -23,7 +23,7 @@ const Developer = () => {
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Kanat Nazarov",
-              jobTitle: "Senior Full-Stack Developer",
+              jobTitle: "Full-Stack Developer",
               worksFor: {
                 "@type": "Organization",
                 name: "Freelance / Open to opportunities",
@@ -54,7 +54,7 @@ const Developer = () => {
         </title>
         <meta
           name="description"
-          content="Kanat Nazarov — Senior Full-Stack Developer in New York City with 5+ years experience in Next.js, React, NestJS, TypeScript, and MongoDB. Building scalable web applications and community platforms."
+          content="Kanat Nazarov — Full-Stack Developer in New York City with 5+ years experience in Next.js, React, NestJS, TypeScript, and MongoDB. Building scalable web applications and community platforms."
         />
         <meta
           name="keywords"
@@ -66,7 +66,7 @@ const Developer = () => {
         />
         <meta
           property="og:description"
-          content="Senior Full-Stack Developer specializing in Next.js, React, and NestJS. Based in New York City."
+          content="Full-Stack Developer specializing in Next.js, React, and NestJS. Based in New York City."
         />
         <meta
           property="og:image"
@@ -113,12 +113,12 @@ const Developer = () => {
                   visible: { opacity: 1, x: 0, transition: { duration: 0.2 } },
                 }}
               >
-                Kanat Nazarov | Senior Full-Stack Developer & Software Engineer
+                Kanat Nazarov | Full-Stack Developer & Software Engineer
                 in NYC{" "}
               </motion.h1>
 
               <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-6">
-                I'm a <strong>senior full-stack developer</strong> based in{" "}
+                I'm a <strong>full-stack developer</strong> based in{" "}
                 <strong>New York City</strong> with 5+ years of professional
                 experience building modern, scalable web applications. I
                 specialize in <strong>Next.js</strong>, <strong>React</strong>,{" "}
@@ -171,7 +171,7 @@ const Developer = () => {
                         Kanat Nazarov
                       </p>
                       <p className="text-sm text-gray-400">
-                        Senior Full-Stack Developer
+                        Full-Stack Developer
                       </p>
                       <p className="text-sm text-gray-400">New York City</p>
                     </div>

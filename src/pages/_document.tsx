@@ -13,7 +13,7 @@ export default function Document() {
         </title>
         <meta
           name="description"
-          content="Kanat Nazarov — Senior Full-Stack Developer in New York City with 5+ years in Next.js, React, NestJS, TypeScript. Building scalable web apps and community platforms."
+          content="Kanat Nazarov — Full-Stack Developer in New York City with 5+ years in Next.js, React, NestJS, TypeScript. Building scalable web apps and community platforms."
         />
         <meta
           name="keywords"
@@ -29,7 +29,7 @@ export default function Document() {
         />
         <meta
           property="og:description"
-          content="Senior Full-Stack Developer in NYC specializing in Next.js, React, and NestJS. Built real-world apps including Kyrgyz diaspora platform."
+          content="Full-Stack Developer in NYC specializing in Next.js, React, and NestJS. Built real-world apps including Kyrgyz diaspora platform."
         />
         <meta
           property="og:image"

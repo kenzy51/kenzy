@@ -200,7 +200,7 @@ export default function Post({ source, frontMatter, readTime }: PostProps) {
               ← Back to all posts
             </Link>
             <span>
-              © {new Date().getFullYear()} Kanat Nazarov • Senior Full-Stack
+              © {new Date().getFullYear()} Kanat Nazarov • Full-Stack Javascript
               Developer
             </span>
           </div>
