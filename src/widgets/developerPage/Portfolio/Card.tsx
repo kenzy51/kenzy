@@ -14,7 +14,7 @@ export const Card = ({ card, onSelect }: CardFunction) => {
   const isMobile = useMediaQuery("exsm");
   const mobileStyles = isMobile
     ? "group h-[340px] w-[100%] overflow-hidden bg-neutral-200 rounded-[20px] relative"
-    : "group h-[450px] w-[450px] overflow-hidden bg-neutral-200 rounded-[20px] relative";
+    : "group h-[650px] w-[650px] overflow-hidden bg-neutral-200 rounded-[20px] relative";
 
   const mobileStylesforP = isMobile
     ? "bg-gradient-to-br from-white/40 to-black/30 p-8 text-2xl font-semibold uppercase text-white backdrop-blur-lg rounded-2xl "

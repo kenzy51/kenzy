@@ -21,7 +21,7 @@ export default function Home() {
     <>
       <Head>
         <title>
-          Kanat Nazarov |  Full-Stack Developer & Software Engineer | NYC
+          Kanat Nazarov |  Full-Stack Developer & Software Engineer 
         </title>
         <meta
           name="google-site-verification"
@@ -29,15 +29,14 @@ export default function Home() {
         />
         <meta
           name="description"
-          content="Kanat Nazarov — Full-Stack Developer with 5+ years experience in Next.js, React, NestJS, and MongoDB. Building scalable web applications and community platforms in New York City."
+          content="Kanat Nazarov — Full-Stack Developer with 5+ years experience in Next.js, React, NestJS, and MongoDB/Redis. Building scalable web applications and community platforms."
         />
         <meta
           name="keywords"
-          content="Kanat Nazarov, full stack developer NYC, software engineer New York, Next.js developer, React developer, NestJS, Kyrgyz developer USA"
         />
         <meta
           property="og:title"
-          content="Kanat Nazarov | Full-Stack Developer | NYC"
+          content="Kanat Nazarov | Full-Stack Developer "
         />
         <meta
           property="og:description"
@@ -54,7 +53,7 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Kanat Nazarov | Full-Stack Developer | NYC"
+          content="Kanat Nazarov | Full-Stack Developer"
         />
         <meta
           name="twitter:description"

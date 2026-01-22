@@ -13,6 +13,7 @@ import framer from "../../../../../public/images/skills/framer.png";
 import jira from "../../../../../public/images/skills/jira.png";
 import mui from "../../../../../public/images/skills/mui.png";
 import mongo from "../../../../../public/images/skills/mongodb.svg";
+import redis from "../../../../../public/images/skills/redis.svg";
 import styles from "./company.module.scss";
 
 const companiesData = [
@@ -21,28 +22,31 @@ const companiesData = [
     company: "Fusion Web Works",
     duration: "March 2025 - present",
     description: [
-      "Spearheaded architecture, development, deployment, and client communication for a full-scale web project.",
-      "Built application with Next.js (SSR & SSG), integrated API routes, middleware, and advanced routing.",
-      "Implemented SEO & performance optimizations (lazy loading, schema markup, Next/Image).",
-      "Developed CMS & Admin panel with role-based access, inline editing, and React Hook Form + Zod validation.",
-      "Led client communication, requirements gathering, and iterative feedback cycles.",
+      "Architected and deployed a high-scale community platform from scratch using Next.js (App Router) and NestJS, designed to handle 10k+ concurrent users with sub-second latency.",
+      "Engineered a high-performance backend with NestJS and PostgreSQL, implementing a Redis-based caching layer (Cache-Aside pattern) to achieve sub-100ms data retrieval for mission-critical endpoints.",
+      "Designed and implemented a scalable real-time notification system using WebSockets (Socket.io) and Redis Pub/Sub to ensure reliable data synchronization across distributed server instances.",
+      "Optimized full-stack performance by integrating Next.js ISR (Incremental Static Regeneration) and advanced middleware, reducing server response time by 45% and improving SEO Core Web Vitals.",
+      "Built a secure Admin Dashboard featuring role-based access control (RBAC), complex form state management with React Hook Form + Zod, and real-time data visualization.",
+      "Developed a robust CI/CD pipeline using GitHub Actions and Docker, automating testing and deployment to AWS to maintain 99.9% application availability.",
+      "Led end-to-end product development, from technical requirements gathering and system design to final deployment and iterative performance tuning based on user feedback.",
     ],
-    icons: [next, react, framer, redux, git,jira,nest,mongo],
+    icons: [next, react, framer, redux, git, jira, nest, mongo,redis],
   },
   {
     title: "Frontend Engineer",
     company: "StreamTech",
     duration: "March 2023 to Mar 2025",
     description: [
-      "Contributed to a real-time betting platform, delivering scalable, high-performance features used by thousands of active users.",
-      "Migrated codebase from React 14 → React 18, unlocking concurrent features and improving rendering speed by 20%.",
-      "Optimized platform performance with lazy loading, code splitting, memoization, and virtualization, reducing page load time by ~30%.",
-      "Built a scalable UI component library with TypeScript, improving developer productivity and reducing code duplication by 40%.",
-      "Refactored legacy code to functional components with hooks, enhancing maintainability and cutting bug rates in refactored modules.",
-      "Worked in Agile sprints using Jira + Confluence",
-      "Collaborated closely with backend engineers, QA, and designers in an Agile environment to ensure reliable real-time data delivery and seamless user experience.",
+      "Developed front-end UI for a high-frequency betting platform, optimizing WebSocket data streams by implementing React.memo, useMemo, and useCallback to prevent unnecessary re-renders during rapid odds updates.",
+      "Engineered performance improvements using windowing (virtual lists) for real-time event feeds, reducing CPU idle time by 30% and maintaining 60fps UI performance under heavy data loads.",
+      "Led the architectural migration from React 14 to React 18, utilizing Concurrent Mode and the Transitions API to prioritize critical user interactions over background data updates.",
+      "Architected a reusable TypeScript UI component library and design system, accelerating the development cycle for new features by 40% while ensuring strict type safety and accessibility.",
+      "Refactored legacy class-based components into functional components with Hooks, enhancing code maintainability and reducing post-release bug rates in core modules.",
+      "Collaborated with backend teams to refine RESTful APIs and WebSocket schemas, ensuring sub-second synchronization between live sports data and the user dashboard.",
+      "Optimized application delivery through code splitting and lazy loading, resulting in a 30% reduction in initial page load times and improved Core Web Vitals.",
+      "Executed high-intensity Agile sprints using Jira and Confluence to deliver mission-critical updates in a global delivery environment.",
     ],
-    icons: [react, redux, mui, framer, git,jira],
+    icons: [react, redux, mui, framer, git, jira],
   },
   {
     title: "Frontend Engineer",
@@ -56,7 +60,7 @@ const companiesData = [
       "Enhanced UX with Framer Motion animations.",
       "Improved page load times by 30% and increased engagement by 20%.",
     ],
-    icons: [react, next, mui, redux,jira],
+    icons: [react, next, mui, redux, jira],
   },
   {
     title: "Full Stack Developer",
@@ -69,7 +73,7 @@ const companiesData = [
       "Collaborated with UX/UI designers and enforced SOLID, DRY, KISS, and YAGNI principles.",
       "Delivered Shamal, a high-impact mobile app with a growing user base developed on React Native",
     ],
-    icons: [react, antd, nest, postgres, git,jira],
+    icons: [react, antd, nest, postgres, git, jira],
   },
 ];
 

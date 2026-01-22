@@ -18,6 +18,7 @@ import node from "../../../../public/images/skills/node.png";
 import mongo from "../../../../public/images/skills/mongodb.svg";
 import nest from "../../../../public/images/skills/nest.png";
 import ts from "../../../../public/images/skills/ts.png";
+import redis from "../../../../public/images/skills/redis.svg";
 import next from "../../../../public/images/skills/nextjs3.webp";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
 
@@ -35,7 +36,7 @@ const imagesAll = [
   jira,
 ];
 const imagesFrontend = [react, js, html, git, css, ts, next];
-const imagesBackend = [mongo, js, nest, git, ts, node];
+const imagesBackend = [mongo, js, nest, git, ts, node,redis];
 type Status = "frontend" | "all" | "backend";
 type SliderProps = {
   status: Status;

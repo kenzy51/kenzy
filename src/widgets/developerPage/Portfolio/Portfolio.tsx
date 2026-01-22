@@ -1,11 +1,352 @@
-import {
-  motion,
-  useTransform,
-  useScroll,
-  AnimatePresence,
-} from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
+// import {
+//   motion,
+//   useTransform,
+//   useScroll,
+//   AnimatePresence,
+// } from "framer-motion";
+// import { useEffect, useRef, useState } from "react";
+// import { useInView } from "react-intersection-observer";
+// import Image from "next/image";
+// import { useTranslations } from "next-intl";
+// import ButtonLink from "@/shared/ui/buttons/buttonLink";
+// import styles from "./portfolio.module.scss";
+
+// // skills
+// import antd from "../../../../public/images/skills/antd.png";
+// import react from "../../../../public/images/skills/react.png";
+// import redux from "../../../../public/images/skills/redux-icon.webp";
+// import nest from "../../../../public/images/skills/nest.png";
+// import postgres from "../../../../public/images/skills/postgres.png";
+// import git from "../../../../public/images/skills/git.png";
+// import next from "../../../../public/images/skills/next.png";
+// import framer from "../../../../public/images/skills/framer.png";
+// import jira from "../../../../public/images/skills/jira.png";
+
+// import mui from "../../../../public/images/skills/mui.png";
+// import mongo from "../../../../public/images/skills/mongodb.svg";
+// import { Card } from "./Card";
+// import useMediaQuery from "@/shared/hooks/useMediaQuery";
+// import { CardType } from "./constants";
+// import BulletList from "@/shared/ui/components/BulletList";
+
+// const Example = () => {
+//   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
+//   const [activeTab, setActiveTab] = useState<
+//     "problem" | "solution" | "outcome"
+//   >("problem");
+//   useEffect(() => {
+//     if (selectedCard) {
+//       setActiveTab("problem");
+//     }
+//   }, [selectedCard]);
+//   const RenderedContent = () => {
+//     if (!selectedCard) return null;
+//     switch (activeTab) {
+//       case "problem":
+//         return <div className="text-sm">{selectedCard.problem}</div>;
+//       case "solution":
+//         return <div className="text-sm"> {selectedCard.solution}</div>;
+//       case "outcome":
+//         return <BulletList text={selectedCard.outcome || ""} />;
+//     }
+//   };
+
+//   return (
+//     <div id="portfolio">
+//       <HorizontalScrollCarousel onSelectCard={setSelectedCard} />
+//       <AnimatePresence>
+//         {selectedCard && (
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             exit={{ opacity: 0 }}
+//             className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+//             onClick={() => setSelectedCard(null)}
+//           >
+//             <motion.div
+//               initial={{ scale: 0.8, opacity: 0 }}
+//               animate={{ scale: 1, opacity: 1 }}
+//               exit={{ scale: 0.8, opacity: 0 }}
+//               transition={{ duration: 0.3 }}
+//               className="relative w-[90%] max-w-3xl rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl p-6 text-white"
+//               onClick={(e) => e.stopPropagation()}
+//             >
+//               <button
+//                 onClick={() => setSelectedCard(null)}
+//                 className="absolute top-3 right-3 text-white text-2xl hover:scale-150 transition"
+//               >
+//                 ×
+//               </button>
+//               <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
+//               <div className="prose prose-invert mb-4 text-base leading-relaxed">
+//                 <div className="flex border-b border-white/30 mb-4 ">
+//                   {["problem", "solution", "outcome"].map((tab) => (
+//                     <button
+//                       key={tab}
+//                       onClick={() => setActiveTab(tab as any)}
+//                       className={`px-4 py-2 text-sm font-medium transition ${
+//                         activeTab === tab
+//                           ? "border-b-2 border-cyan-400 text-cyan-400"
+//                           : "text-gray-300 hover:text-white"
+//                       }`}
+//                     >
+//                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
+//                     </button>
+//                   ))}
+//                 </div>
+//               </div>
+//               <RenderedContent />
+//               <br />
+//               {selectedCard?.technologies && (
+//                 <div className="flex gap-3 flex-wrap mb-4">
+//                   {selectedCard.technologies.map((tech, index) => (
+//                     <div
+//                       key={index}
+//                       className="w-10 h-10 relative rounded-md overflow-hidden"
+//                     >
+//                       <Image src={tech} alt="tech" fill />
+//                     </div>
+//                   ))}
+//                 </div>
+//               )}
+
+//               {selectedCard?.link && <ButtonLink link={selectedCard.link} />}
+//             </motion.div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </div>
+//   );
+// };
+
+// const HorizontalScrollCarousel = ({
+//   onSelectCard,
+// }: {
+//   onSelectCard: (card: CardType) => void;
+// }) => {
+//   const [ref, inView] = useInView({
+//     triggerOnce: true,
+//   });
+
+//   useEffect(() => {
+//     if (inView) {
+//       console.log("Component is in view!");
+//     }
+//   }, [inView]);
+
+//   const targetRef = useRef<HTMLDivElement | null>(null);
+//   const { scrollYProgress } = useScroll();
+
+//   const x = useTransform(scrollYProgress, [0, 1], ["2%", "-92%"]);
+
+//   const t = useTranslations();
+//   const descSrm =
+//     "A catering SaaS for multi-branch restaurants with tools for managing employees, events, and catering orders at each location.";
+//   const descKyrgyz =
+//     "Full-stack community platform connecting Kyrgyz, Kazakh, and Uzbek diaspora in the USA with events, resources, and multilingual support.";
+//   const cards: CardType[] = [
+//     {
+//       url: "/images/portfolio/kyrgyzproject.png",
+//       title: "Kyrgyz Diaspora Community Platform",
+//       technologies: [next, nest, mongo, react],
+//       description:
+//         "Full-stack platform connecting Kyrgyz diaspora in USA with events, resources, and community support.",
+//       link: "https://kyrgyz-diaspora.vercel.app",
+//       problem:
+//         "Kyrgyz immigrants in NYC and USA struggled to find community events (Nooruz, cultural gatherings), consular resources, and support. Information was scattered across WhatsApp groups and Facebook — no centralized platform existed.",
+//       solution: `I built a full-stack community platform from the ground up using Next.js for a fast, SEO-friendly frontend and NestJS with MongoDB on the backend. I implemented secure JWT authentication to protect user accounts, designed an intuitive event creation system where each event is tied to its creator, and added full multilingual support in English, Russian, and Kyrgyz to make it truly accessible to the diaspora. The app includes a resources section for consular and practical help, plus a public support form open to everyone. Everything is fully responsive, so it works beautifully on mobile — ensuring Kyrgyz people in NYC and across the USA can stay connected no matter what device they're using.`,
+//       outcome: `• Live platform used by real community members
+// • Central hub for events and cultural connection
+// • Secure, scalable architecture with r  eal-world impact
+// • Demonstrates end-to-end full-stack development`,
+//       id: 11,
+//     },
+//     {
+//       url: "/images/portfolio/saas.png",
+//       title: "SaaS CRM System",
+//       technologies: [mui, nest, mongo, redux, react, git],
+//       description: descSrm,
+//       problem:
+//         "Multi-branch restaurants were struggling to manage operations across different locations. Employee scheduling, catering orders, and event coordination were fragmented, often tracked in spreadsheets or disconnected tools. Managers had no unified dashboard for performance analytics, which caused inefficiencies and delays.",
+//       solution: `I built a full-stack SaaS platform that centralized restaurant operations into one system. 
+//    The frontend was developed with React, Redux, and MUI to deliver a responsive, intuitive interface. 
+//    On the backend, I used NestJS with PostgreSQL and MongoDB to handle relational data and flexible content storage. 
+//    The system included role-based employee management, event scheduling with resource allocation, customizable catering orders, 
+//    and real-time analytics dashboards, giving managers a single source of truth across all branches.`,
+//       outcome: ` 
+//     Reduced scheduling and order management overhead by ~40%
+//     Improved operational visibility across 20+ restaurant branches
+//     Enabled 5,000+ staff and managers to coordinate seamlessly in one platform
+//     Provided scalable foundation for future modules like inventory and billing
+//     `,
+//       id: 11,
+//     },
+
+//     {
+//       url: "/images/portfolio/jalgroupNew.png",
+//       title: "Jal Group Asia",
+//       technologies: [antd, next, mongo, redux, react, git, jira],
+//       description: t("jalGroup"),
+//       problem:
+//         " The client’s existing site was static and hard to maintain. They needed a dynamic site to support frequent updates, campaigns, and content changes without developer intervention.",
+//       solution: `I rebuilt their site using Next.js with CMS integration. Implemented dynamic routing, on-demand content fetching, image optimization, and SEO best practices. Also added admin interfaces so non-technical users could update content.`,
+//       outcome: ` 
+//    Content updates now take minutes instead of developer cycles
+//    Improved SEO rankings and page speed
+//    Lower maintenance burden for the client
+//     `,
+//       link: "https://jalgroupasia.kg/",
+//       id: 1,
+//     },
+//     {
+//       url: "/images/portfolio/barca.png",
+//       title: "Barca experience KG",
+//       link: "https://experience.barcelona.kg/",
+//       description: t("barca"),
+//       technologies: [antd, nest, postgres, redux, react, jira, git],
+//       problem: `  The Barcelona Academy in Bishkek needed both a public-facing website to showcase programs/events and an internal CRM to manage students, registrations, and communications.
+// The team had mostly junior developers who required technical guidance, and there was no structured system for code quality, reviews, or delivery.`,
+//       solution: `Acted as senior developer and team lead, mentoring juniors and conducting code reviews to maintain high standards.
+
+// Designed and implemented a CRM system using NestJS + MongoDB to handle student data, registrations, and staff workflows.
+
+// Built the frontend with React + Ant Design, ensuring a professional and responsive UI.
+
+// Integrated role-based access control for staff/admin, and set up clear Git workflows with CI/CD to improve collaboration.`,
+//       outcome: `Launched a production-ready academy website and CRM used daily by staff.
+//          Juniors gained skills and confidence from mentorship, improving team velocity.
+//           Academy staff saved significant time by consolidating student management into one platform.
+
+// Delivered a scalable system ready for future modules (payments, attendance tracking, reporting).`,
+//       id: 2,
+//     },
+//     {
+//       url: "/images/portfolio/ergotech.png",
+//       title: "Fusion Web",
+//       technologies: [next, react, git, jira, framer],
+//       link: "https://fusionweb.vercel.app/",
+//       description: t("ergo"),
+//       id: 3,
+//     },
+//     {
+//       url: "/images/portfolio/effafa.png",
+//       title: "Effafa",
+//       technologies: [next, react, git, jira, framer],
+//       description: t("effafa"),
+//       link: "https://effafa.com/",
+//       id: 4,
+//     },
+//     {
+//       url: "/images/portfolio/myPost.png",
+//       title: "My Post",
+//       link: "https://kyrgyz-post.vercel.app/",
+//       technologies: [postgres, react, git, framer, mui, jira, nest],
+//       description: t("myPost"),
+//       id: 5,
+//     },
+//     {
+//       url: "/images/portfolio/tenloc.png",
+//       link: " https://tenloc-pi.vercel.app/",
+//       title: "Tenloc",
+//       description: t("tenloc"),
+//       technologies: [react, git],
+//       id: 6,
+//     },
+//     {
+//       url: "/images/portfolio/tunukOi.png",
+//       link: "https://ku-tengri-landing.vercel.app/",
+//       title: "Tunuk-Oi",
+//       description: t("tunuk"),
+//       technologies: [react, git],
+//       id: 7,
+//     },
+//     {
+//       url: "/images/portfolio/dataxway.jpg",
+//       link: "https://dataxway.com/",
+//       title: "Dataxway",
+//       description: t("dataxway"),
+//       technologies: [next, react, git, framer],
+//       id: 7,
+//     },
+//   ];
+//   const isSmall = useMediaQuery("sm");
+//   return isSmall ? (
+//     <div className="flex flex-col justify-center items-center gap-7 px-8">
+//       <motion.h3
+//         className=" font-bold "
+//         style={{ color: "white", fontSize: "25px" }}
+//         initial="hidden"
+//         animate={inView ? "visible" : "hidden"}
+//       >
+//         Let's see my works
+//       </motion.h3>
+
+//       {cards.map((card) => {
+//         return (
+//           <Card card={card} key={card.id} onSelect={() => onSelectCard(card)} />
+//         );
+//       })}
+//     </div>
+//   ) : (
+//     <div>
+//       <section className="relative h-[200vh]">
+//         <div className="sticky top-0 flex h-screen overflow-hidden items-center">
+//           <motion.div style={{ x }} className="flex gap-4">
+//             <div className={styles.skill} ref={ref}>
+//               <motion.h3
+//                 className="white"
+//                 variants={{
+//                   hidden: { opacity: 0, x: -50 },
+//                   visible: {
+//                     opacity: 1,
+//                     x: 0,
+//                     transition: { duration: 0.5, delay: 0.5 },
+//                   },
+//                 }}
+//                 initial="hidden"
+//                 animate={inView ? "visible" : "hidden"}
+//               >
+//                 Let's see
+//               </motion.h3>
+//               <motion.h4
+//                 className="white"
+//                 variants={{
+//                   hidden: { opacity: 0, x: -50 },
+//                   visible: {
+//                     opacity: 1,
+//                     x: 0,
+//                     transition: { duration: 0.3, delay: 0.8 },
+//                   },
+//                 }}
+//                 initial="hidden"
+//                 animate={inView ? "visible" : "hidden"}
+//               >
+//                 my works
+//               </motion.h4>
+
+//               <p className={styles.small}>{t("worksDescription")}</p>
+//             </div>
+//             {cards.map((card) => {
+//               return (
+//                 <Card
+//                   card={card}
+//                   key={card.id}
+//                   onSelect={() => onSelectCard(card)}
+//                 />
+//               );
+//             })}
+//           </motion.div>
+//         </div>
+//       </section>
+//     </div>
+//   );
+// };
+
+// export default Example;
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import ButtonLink from "@/shared/ui/buttons/buttonLink";
@@ -29,7 +370,7 @@ import useMediaQuery from "@/shared/hooks/useMediaQuery";
 import { CardType } from "./constants";
 import BulletList from "@/shared/ui/components/BulletList";
 
-const Example = () => {
+const Portfolio = () => {
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [activeTab, setActiveTab] = useState<
     "problem" | "solution" | "outcome"
@@ -43,105 +384,98 @@ const Example = () => {
     if (!selectedCard) return null;
     switch (activeTab) {
       case "problem":
-        return <div className="text-sm">{selectedCard.problem}</div>;
+        return <div className="text-sm whitespace-pre-line">{selectedCard.problem}</div>;
       case "solution":
-        return <div className="text-sm"> {selectedCard.solution}</div>;
+        return <div className="text-sm whitespace-pre-line"> {selectedCard.solution}</div>;
       case "outcome":
         return <BulletList text={selectedCard.outcome || ""} />;
     }
   };
 
   return (
-    <div id="portfolio">
-      <HorizontalScrollCarousel onSelectCard={setSelectedCard} />
-      <AnimatePresence>
-        {selectedCard && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-            onClick={() => setSelectedCard(null)}
-          >
+    <div id="portfolio" className="py-16 md:py-24 px-6 md:px-12 lg:px-20">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-12 md:mb-16">
+          Let's see my works
+        </h2>
+
+        <PortfolioGrid onSelectCard={setSelectedCard} />
+
+        <AnimatePresence>
+          {selectedCard && (
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-[90%] max-w-3xl rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl p-6 text-white"
-              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4"
+              onClick={() => setSelectedCard(null)}
             >
-              <button
-                onClick={() => setSelectedCard(null)}
-                className="absolute top-3 right-3 text-white text-2xl hover:scale-150 transition"
+              <motion.div
+                initial={{ scale: 0.92, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.92, opacity: 0 }}
+                className="relative w-full max-w-4xl bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-6 md:p-10 text-white max-h-[90vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
               >
-                ×
-              </button>
-              <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
-              <div className="prose prose-invert mb-4 text-base leading-relaxed">
-                <div className="flex border-b border-white/30 mb-4 ">
+                <button
+                  className="absolute top-4 right-4 text-3xl hover:text-cyan-400 transition-colors"
+                  onClick={() => setSelectedCard(null)}
+                >
+                  ×
+                </button>
+
+                <h2 className="text-2xl md:text-3xl font-bold mb-6">{selectedCard.title}</h2>
+
+                <div className="flex border-b border-white/20 mb-6 overflow-x-auto">
                   {["problem", "solution", "outcome"].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab as any)}
-                      className={`px-4 py-2 text-sm font-medium transition ${
+                      className={`px-5 py-3 text-base font-medium whitespace-nowrap transition-colors ${
                         activeTab === tab
                           ? "border-b-2 border-cyan-400 text-cyan-400"
-                          : "text-gray-300 hover:text-white"
+                          : "text-gray-400 hover:text-white"
                       }`}
                     >
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </button>
                   ))}
                 </div>
-              </div>
-              <RenderedContent />
-              <br />
-              {selectedCard?.technologies && (
-                <div className="flex gap-3 flex-wrap mb-4">
-                  {selectedCard.technologies.map((tech, index) => (
-                    <div
-                      key={index}
-                      className="w-10 h-10 relative rounded-md overflow-hidden"
-                    >
-                      <Image src={tech} alt="tech" fill />
-                    </div>
-                  ))}
-                </div>
-              )}
 
-              {selectedCard?.link && <ButtonLink link={selectedCard.link} />}
+                <div className="prose prose-invert prose-sm md:prose-base max-w-none mb-8">
+                  <RenderedContent />
+                </div>
+
+                {selectedCard?.technologies && (
+                  <div className="flex flex-wrap gap-4 mt-10 mb-8">
+                    {selectedCard.technologies.map((tech, index) => (
+                      <div
+                        key={index}
+                        className="w-10 h-10 md:w-12 md:h-12 relative rounded-md overflow-hidden"
+                      >
+                        <Image src={tech} alt="tech" fill className="object-contain" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {selectedCard?.link && <ButtonLink link={selectedCard.link} />}
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
 
-const HorizontalScrollCarousel = ({
+function PortfolioGrid({
   onSelectCard,
 }: {
   onSelectCard: (card: CardType) => void;
-}) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      console.log("Component is in view!");
-    }
-  }, [inView]);
-
-  const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["2%", "-95%"]);
-
+}) {
   const t = useTranslations();
+  const isSmall = useMediaQuery("sm");
   const descSrm =
     "A catering SaaS for multi-branch restaurants with tools for managing employees, events, and catering orders at each location.";
   const descKyrgyz =
@@ -157,10 +491,7 @@ const HorizontalScrollCarousel = ({
       problem:
         "Kyrgyz immigrants in NYC and USA struggled to find community events (Nooruz, cultural gatherings), consular resources, and support. Information was scattered across WhatsApp groups and Facebook — no centralized platform existed.",
       solution: `I built a full-stack community platform from the ground up using Next.js for a fast, SEO-friendly frontend and NestJS with MongoDB on the backend. I implemented secure JWT authentication to protect user accounts, designed an intuitive event creation system where each event is tied to its creator, and added full multilingual support in English, Russian, and Kyrgyz to make it truly accessible to the diaspora. The app includes a resources section for consular and practical help, plus a public support form open to everyone. Everything is fully responsive, so it works beautifully on mobile — ensuring Kyrgyz people in NYC and across the USA can stay connected no matter what device they're using.`,
-      outcome: `• Live platform used by real community members
-• Central hub for events and cultural connection
-• Secure, scalable architecture with r  eal-world impact
-• Demonstrates end-to-end full-stack development`,
+      outcome: `• Live platform used by real community members\n• Central hub for events and cultural connection\n• Secure, scalable architecture with real-world impact\n• Demonstrates end-to-end full-stack development`,
       id: 11,
     },
     {
@@ -170,17 +501,8 @@ const HorizontalScrollCarousel = ({
       description: descSrm,
       problem:
         "Multi-branch restaurants were struggling to manage operations across different locations. Employee scheduling, catering orders, and event coordination were fragmented, often tracked in spreadsheets or disconnected tools. Managers had no unified dashboard for performance analytics, which caused inefficiencies and delays.",
-      solution: `I built a full-stack SaaS platform that centralized restaurant operations into one system. 
-   The frontend was developed with React, Redux, and MUI to deliver a responsive, intuitive interface. 
-   On the backend, I used NestJS with PostgreSQL and MongoDB to handle relational data and flexible content storage. 
-   The system included role-based employee management, event scheduling with resource allocation, customizable catering orders, 
-   and real-time analytics dashboards, giving managers a single source of truth across all branches.`,
-      outcome: ` 
-    Reduced scheduling and order management overhead by ~40%
-    Improved operational visibility across 20+ restaurant branches
-    Enabled 5,000+ staff and managers to coordinate seamlessly in one platform
-    Provided scalable foundation for future modules like inventory and billing
-    `,
+      solution: `I built a full-stack SaaS platform that centralized restaurant operations into one system. \nThe frontend was developed with React, Redux, and MUI to deliver a responsive, intuitive interface. \nOn the backend, I used NestJS with PostgreSQL and MongoDB to handle relational data and flexible content storage. \nThe system included role-based employee management, event scheduling with resource allocation, customizable catering orders, \nand real-time analytics dashboards, giving managers a single source of truth across all branches.`,
+      outcome: ` \nReduced scheduling and order management overhead by ~40%\nImproved operational visibility across 20+ restaurant branches\nEnabled 5,000+ staff and managers to coordinate seamlessly in one platform\nProvided scalable foundation for future modules like inventory and billing\n    `,
       id: 11,
     },
 
@@ -192,11 +514,7 @@ const HorizontalScrollCarousel = ({
       problem:
         " The client’s existing site was static and hard to maintain. They needed a dynamic site to support frequent updates, campaigns, and content changes without developer intervention.",
       solution: `I rebuilt their site using Next.js with CMS integration. Implemented dynamic routing, on-demand content fetching, image optimization, and SEO best practices. Also added admin interfaces so non-technical users could update content.`,
-      outcome: ` 
-   Content updates now take minutes instead of developer cycles
-   Improved SEO rankings and page speed
-   Lower maintenance burden for the client
-    `,
+      outcome: ` \nContent updates now take minutes instead of developer cycles\nImproved SEO rankings and page speed\nLower maintenance burden for the client\n    `,
       link: "https://jalgroupasia.kg/",
       id: 1,
     },
@@ -206,20 +524,9 @@ const HorizontalScrollCarousel = ({
       link: "https://experience.barcelona.kg/",
       description: t("barca"),
       technologies: [antd, nest, postgres, redux, react, jira, git],
-      problem: `  The Barcelona Academy in Bishkek needed both a public-facing website to showcase programs/events and an internal CRM to manage students, registrations, and communications.
-The team had mostly junior developers who required technical guidance, and there was no structured system for code quality, reviews, or delivery.`,
-      solution: `Acted as senior developer and team lead, mentoring juniors and conducting code reviews to maintain high standards.
-
-Designed and implemented a CRM system using NestJS + MongoDB to handle student data, registrations, and staff workflows.
-
-Built the frontend with React + Ant Design, ensuring a professional and responsive UI.
-
-Integrated role-based access control for staff/admin, and set up clear Git workflows with CI/CD to improve collaboration.`,
-      outcome: `Launched a production-ready academy website and CRM used daily by staff.
-         Juniors gained skills and confidence from mentorship, improving team velocity.
-          Academy staff saved significant time by consolidating student management into one platform.
-
-Delivered a scalable system ready for future modules (payments, attendance tracking, reporting).`,
+      problem: `  The Barcelona Academy in Bishkek needed both a public-facing website to showcase programs/events and an internal CRM to manage students, registrations, and communications.\nThe team had mostly junior developers who required technical guidance, and there was no structured system for code quality, reviews, or delivery.`,
+      solution: `Acted as senior developer and team lead, mentoring juniors and conducting code reviews to maintain high standards.\n\nDesigned and implemented a CRM system using NestJS + MongoDB to handle student data, registrations, and staff workflows.\n\nBuilt the frontend with React + Ant Design, ensuring a professional and responsive UI.\n\nIntegrated role-based access control for staff/admin, and set up clear Git workflows with CI/CD to improve collaboration.`,
+      outcome: `Launched a production-ready academy website and CRM used daily by staff.\n         Juniors gained skills and confidence from mentorship, improving team velocity.\n          Academy staff saved significant time by consolidating student management into one platform.\n\nDelivered a scalable system ready for future modules (payments, attendance tracking, reporting).`,
       id: 2,
     },
     {
@@ -271,14 +578,14 @@ Delivered a scalable system ready for future modules (payments, attendance track
       id: 7,
     },
   ];
-  const isSmall = useMediaQuery("sm");
-  return isSmall ? (
+
+  return (
     <div className="flex flex-col justify-center items-center gap-7 px-8">
       <motion.h3
         className=" font-bold "
         style={{ color: "white", fontSize: "25px" }}
         initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        animate="visible"
       >
         Let's see my works
       </motion.h3>
@@ -289,59 +596,7 @@ Delivered a scalable system ready for future modules (payments, attendance track
         );
       })}
     </div>
-  ) : (
-    <div>
-      <section ref={targetRef} className="relative h-[300vh]">
-        <div className="sticky top-0 flex h-screen overflow-hidden items-center">
-          <motion.div style={{ x }} className="flex gap-4">
-            <div className={styles.skill} ref={ref}>
-              <motion.h3
-                className="white"
-                variants={{
-                  hidden: { opacity: 0, x: -50 },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    transition: { duration: 0.5, delay: 0.5 },
-                  },
-                }}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-              >
-                Let's see
-              </motion.h3>
-              <motion.h4
-                className="white"
-                variants={{
-                  hidden: { opacity: 0, x: -50 },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    transition: { duration: 0.3, delay: 0.8 },
-                  },
-                }}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-              >
-                my works
-              </motion.h4>
-
-              <p className={styles.small}>{t("worksDescription")}</p>
-            </div>
-            {cards.map((card) => {
-              return (
-                <Card
-                  card={card}
-                  key={card.id}
-                  onSelect={() => onSelectCard(card)}
-                />
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-    </div>
   );
 };
 
-export default Example;
+export default Portfolio;

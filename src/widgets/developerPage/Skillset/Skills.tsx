@@ -20,7 +20,6 @@ const Skills = () => {
     triggerOnce: true,
   });
 
-  console.log(categories);
   useEffect(() => {
     if (inView) {
       console.log("Component is in view!");

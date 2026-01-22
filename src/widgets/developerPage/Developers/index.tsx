@@ -49,24 +49,22 @@ const Developer = () => {
             }),
           }}
         />
-        <title>
-          Kanat Nazarov | Full-Stack Developer & Software Engineer | NYC
-        </title>
+        <title>Kanat Nazarov | Full-Stack Developer & Software Engineer</title>
         <meta
           name="description"
           content="Kanat Nazarov — Full-Stack Developer in New York City with 5+ years experience in Next.js, React, NestJS, TypeScript, and MongoDB. Building scalable web applications and community platforms."
         />
         <meta
           name="keywords"
-          content="Kanat Nazarov, full stack developer NYC, software engineer New York, frontend engineer NYC, Next.js developer, React developer NYC, NestJS developer, Kyrgyz developer USA"
+          content="Kanat Nazarov, full stack developer, software engineer New York, frontend engineer, Next.js developer, React developer, NestJS developer, Kyrgyz developer USA"
         />
         <meta
           property="og:title"
-          content="Kanat Nazarov | Full-Stack Developer NYC"
+          content="Kanat Nazarov | Full-Stack Developer"
         />
         <meta
           property="og:description"
-          content="Full-Stack Developer specializing in Next.js, React, and NestJS. Based in New York City."
+          content="Full-Stack Developer specializing in Next.js, React, and NestJS."
         />
         <meta
           property="og:image"
@@ -79,11 +77,11 @@ const Developer = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Kanat Nazarov | Full-Stack Developer NYC"
+          content="Kanat Nazarov | Full-Stack Developer"
         />
         <meta
           name="twitter:description"
-          content="Full-Stack Developer in NYC | Next.js, React, NestJS"
+          content="Full-Stack Developer in | Next.js, React, NestJS"
         />
       </Head>
 
@@ -114,17 +112,15 @@ const Developer = () => {
                 }}
               >
                 Kanat Nazarov | Full-Stack Developer & Software Engineer
-                in NYC{" "}
               </motion.h1>
 
               <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-6">
-                I'm a <strong>full-stack developer</strong> based in{" "}
-                <strong>New York City</strong> with 5+ years of professional
-                experience building modern, scalable web applications. I
-                specialize in <strong>Next.js</strong>, <strong>React</strong>,{" "}
-                <strong>TypeScript</strong>, and <strong>NestJS</strong>,
-                delivering performant and user-focused solutions from frontend
-                to backend.
+                I'm a <strong>full-stack developer</strong> with 5+ years of
+                professional experience building modern, scalable web
+                applications. I specialize in <strong>Next.js</strong>,{" "}
+                <strong>React</strong>, <strong>TypeScript</strong>, and{" "}
+                <strong>NestJS</strong>, delivering performant and user-focused
+                solutions from frontend to backend.
               </p>
 
               <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
@@ -136,7 +132,7 @@ const Developer = () => {
 
               <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
                 Currently focused on <strong>frontend engineering</strong> and{" "}
-                <strong>full-stack development</strong> in NYC, I love creating
+                <strong>full-stack development</strong> in, I love creating
                 clean, accessible, and visually engaging experiences that scale.
               </p>
 
@@ -161,7 +157,7 @@ const Developer = () => {
                 <div className="rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 p-4">
                   <Image
                     src={me}
-                    alt="Kanat Nazarov - Full-Stack Developer in NYC"
+                    alt="Kanat Nazarov - Full-Stack Developer"
                     style={{ width: "100%" }}
                     priority
                   />
@@ -173,7 +169,6 @@ const Developer = () => {
                       <p className="text-sm text-gray-400">
                         Full-Stack Developer
                       </p>
-                      <p className="text-sm text-gray-400">New York City</p>
                     </div>
                     <div className={styles.icons}>
                       <a
