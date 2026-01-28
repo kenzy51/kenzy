@@ -34,8 +34,8 @@ const Developer = () => {
                 "https://www.linkedin.com/in/kanat-nazarov-a8b55533a/",
               ],
               address: {
-                addressLocality: "New York City",
-                addressRegion: "NY",
+                addressLocality: "Austin",
+                addressRegion: "Texas",
                 addressCountry: "US",
               },
               knowsAbout: [
@@ -52,11 +52,11 @@ const Developer = () => {
         <title>Kanat Nazarov | Full-Stack Developer & Software Engineer</title>
         <meta
           name="description"
-          content="Kanat Nazarov — Full-Stack Developer in New York City with 5+ years experience in Next.js, React, NestJS, TypeScript, and MongoDB. Building scalable web applications and community platforms."
+          content="Kanat Nazarov — Full-Stack Developer in United States with 5+ years experience in Next.js, React, NestJS, TypeScript, and MongoDB. Building scalable web applications and community platforms."
         />
         <meta
           name="keywords"
-          content="Kanat Nazarov, full stack developer, software engineer New York, frontend engineer, Next.js developer, React developer, NestJS developer, Kyrgyz developer USA"
+          content="Kanat Nazarov, full stack developer, software engineer United States, frontend engineer, Next.js developer, React developer, NestJS developer, Kyrgyz developer USA"
         />
         <meta
           property="og:title"
@@ -81,7 +81,7 @@ const Developer = () => {
         />
         <meta
           name="twitter:description"
-          content="Full-Stack Developer in | Next.js, React, NestJS"
+          content="Full-Stack Developer | Next.js, React, NestJS"
         />
       </Head>
 

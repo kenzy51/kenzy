@@ -12,9 +12,11 @@ import {
   buttonClassNameStyle,
   buttonClassNameStyleActive,
 } from "@/shared/ui/components/ClassNamesStyles";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Skills = () => {
   const [categories, setCategories] = useState<"frontend" | "all" | "backend">(
-    "all"
+    "all",
   );
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -31,6 +33,8 @@ const Skills = () => {
   return (
     <div className={styles.wrapper} id="skills">
       <Container>
+        <i style={{ color: "white" }}>swipe to see</i>
+
         <div className={styles.skill} ref={ref}>
           <motion.h4
             style={{ fontSize: isTablet ? "36px" : "66px", fontWeight: "800" }}
@@ -48,11 +52,10 @@ const Skills = () => {
           >
             my skills.
           </motion.h4>
-          <i>swipe to see</i>
         </div>
         <div className="flex max-w-[100%] justify-center gap-5">
           {["all", "frontend", "backend"].map((item) => (
-            <button
+            <Button
               className={
                 categories === item
                   ? buttonClassNameStyleActive
@@ -62,7 +65,7 @@ const Skills = () => {
               onClick={() => setCategories(item)}
             >
               <strong>{item.toUpperCase()}</strong>{" "}
-            </button>
+            </Button>
           ))}
         </div>
         <br />

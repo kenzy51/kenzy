@@ -57,7 +57,7 @@ export default function Home() {
         />
         <meta
           name="twitter:description"
-          content="Full-stack developer building modern web apps with Next.js and NestJS in New York."
+          content="Full-stack developer building modern web apps with Next.js and NestJS."
         />
         {/* Viewport & Favicon */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
