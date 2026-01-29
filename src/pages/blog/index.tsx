@@ -4,39 +4,61 @@ import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import readingTime from 'reading-time';
-// @ts-ignore
-export default function Blog({ posts }) {
-  return (
-    <div className="max-w-5xl mx-auto py-16 px-6">
-      <h1 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-        Blog & Insights
-      </h1>
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+export interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  readTime: string;
+}
 
-      {posts.length === 0 ? (
-        <p className="text-center text-xl text-gray-500">
-          No posts yet — check back soon!
-        </p>
-      ) : (
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post:any) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`}>
-              <div className="group block p-6 border border-gray-200 rounded-xl hover:shadow-lg transition-all hover:border-blue-500 bg-white dark:bg-gray-900 cursor-pointer">
-                <h2 className="text-2xl font-semibold mb-3 group-hover:text-blue-600">
-                  {post.title}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                  {post.excerpt}
-                </p>
-                <div className="flex items-center text-sm text-gray-500">
-                  <time>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
-                  <span className="mx-2">•</span>
-                  <span>{post.readTime}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+interface BlogProps {
+  posts: Post[];
+}
+export default function Blog({ posts }:BlogProps) {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-6xl mx-auto py-20 px-6">
+        <header className="mb-16 text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+            Blog & Insights
+          </h1>
+          <p className="text-gray-400 text-lg">Thoughts on engineering, performance, and design.</p>
+        </header>
+
+        {posts.length === 0 ? (
+          <p className="text-center text-xl text-zinc-500">
+            No posts yet — check back soon!
+          </p>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post: any) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="group transition-transform duration-200 hover:-translate-y-1">
+                <Card className="h-full bg-zinc-950 border-zinc-800 transition-colors group-hover:border-zinc-700 overflow-hidden">
+                  <CardHeader className="space-y-2">
+                    <CardTitle className="text-xl font-bold leading-snug group-hover:text-blue-400 transition-colors text-white">
+                      {post.title}
+                    </CardTitle>
+                  </CardHeader>
+                  
+                  <CardContent>
+                    <p className="text-zinc-400 line-clamp-3 text-sm leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                  </CardContent>
+
+                  <CardFooter className="flex items-center text-xs font-medium text-zinc-500 uppercase tracking-wider">
+                    <time>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+                    <span className="mx-2 text-zinc-700">•</span>
+                    <span>{post.readTime}</span>
+                  </CardFooter>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -138,8 +138,7 @@ const Developer = () => {
 
               <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
                 Outside coding, I play piano and guitar, compose music, and
-                explore the intersection of technology and creativity in New
-                York.
+                explore the intersection of technology and creativity
               </p>
             </motion.div>
 
