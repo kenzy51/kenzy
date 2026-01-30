@@ -64,19 +64,21 @@ export default function Blog({ posts }:BlogProps) {
 }
 
 export async function getStaticProps() {
-const postsDirectory = path.join(process.cwd(), 'src/content/blog');// @ts-ignore
-
-  let fileNames = [];
+  const postsDirectory = path.join(process.cwd(), 'src/content/blog');
+  let fileNames: string[] = [];
 
   try {
-    fileNames = fs.readdirSync(postsDirectory).filter((name) => name.endsWith('.mdx'));
+    // We check both .md and .mdx to be safe
+    fileNames = fs.readdirSync(postsDirectory).filter((name) => 
+      name.endsWith('.mdx') || name.endsWith('.md')
+    );
   } catch (err) {
     console.error('Error reading blog directory:', err);
+    return { props: { posts: [] } };
   }
-// @ts-ignore
 
   const posts = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.mdx$/, '');
+    const slug = fileName.replace(/\.(mdx|md)$/, '');
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
@@ -84,17 +86,20 @@ const postsDirectory = path.join(process.cwd(), 'src/content/blog');// @ts-ignor
 
     return {
       slug,
-      title: data.title,
-      date: data.date,
-      excerpt: data.excerpt,
+      title: data.title || "Untitled Post",
+      date: data.date || new Date().toISOString(),
+      // FIX: Ensure excerpt is never undefined. 
+      // It uses the frontmatter excerpt, or falls back to an empty string.
+      excerpt: data.excerpt ?? "", 
       readTime: stats.text,
     };
-// @ts-ignore
-
-  }).sort((a, b) => new Date(b.date) - new Date(a.date));
+  }).sort((a, b) => {
+    // Proper date sorting for TypeScript
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 
   return {
     props: { posts },
-    revalidate: 60, // ISR: revalidate every 60 seconds (optional)
+    revalidate: 60,
   };
 }

@@ -1,0 +1,86 @@
+---
+title: "Modernizing Next.js Architecture: From Pages to App Router"
+date: "January 30, 2026"
+readTime: "4 min read"
+author: "Kanat Nazarov"
+tags: ["nextjs", "react", "architecture", "typescript", "performance"]
+description: "How I leveraged React Server Components (RSC) to eliminate 40% of client-side JavaScript bundle size."
+---
+
+# Modernizing Next.js Architecture
+
+In frontend engineering, performance is no longer just about optimizing images—it's about **architectural efficiency**. By moving toward **React Server Components (RSC)**, I’ve shifted the heavy lifting away from the user's device and onto the server.
+
+> **The Goal:** Reduce the "Client-Side Bloat" by migrating key modules to a server-first architecture. On a recent project, we eliminated nearly **42% of the client-side JavaScript bundle**.
+
+---
+
+## 🛑 The Challenge: The "Client-Side Bloat"
+
+In our legacy Pages Router setup, data fetching occurred primarily on the client. This created a sluggish **First Contentful Paint (FCP)**.
+
+1. **The Bundle:** User downloads a heavy JS bundle.
+2. **The Parse:** The browser pauses to parse logic.
+3. **The Waterfall:** JS triggers an API request only *after* hydration.
+
+
+
+---
+
+## 🛠 The Solution: Server-First Architecture
+
+### 1. Zero-Bundle-Size Data Fetching
+By fetching data in Server Components, the logic stays on the server. Dependencies like **date-fns** or **axios** never even reach the client's browser.
+
+```typescript
+// src/app/analytics/page.tsx
+async function AnalyticsPage() {
+  const response = await fetch('[https://api.firefly-ops.com/v1/telemetry](https://api.firefly-ops.com/v1/telemetry)', {
+    next: { revalidate: 60 } 
+  });
+  const telemetry = await response.json();
+
+  return (
+    <main className="p-8">
+      <h1 className="text-2xl font-bold">Mission Telemetry</h1>
+      <TelemetryGrid data={telemetry} />
+    </main>
+  );
+}
+```
+## 2. Streaming with Suspense
+Instead of making the user wait for the entire data-heavy page to resolve, we implemented **Streaming**. This pushes the static "shell" (navigation, sidebar) immediately and streams in the dynamic content as it arrives from the server.
+
+```tsx
+import { Suspense } from 'react';
+import { SkeletonLoader } from '@/components/ui/skeletons';
+
+export default function MissionControl() {
+  return (
+    <section className="space-y-6">
+      <Navbar />
+      <Suspense fallback={<SkeletonLoader className="h-[400px]" />}>
+        <RealTimeDataFeed />
+      </Suspense>
+    </section>
+  );
+}
+```
+## 📊 The Results
+
+By treating performance as a first-class citizen, we achieved measurable improvements that directly impact user retention:
+
+| Metric | Before | After | Improvement |
+| :--- | :--- | :--- | :--- |
+| **JS Bundle Size** | 450 KB | 260 KB | **-42%** |
+| **TTI (Time to Interactive)** | 3.4s | 2.2s | **-1.2s** |
+| **Lighthouse Score** | 68 | 94 | **+26 pts** |
+
+
+
+## 💡 Lessons Learned
+
+The biggest challenge was managing **Client vs. Server boundaries**. We adopted a **"Leaf Component"** strategy to optimize the hydration boundary:
+
+* **Server Components:** Used for data fetching, SEO-heavy content, and large dependencies.
+* **Client Components:** Reserved strictly for interactivity (using the **`use client"** directive) like buttons, forms, and complex stateful modals.
