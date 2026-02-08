@@ -14,6 +14,7 @@ import js from "../../../../public/images/skills/javascript-3.png";
 import html from "../../../../public/images/skills/html.png";
 import git from "../../../../public/images/skills/git.png";
 import css from "../../../../public/images/skills/css.png";
+import angular from "../../../../public/images/skills/angular.svg";
 import node from "../../../../public/images/skills/node.png";
 import mongo from "../../../../public/images/skills/mongodb.svg";
 import nest from "../../../../public/images/skills/nest.png";
@@ -34,9 +35,10 @@ const imagesAll = [
   ts,
   next,
   jira,
+  angular,
 ];
-const imagesFrontend = [react, js, html, git, css, ts, next];
-const imagesBackend = [mongo, js, nest, git, ts, node,redis];
+const imagesFrontend = [react, js, html, git, css, ts, next, angular];
+const imagesBackend = [mongo, js, nest, git, ts, node, redis];
 type Status = "frontend" | "all" | "backend";
 type SliderProps = {
   status: Status;
