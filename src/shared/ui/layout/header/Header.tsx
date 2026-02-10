@@ -98,7 +98,7 @@ const Header = () => {
                       <Image alt="Github" src={github} width={30} />
                     </a>
                     <a
-                      href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
+                      href="https://www.linkedin.com/in/kanat-nazar/"
                       target="_blank"
                       className={styles.link}
                     >
@@ -138,7 +138,7 @@ const Header = () => {
                 <Image alt="Github" src={github} width={30} />
               </a>
               <a
-                href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
+                href="https://www.linkedin.com/in/kanat-nazar"
                 target="_blank"
                 className={styles.link}
               >

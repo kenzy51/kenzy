@@ -31,7 +31,7 @@ const Developer = () => {
               url: "https://kenzy.vercel.app",
               sameAs: [
                 "https://github.com/kenzy51",
-                "https://www.linkedin.com/in/kanat-nazarov-a8b55533a/",
+                "https://www.linkedin.com/in/kanat-nazar",
               ],
               address: {
                 addressLocality: "Austin",
@@ -183,7 +183,7 @@ const Developer = () => {
                         />
                       </a>
                       <a
-                        href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
+                        href="https://www.linkedin.com/in/kanat-nazar"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.link}

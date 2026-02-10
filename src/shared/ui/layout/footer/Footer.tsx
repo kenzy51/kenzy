@@ -105,7 +105,7 @@ const Footer = () => {
                 <Image alt="" src={git} width={30} />
               </a>{" "}
               <a
-                href="https://www.linkedin.com/in/kanat-nazarov-a8b55533a/"
+                href="https://www.linkedin.com/in/kanat-nazar"
                 target="_blank"
                 className={styles.link}
               >
