@@ -8,7 +8,7 @@ import github from "../../../../public/images/githubW.svg";
 import linkedin from "../../../../public/images/socIcons/linkedin.webp";
 import styles from "./developer.module.scss";
 import { useTranslations } from "next-intl";
-import me from "./non2.jpeg";
+import me from "./KanatNazarov.jpg";
 
 const Developer = () => {
   const t = useTranslations();
