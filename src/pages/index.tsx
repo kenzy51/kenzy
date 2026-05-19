@@ -25,7 +25,7 @@ const Developer = () => {
               "@type": "Person",
               name: "Kanat Nazarov",
               alternateName: "Kenzy",
-              jobTitle: "Senior Full-Stack Developer & Systems Engineer",
+              jobTitle: "Full-Stack Developer & Systems Engineer",
               worksFor: [
                 {
                   "@type": "Organization",
@@ -61,10 +61,10 @@ const Developer = () => {
             }),
           }}
         />
-        <title>Kanat Nazarov | Senior Full-Stack Developer & Systems Engineer</title>
+        <title>Kanat Nazarov | Full-Stack Developer & Systems Engineer</title>
         <meta
           name="description"
-          content="Kanat Nazarov — Senior Full-Stack Developer based in New York City with extensive expertise in Next.js, React, NestJS, TypeScript, and AI-driven growth systems."
+          content="Kanat Nazarov — Full-Stack Developer based in New York City with extensive expertise in Next.js, React, NestJS, TypeScript, and AI-driven growth systems."
         />
         <meta
           name="keywords"
@@ -72,7 +72,7 @@ const Developer = () => {
         />
         <meta
           property="og:title"
-          content="Kanat Nazarov | Senior Full-Stack Developer & Systems Engineer"
+          content="Kanat Nazarov | Full-Stack Developer & Systems Engineer"
         />
         <meta
           property="og:description"
@@ -89,7 +89,7 @@ const Developer = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Kanat Nazarov | Senior Full-Stack Developer"
+          content="Kanat Nazarov | Full-Stack Developer"
         />
         <meta
           name="twitter:description"
@@ -125,13 +125,13 @@ const Developer = () => {
                 Kanat Nazarov
               </h1>
               <p className="text-lg sm:text-xl font-medium text-neutral-400 font-mono">
-                Senior Full-Stack Developer & Digital Growth Engineer
+                Full-Stack Developer & Digital Growth Engineer
               </p>
 
               <div className="w-12 h-[1px] bg-cyan-500/50 my-6" />
 
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-300 font-light">
-                I am a <strong>Senior Full-Stack Developer</strong> and systems architect specializing in constructing modern, high-concurrency web ecosystems. My day-to-day work centers on optimizing production applications built on <strong>Next.js (App Router)</strong>, <strong>React 19</strong>, <strong>TypeScript</strong>, and <strong>NestJS</strong> backends.
+                I am a <strong>Full-Stack Developer</strong> and systems architect specializing in constructing modern, high-concurrency web ecosystems. My day-to-day work centers on optimizing production applications built on <strong>Next.js (App Router)</strong>, <strong>React 19</strong>, <strong>TypeScript</strong>, and <strong>NestJS</strong> backends.
               </p>
 
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-300 font-light">

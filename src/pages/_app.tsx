@@ -23,15 +23,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
         {/* Primary Global SEO Standby Data */}
         <title>
-          Kanat Nazarov | Senior Full-Stack Developer & AI Systems Engineer
+          Kanat Nazarov |  Full-Stack Developer & AI Systems Engineer
         </title>
         <meta
           name="description"
-          content="Kanat Nazarov — Senior Full-Stack Developer & Systems Architect based in NYC. Specializing in high-performance Next.js architectures, NestJS frameworks, and autonomous conversational AI pipelines."
+          content="Kanat Nazarov —  Full-Stack Developer & Systems Architect based in NYC. Specializing in high-performance Next.js architectures, NestJS frameworks, and autonomous conversational AI pipelines."
         />
         <meta
           name="keywords"
-          content="Kanat Nazarov, Kenzy, Senior Full-Stack Developer NYC, Next.js developer, React 19 architect, NestJS engineer, AI Growth Engineer, Tribeca Dental Studio marketing, Fusion AI Agency, local SEO expert, technical SGE optimization"
+          content="Kanat Nazarov, Kenzy,  Full-Stack Developer NYC, Next.js developer, React 19 architect, NestJS engineer, AI Growth Engineer, Tribeca Dental Studio marketing, Fusion AI Agency, local SEO expert, technical SGE optimization"
         />
         <meta name="author" content="Kanat Nazarov" />
         <meta name="robots" content="index, follow" />
@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:title"
-          content="Kanat Nazarov | Senior Full-Stack Developer & AI Systems Engineer"
+          content="Kanat Nazarov |  Full-Stack Developer & AI Systems Engineer"
         />
         <meta
           property="og:description"
@@ -70,7 +70,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Kanat Nazarov | Senior Full-Stack Developer"
+          content="Kanat Nazarov |  Full-Stack Developer"
         />
         <meta
           name="twitter:description"
