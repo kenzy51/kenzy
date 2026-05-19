@@ -1,287 +1,257 @@
 // pages/blog/[slug].tsx
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import readingTime from "reading-time";
-import Image from "next/image";
+import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import Link from "next/link";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import Image from "next/image";
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
-
-// ── Types (your existing ones) ──────────────────────────────────────────
-interface FrontMatter {
-  title: string;
-  date: string;
-  excerpt?: string;
-  image?: string;
-  tags?: string[];
-  author?: string;
-  [key: string]: unknown;
-}
+import { sanityClient, urlFor } from "@/lib/sanity";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
+import Container from "@/shared/ui/container/Container";
 
 interface PostProps {
-  source: MDXRemoteSerializeResult<Record<string, unknown>>;
-  frontMatter: FrontMatter;
-  readTime: string;
+  post: {
+    title: string;
+    date: string;
+    excerpt: string;
+    keywords: string[];
+    image: any;
+    body: any;
+    readTime: string;
+    author?: string;
+  };
 }
 
-// ── Custom MDX Components ───────────────────────────────────────────────
-
-const mdxComponents = {
-  img: (props: React.ImgHTMLAttributes<HTMLImageElement> & { src: string }) => {
-    if (!props.src) return null;
-    return (
-      <div className="my-10 rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
-        <Image
-          {...props}
-          src={props.src}
-          alt={props.alt || "Blog image"}
-          width={props.width ? Number(props.width) : 1200}
-          height={props.height ? Number(props.height) : 675}
-          sizes="(max-width: 768px) 100vw, 900px"
-          quality={85}
-          className="w-full h-auto object-cover"
-          placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAErgJ9aA9l9gAAAABJRU5ErkJggg=="
-          loading="lazy"
-        />
-      </div>
-    );
-  },
-
-  // VS Code-style code block
-  pre: ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-  }) => {
-    const [copied, setCopied] = useState(false);
-    const language = className?.match(/language-(\w+)/)?.[1] || "text";
-    const codeString =
-      (children as any)?.props?.children?.props?.children || "";
-
-    const copyCode = () => {
-      navigator.clipboard.writeText(codeString);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    };
-
-    return (
-      <div className="relative my-10 rounded-xl overflow-hidden bg-[#0d1117] border border-[#30363d] shadow-2xl">
-        {/* Top bar (VS Code-like) */}
-        <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-[#30363d] text-xs text-gray-400">
-          <span>{language}</span>
-          <button
-            onClick={copyCode}
-            className="flex items-center gap-1.5 text-gray-400 hover:text-gray-200 transition-colors"
-            title="Copy code"
-          >
-            {copied ? (
-              <>
-                <Check size={14} className="text-green-400" />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy size={14} />
-                <span>Copy</span>
-              </>
-            )}
-          </button>
+// Visual layout rendering configurations for Portable Text elements
+const makeCustomComponents = (): PortableTextComponents => ({
+  types: {
+    image: ({ value }) => {
+      if (!value?.asset?._ref) return null;
+      return (
+        <div className="my-10 rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl">
+          <Image
+            src={urlFor(value).url()}
+            alt={value.alt || "Architecture visualization block"}
+            width={1200}
+            height={675}
+            sizes="(max-w-4xl) 100vw"
+            className="w-full h-auto object-cover"
+            loading="lazy"
+          />
         </div>
+      );
+    },
+    code: ({ value }) => {
+      const [copied, setCopied] = useState(false);
+      const language = value.language || "typescript";
+      const codeString = value.code || "";
 
-        <pre
-          className={`p-6 pt-4 overflow-x-auto text-sm leading-6 font-mono text-gray-300 ${
-            className || ""
-          }`}
+      const executeCopy = () => {
+        navigator.clipboard.writeText(codeString);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      };
+
+      return (
+        <div className="relative my-10 rounded-xl overflow-hidden bg-neutral-950 border border-neutral-800/80 shadow-2xl font-mono text-sm">
+          {/* Top terminal tab block header layout bar */}
+          <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-900/60 border-b border-neutral-800/80 text-xs text-neutral-400">
+            <span className="uppercase tracking-wider font-semibold">{language}</span>
+            <button
+              onClick={executeCopy}
+              className="flex items-center gap-1.5 hover:text-white transition-colors duration-200"
+            >
+              {copied ? (
+                <>
+                  <Check size={13} className="text-cyan-400" />
+                  <span className="text-cyan-400">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={13} />
+                  <span>Copy</span>
+                </>
+              )}
+            </button>
+          </div>
+          <pre className="p-6 overflow-x-auto text-neutral-300 leading-relaxed text-sm bg-black/40">
+            <code>{codeString}</code>
+          </pre>
+        </div>
+      );
+    },
+  },
+  block: {
+    h2: ({ children }) => <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-4 font-sans">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mt-8 mb-3 font-sans">{children}</h3>,
+    normal: ({ children }) => <p className="text-neutral-300 font-light leading-relaxed mb-6 text-base md:text-lg">{children}</p>,
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-2 border-cyan-400 pl-5 italic text-neutral-400 my-8 bg-neutral-950/40 py-1 rounded-r-lg">
+        {children}
+      </blockquote>
+    ),
+  },
+  marks: {
+    link: ({ children, value }) => {
+      const isExternal = !value.href.startsWith("/");
+      return (
+        <a
+          href={value.href}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 decoration-cyan-500/30 transition-colors font-medium"
         >
           {children}
-        </pre>
-      </div>
-    );
+        </a>
+      );
+    },
   },
-};
+});
 
-export default function Post({ source, frontMatter, readTime }: PostProps) {
-  if (!frontMatter?.title) {
+export default function Post({ post }: PostProps) {
+  const components = makeCustomComponents();
+
+  if (!post) {
     return (
-      <div className="text-center py-20 text-xl text-gray-500 dark:text-gray-400">
-        Post not found
+      <div className="text-center py-32 text-neutral-500 font-mono text-base bg-black min-h-screen">
+        Execution Fallback: Target Context Reference Missing.
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0d1117] text-gray-100">
-      <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-12 group text-lg font-medium transition-colors"
-        >
-          <svg
-            className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          Back to all posts
-        </Link>
+    <>
+      <Head>
+        <title>{post.title} | Technical Blog</title>
+        <meta name="description" content={post.excerpt} />
+        {post.keywords && <meta name="keywords" content={post.keywords.join(", ")} />}
+        
+        {/* Open Graph Security Mapping Protocols */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.excerpt} />
+        {post.image && <meta property="og:image" content={urlFor(post.image).width(1200).height(630).url()} />}
+        
+        {/* Dynamic Structural JSON-LD Engine for SGE Positioning */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TechArticle",
+              "headline": post.title,
+              "description": post.excerpt,
+              "keywords": post.keywords ? post.keywords.join(", ") : "",
+              "datePublished": post.date,
+              "author": {
+                "@type": "Person",
+                "name": post.author || "Kanat Nazarov",
+                "url": "https://kanatnazarov.vercel.app"
+              }
+            })
+          }}
+        />
+      </Head>
 
-        {/* Header */}
-        <header className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            {frontMatter.title}
-          </h1>
-
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-gray-400 text-sm">
-            <time dateTime={frontMatter.date}>
-              {new Date(frontMatter.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-            <span>•</span>
-            <span>{readTime}</span>
-            {frontMatter.author && (
-              <>
-                <span>•</span>
-                <span className="font-medium text-gray-300">
-                  {frontMatter.author}
-                </span>
-              </>
-            )}
-          </div>
-
-          {/* Tags */}
-          {frontMatter.tags && frontMatter.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-6">
-              {frontMatter.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-4 py-1.5 bg-gray-800 text-blue-300 rounded-full text-sm font-medium border border-gray-700"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </header>
-
-        {/* Main content */}
-        <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-white prose-h2:text-3xl prose-h3:text-2xl prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-strong:text-white prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-5 prose-blockquote:italic prose-blockquote:text-gray-300">
-         {/* @ts-ignore */}
-          <MDXRemote {...source} components={mdxComponents} />
-        </div>
-
-        {/* Footer */}
-        <footer className="mt-20 pt-12 border-t border-gray-800 text-sm text-gray-400">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="min-h-screen bg-black text-neutral-100 py-16 md:py-24">
+        <Container>
+          <div className="max-w-3xl mx-auto">
+            {/* Context Back navigation anchor */}
             <Link
               href="/blog"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
+              className="inline-flex items-center text-sm font-mono text-neutral-400 hover:text-cyan-400 mb-12 transition-colors group"
             >
-              ← Back to all posts
+              <span className="mr-2 transform group-hover:-translate-x-1 transition-transform">←</span>
+              BACK_TO_LOGS
             </Link>
-            <span>
-              © {new Date().getFullYear()} Kanat Nazarov • Full-Stack Javascript
-              Developer
-            </span>
+
+            <header className="mb-14">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-white leading-tight">
+                {post.title}
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-mono text-neutral-400 uppercase tracking-wider">
+                <time>
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+                <span className="text-neutral-700">•</span>
+                <span className="text-neutral-300">{post.readTime}</span>
+                <span className="text-neutral-700">•</span>
+                <span className="text-neutral-400 font-bold">{post.author || "KANAT NAZAROV"}</span>
+              </div>
+            </header>
+
+            {post.image && (
+              <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-neutral-900 my-10 shadow-xl">
+                <Image
+                  src={urlFor(post.image).url()}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
+
+            {/* Structured Portable Text Parsing Injection Block */}
+            <div className="mt-10">
+              <PortableText value={post.body} components={components} />
+            </div>
+
+            <footer className="mt-24 pt-8 border-t border-neutral-900 text-xs font-mono text-neutral-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+              <Link href="/blog" className="hover:text-cyan-400 transition-colors">
+                ← TERMINATE_VIEW
+              </Link>
+              <span>
+                © {new Date().getFullYear()} KANAT NAZAROV • SYSTEMS SYSTEM
+              </span>
+            </footer>
           </div>
-        </footer>
+        </Container>
       </div>
-    </div>
+    </>
   );
 }
 
-// getStaticPaths and getStaticProps stay exactly as you have themhem
-
-// ── Static Generation ────────────────────────────────────────────────────
-
-export async function getStaticPaths() {
-  const postsDirectory = path.join(process.cwd(), "src/content/blog");
-  console.log("Looking for posts in:", postsDirectory);
-
-  let fileNames: string[] = [];
-  try {
-    fileNames = fs
-      .readdirSync(postsDirectory)
-      .filter((name) => name.endsWith(".mdx"));
-    console.log("Found MDX files:", fileNames);
-  } catch (err) {
-    console.error("Directory read error:", err);
-  }
-
-  const paths = fileNames.map((fileName) => ({
-    params: { slug: fileName.replace(/\.mdx$/, "") },
-  }));
-
-  console.log("Generated paths:", paths);
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = await sanityClient.fetch(
+    `*[_type == "post" && defined(slug.current)][].slug.current`
+  );
 
   return {
-    paths,
-    fallback: "blocking" as const,
+    paths: paths.map((slug: string) => ({ params: { slug } })),
+    fallback: "blocking",
   };
-}
+};
 
-interface GetStaticPropsContext {
-  params: any;
-}
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  const query = `*[_type == "post" && slug.current == $slug][0]{
+    title,
+    date,
+    excerpt,
+    keywords,
+    image,
+    body,
+    author,
+    "readTime": select(
+      round(string::length(pt::text(body)) / 5 / 200) <= 1 => "1 min read",
+      string(round(string::length(pt::text(body)) / 5 / 200)) + " min read"
+    )
+  }`;
 
-export async function getStaticProps({
-  params,
-}: GetStaticPropsContext): Promise<any | { notFound: true }> {
-  console.log("Building post for slug:", params.slug);
+  const post = await sanityClient.fetch(query, { slug: params?.slug });
 
-  const fullPath = path.join(
-    process.cwd(),
-    "src/content/blog",
-    `${params.slug}.mdx`
-  );
-
-  if (!fs.existsSync(fullPath)) {
-    console.error("File missing:", fullPath);
-    return { notFound: true };
-  }
-
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data: frontMatter, content } = matter(fileContents);
-
-  const mdxSource = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [
-        rehypeSlug,
-        [rehypeAutolinkHeadings, { behavior: "wrap" }],
-        rehypeHighlight,
-      ],
-    },
-  });
-
-  const stats = readingTime(content);
+  if (!post) return { notFound: true };
 
   return {
     props: {
-      source: mdxSource,
-      frontMatter: frontMatter as FrontMatter,
-      readTime: stats.text,
+      post,
+      messages: (await import(`../../messages/${locale || "en"}.json`)).default,
     },
     revalidate: 60,
   };
-}
+};
