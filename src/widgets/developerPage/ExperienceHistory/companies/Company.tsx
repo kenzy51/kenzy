@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import Image from "next/image";
+
+// Skill Asset Mappings
 import antd from "../../../../../public/images/skills/antd.png";
 import react from "../../../../../public/images/skills/react.png";
 import redux from "../../../../../public/images/skills/redux-icon.webp";
@@ -18,36 +22,41 @@ import fsd from "../../../../../public/images/skills/fsdPattern.jpg";
 import redis from "../../../../../public/images/skills/redis.svg";
 import angular from "../../../../../public/images/skills/angular.svg";
 import websockets from "../../../../../public/images/skills/websockets.svg";
-import styles from "./company.module.scss";
 
 const companiesData = [
   {
-    title: "Software & Digital Automation Engineer",
+    title: "Founder & Principal Systems Engineer",
+    company: "Fusion AI Agency",
+    duration: "March 2025 - Present",
+    description: [
+      "Architected and deployed 'Jessica,' a proprietary autonomous AI Voice agent for clinical environments, integrating Deepgram (Nova-2) and Groq (Llama 3.3) to achieve a <800ms Time to First Token (TTFT) for organic, human-parity patient intake streams.",
+      "Engineered a high-performance Next.js 15/16 multi-tenant growth engine utilizing App Router and Tailwind CSS v4; leveraged Server-Side Rendering (SSR) and Edge Caching to secure perfect 100/100 Lighthouse metrics and elevate mobile conversion rates by 40%.",
+      "Designed an advanced Technical SEO framework leveraging dynamic JSON-LD schemas and semantic HTML tailored for AI-Driven Search (SGE), yielding a 900% increase in organic reach and Top-3 positions for high-intent keywords for strategic partner clinics.",
+      "Eliminated third-party CRM dependency by building a secure, custom middleware and lead-tracking data architecture, seamlessly mapping user lifecycles from Next.js frontends to autonomous AI text/voice follow-up pipelines.",
+    ],
+    icons: [next, nest, postgres, redis, git],
+  },
+  {
+    title: "AI & Growth Systems Engineer",
     company: "Tribeca Dental Studio",
     duration: "June 2025 - Present",
     description: [
-      "Engineered high-converting patient acquisition funnels using Next.js 16 and Tailwind CSS v4, leveraging SSR to achieve a 35% increase in mobile consultation bookings.",
-      "Architected a custom integration between Next.js and GoHighLevel (GHL) API, automating the lead journey and reducing manual data entry by 15+ hours weekly.",
-      "Developed a sophisticated automation pipeline that syncs GHL data with an AI Agent to execute autonomous outbound calls for appointment scheduling and lead qualification.",
-      "Built HIPAA-compliant GHL 'Snapshots' with automated SMS follow-ups and missed-call text-back sequences, resulting in a 25% reduction in no-show rates.",
-      "Optimized technical SEO and SGE (AI-search) visibility through JSON-LD Schema markup, achieving top-3 rankings for high-value keywords like 'Invisalign NYC'.",
-      "Implemented a 900% growth in organic visibility by aligning site architecture with AI-driven search algorithms and local discovery patterns.",
-      "Integrated GTM and GHL conversion tracking for A/B testing, increasing the 'Click-to-Call' conversion rate by 40% for high-ticket cosmetic procedures.",
+      "Transitioned multi-specialty clinical operations from legacy front-desk workflows to an automated, AI-first patient generation system, deploying custom outbound AI voice agents to book high-margin procedures 24/7.",
+      "Designed and optimized dedicated web funnels focusing on programmatic 'Click-to-Call' interfaces and hyper-localized technical SEO, securing a #1 Google ranking for 'Nightlase Treatment Tribeca' and drastically dropping CAC.",
+      "Developed secure, HIPAA-compliant API bridges connecting Next.js dental landing pages directly to internal practice management scheduling databases, reclaiming 20+ hours of weekly manual administrative triage.",
+      "Architected end-to-end performance marketing infrastructure across Meta (FB/IG) Lead Forms and Google Search Ads, engineering predictive bidding strategies and creative asset variations to maximize high-intent commercial web traffic.",
     ],
-    icons: [next, nest, git],
+    icons: [next, ts, git],
   },
   {
-    title: "CEO & Full Stack Developer",
-    company: "Fusion Web Works",
+    title: "CEO & Full Stack Developer (Community Initiative)",
+    company: "Fusion Web Works / Union KG",
     duration: "March 2025 - Present",
     description: [
-      "Architected 'Union KG,' a full-stack diaspora ecosystem utilizing Next.js 15+ and NestJS, optimized to handle 10k+ concurrent users with sub-second latency.",
-      "Engineered a high-performance AI Assistant using NestJS and Vercel AI SDK; implemented Data Stream Protocol for sub-100ms responses with real-time reasoning visualization.",
-      "Built a RAG (Retrieval-Augmented Generation) pipeline using Google Gemini models and community-specific datasets to provide context-aware answers on 2026 regulations.",
-      "Developed a robust backend architecture with NestJS and PostgreSQL, integrating a Redis-based caching layer (Cache-Aside pattern) to achieve high-speed data retrieval.",
-      "Implemented advanced UI state management in React 19 using Zustand and useRef, ensuring a seamless, high-performance conversational UX for complex AI interactions.",
-      "Spearheaded multi-environment CI/CD workflows using Vite-based mode handling and Vercel, ensuring secure deployments and 99.9% application availability.",
-      "Optimized full-stack performance by leveraging React Server Components (RSC) and Tailwind CSS v4, achieving 95+ Lighthouse scores for Core Web Vitals.",
+      "Spearheaded the design and product roadmap of 'Union KG,' an open-access digital infrastructure ecosystem providing AI-driven resource navigation and location-aware knowledge graphs to over 20,000 Kyrgyz immigrants in the US.",
+      "Built a real-time Retrieval-Augmented Generation (RAG) assistant utilizing NestJS, Vercel AI SDK, and Google Gemini models to seamlessly parse shifting 2026 immigration and residency compliance updates.",
+      "Implemented high-speed server state configurations via Next.js React Server Components (RSC), NestJS, and PostgreSQL, incorporating a robust Cache-Aside pattern via Redis to seamlessly manage thousands of active websocket streams.",
+      "Engineered an ultra-low latency streaming chat UI in React 19 using Zustand and specialized useRef hook layouts, providing fluid real-time visual reasoning representations for complex database search actions.",
     ],
     icons: [next, react, nest, postgres, redis, git, mongo],
   },
@@ -56,41 +65,38 @@ const companiesData = [
     company: "StreamTech",
     duration: "March 2023 - March 2025",
     description: [
-      "Engineered the core frontend for a premier sports betting platform, supporting 500k+ MAU and handling high-frequency real-time data streams for live odds updates.",
-      "Architected the codebase using Feature-Sliced Design (FSD) patterns, standardizing a 7-layer hierarchy to decouple business logic and improve team velocity by 40%.",
-      "Orchestrated a large-scale migration from React 14 to React 18, leveraging Concurrent Mode and Suspense to ensure zero-downtime during peak traffic events.",
-      "Spearheaded development of Enterprise CRM and Admin Dashboards, utilizing FSD 'Entities' to manage complex user risk profiles and high-concurrency data.",
-      "Implemented sophisticated server-state management using TanStack Query and MobX/Redux, optimizing data fetching for thousands of simultaneous WebSocket connections.",
-      "Developed a strictly-typed TypeScript UI Library, ensuring 100% design system adherence and significantly reducing technical debt across enterprise projects.",
+      "Engineered the core frontend systems of a tier-1 Central Asian sports betting platform supporting over 500,000 monthly active users and digesting dense, real-time WebSocket data updates for thousands of concurrent live match odds.",
+      "Enforced rigid architectural consistency by introducing Feature-Sliced Design (FSD) patterns, dividing complex business rules into a structured 7-layer hierarchy to slice onboarding overhead and technical debt by 40%.",
+      "Orchestrated a zero-downtime framework migration from React 14 to React 18, applying Concurrent Mode and Suspense strategies to preserve fluid interactive speeds during catastrophic traffic bursts.",
+      "Spearheaded enterprise dashboard UI modules utilizing FSD 'Entities' to capture comprehensive user risk profiling, maintaining state integrity across high-concurrency interfaces with TanStack Table and Redux Toolkit/MobX.",
+      "Governed an internal strictly-typed TypeScript component system, ensuring 100% adherence to corporate style guidelines and cutting the development cycle of feature iterations by 40%.",
     ],
     icons: [react, ts, fsd, redux, git, websockets],
   },
   {
     title: "Frontend Engineer",
-    company: "DataXWay- Saint Petersburg & Bishkek (Remote/Hybrid)",
+    company: "DATAXWAY",
     duration: "February 2022 - February 2023",
     description: [
-      "Executed a comprehensive performance audit and optimization for large-scale web applications, achieving a 30% reduction in TTI (Time to Interactive) via code-splitting and asset compression.",
-      "Partnered with backend teams to define robust API contracts and JSON schemas, accelerating feature delivery cycles by 20% through standardized documentation.",
-      "Engineered and audited UI components for 100% cross-browser compatibility and WCAG 2.1 accessibility compliance, significantly expanding the accessible user base.",
-      "Managed complex application states using Redux Toolkit and MobX, ensuring high-performance data flow between RESTful APIs and real-time UI components.",
-      "Actively participated in a high-intensity Agile environment, contributing to sprint planning and code reviews to maintain high engineering standards.",
+      "Directed complete performance profile analyses across multiple extensive web systems, employing granular code-splitting and asset minification to slash Time to Interactive (TTI) benchmarks by 30%.",
+      "Collaborated intimately with internal engineering squads to lock in strict API contracts and automated JSON schema validation rules, expediting feature sprint shipments by 20%.",
+      "Constructed reusable structural components ensuring universal cross-browser delivery and 100% adherence to WCAG 2.1 accessibility benchmarks to broaden the consumer funnel.",
+      "Maintained data flow across fast-paced Agile sprints using Redux Toolkit, managing complex global application states and binding real-time UI components cleanly with underlying RESTful endpoints.",
     ],
-    icons: [react, redux, git, ts, framer,angular],
+    icons: [react, redux, git, ts, framer, angular],
   },
   {
-    title: "Full Stack Developer",
+    title: "Full-Stack Developer",
     company: "Discovery Studio",
-    duration: "Feb 2021 - Febrary 2022",
+    duration: "February 2021 - February 2022",
     description: [
-      "Developed proprietary UI library with React, React Native, Next.js, Tailwind CSS, and Ant Design.",
-      "Developed a marketplace platform for price comparisons across e-commerce sites, integrating NestJS APIs with MongoDB for scalable data handling.",
-      "Implemented advanced data parsing using Playwright.",
-      "Collaborated with UX/UI designers and enforced SOLID, DRY, KISS, and YAGNI principles.",
-      "Delivered Shamal, a high-impact mobile app with a growing user base developed on React Native",
+      "Engineered a cross-platform mobile festival application using React Native and Expo, integrating live event tracking systems, interactive vector map layouts, and local push schedules.",
+      "Enforced client-side persistence mechanisms via React Native AsyncStorage and Redux, protecting full application utility for attendees during periods of zero internet connectivity.",
+      "Built a secure e-commerce marketplace backend using NestJS and MongoDB, writing optimized CRUD endpoints and ironclad JWT-based authentication guards to process dynamic digital inventories.",
+      "Optimized legacy enterprise-level Angular modules inside a cohesive MEAN stack layout, identifying and fixing production edge-case regressions to maintain complete feature parity.",
     ],
-    icons: [react, antd, nest, postgres, git, jira,angular],
-  },
+    icons: [react, antd, nest, postgres, git, jira, angular],
+  }
 ];
 
 interface CompanyProps {
@@ -102,9 +108,6 @@ interface CompanyProps {
   icons?: any[];
 }
 
-const classNameBlock =
-  "backdrop-blur-xl bg-[rgba(44,44,44,0.5)] border border-[rgba(246,246,249,0.08)] rounded-lg p-6 text-white transition-all duration-300 ease-in-out hover:scale-[1.01] hover:bg-[rgba(60,60,60,0.6)] hover:shadow-lg hover:shadow-[rgba(0,0,0,0.4)]";
-
 const SingleCompany: React.FC<CompanyProps> = ({
   title,
   company,
@@ -113,68 +116,93 @@ const SingleCompany: React.FC<CompanyProps> = ({
   index,
   icons,
 }) => {
-  const [ref, inView] = useInView({ triggerOnce: true });
+  const [ref, inView] = useInView({ 
+    triggerOnce: true,
+    threshold: 0.1 
+  });
 
   return (
     <motion.div
       ref={ref}
-      className={styles.mainWrapper}
+      className="relative pl-0 md:pl-8 pb-12 last:pb-0"
       variants={{
-        hidden: { opacity: 0, y: -80 },
+        hidden: { opacity: 0, y: 40 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.4, delay: 0.15 * index },
+          transition: { duration: 0.5, delay: 0.1 * index, ease: "easeOut" },
         },
       }}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
     >
-      <div className={styles.wrapper}>
-        <div className={styles.leftBlock}>
-          <h2>{title}</h2>
-          <p>{company}</p>
-        </div>
-        <div className={styles.rightBlock}>{duration}</div>
+      {/* Decorative vertical timeline axis rail for desktop layouts */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-neutral-800/80 hidden md:block">
+        <motion.div 
+          className="absolute top-2 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-cyan-500 border-2 border-black shadow-[0_0_10px_rgba(6,182,212,0.5)]"
+          initial={{ scale: 0 }}
+          animate={inView ? { scale: 1 } : { scale: 0 }}
+          transition={{ delay: 0.2 + 0.1 * index, type: "spring" }}
+        />
       </div>
 
-      <div className={classNameBlock}>
-        {Array.isArray(description) ? (
-          <ul className="list-disc list-inside space-y-2 text-gray-300">
-            {description.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-300">{description}</p>
-        )}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Timeline Metadata Block */}
+        <div className="lg:col-span-4 space-y-1">
+          <span className="text-xs font-mono text-cyan-400 font-medium tracking-wider block uppercase">
+            {duration}
+          </span>
+          <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors duration-200">
+            {title}
+          </h3>
+          <p className="text-sm font-mono text-neutral-400">{company}</p>
+        </div>
 
-        <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-5 mt-4 sm:mt-6">
-          {icons?.map((icon, i) => (
-            <div
-              key={i}
-              className="p-2 sm:p-3 rounded-xl border border-[rgba(246,246,249,0.08)] bg-[rgba(60,60,60,0.35)] backdrop-blur-md shadow-md hover:scale-110 hover:shadow-lg hover:shadow-[rgba(0,0,0,0.35)] transition-all duration-300"
-            >
-              <Image
-                src={icon}
-                alt="tech-icon"
-                width={32}
-                height={32}
-                className="sm:w-9 sm:h-9 rounded-md object-contain"
-              />
+        {/* Timeline Sub-Card Information Architecture */}
+        <div className="lg:col-span-8 group relative rounded-xl bg-gradient-to-br from-neutral-900/30 to-neutral-950/60 border border-neutral-800/50 p-6 backdrop-blur-xl transition-all duration-300 hover:border-neutral-700/60 hover:shadow-2xl hover:shadow-black/40">
+          
+          {/* Subtle inside illumination accent */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
+
+          {Array.isArray(description) ? (
+            <ul className="space-y-3.5 text-sm sm:text-base text-neutral-300 font-light leading-relaxed">
+              {description.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-neutral-600 shrink-0 group-hover:bg-cyan-500 transition-colors duration-300" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm sm:text-base text-neutral-300 font-light leading-relaxed">{description}</p>
+          )}
+
+          {/* Inline Technology Badges */}
+          {icons && icons.length > 0 && (
+            <div className="flex flex-wrap gap-2.5 mt-6 pt-5 border-t border-neutral-900/60">
+              {icons.map((icon, i) => (
+                <div
+                  key={i}
+                  className="w-8 h-8 p-1.5 rounded-lg bg-neutral-950/80 border border-neutral-800/60 flex items-center justify-center shadow-md transition-all duration-300 hover:border-cyan-500/40 hover:scale-110"
+                >
+                  <Image
+                    src={icon}
+                    alt="stack hardware tag icon"
+                    className="w-full h-full object-contain filter brightness-95"
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
-
-      <div className={styles.border}></div>
     </motion.div>
   );
 };
 
 const Company: React.FC = () => {
   return (
-    <div>
+    <div className="relative space-y-4 md:space-y-0 mt-8">
       {companiesData.map((company, index) => (
         <SingleCompany
           key={index}

@@ -1,9 +1,10 @@
-// components/Developer/Developer.tsx or wherever it is
+"use client";
+
 import { motion } from "framer-motion";
 import Container from "@/shared/ui/container/Container";
 import React from "react";
 import Image from "next/image";
-import Head from "next/head"; // ← Add this
+import Head from "next/head";
 import github from "../../../../public/images/githubW.svg";
 import linkedin from "../../../../public/images/socIcons/linkedin.webp";
 import styles from "./developer.module.scss";
@@ -23,184 +24,201 @@ const Developer = () => {
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Kanat Nazarov",
-              jobTitle: "Full-Stack Developer",
-              worksFor: {
-                "@type": "Organization",
-                name: "Freelance / Open to opportunities",
-              },
+              alternateName: "Kenzy",
+              jobTitle: "Senior Full-Stack Developer & Systems Engineer",
+              worksFor: [
+                {
+                  "@type": "Organization",
+                  name: "Tribeca Dental Studio",
+                },
+                {
+                  "@type": "Organization",
+                  name: "Fusion AI Agency",
+                }
+              ],
               url: "https://kenzy.vercel.app",
               sameAs: [
                 "https://github.com/kenzy51",
                 "https://www.linkedin.com/in/kanat-nazar",
               ],
               address: {
-                addressLocality: "Austin",
-                addressRegion: "Texas",
+                "@type": "PostalAddress",
+                addressLocality: "New York City",
+                addressRegion: "NY",
                 addressCountry: "US",
               },
               knowsAbout: [
                 "Next.js",
-                "React",
+                "React 19",
                 "NestJS",
                 "TypeScript",
-                "MongoDB",
-                "Full-Stack Development",
+                "PostgreSQL",
+                "Redis Caching",
+                "Conversational AI Infrastructure",
+                "Technical SEO & SGE Optimization",
+                "Full-Stack Software Engineering"
               ],
             }),
           }}
         />
-        <title>Kanat Nazarov | Full-Stack Developer & Software Engineer</title>
+        <title>Kanat Nazarov | Senior Full-Stack Developer & Systems Engineer</title>
         <meta
           name="description"
-          content="Kanat Nazarov — Full-Stack Developer in United States with 5+ years experience in Next.js, React, NestJS, TypeScript, and MongoDB. Building scalable web applications and community platforms."
+          content="Kanat Nazarov — Senior Full-Stack Developer based in New York City with extensive expertise in Next.js, React, NestJS, TypeScript, and AI-driven growth systems."
         />
         <meta
           name="keywords"
-          content="Kanat Nazarov, full stack developer, software engineer United States, frontend engineer, Next.js developer, React developer, NestJS developer, Kyrgyz developer USA"
+          content="Kanat Nazarov, Kenzy, full stack developer NYC, software engineer New York, AI growth engineer, Next.js developer, React 19, NestJS, TypeScript architect, SGE SEO expert"
         />
         <meta
           property="og:title"
-          content="Kanat Nazarov | Full-Stack Developer"
+          content="Kanat Nazarov | Senior Full-Stack Developer & Systems Engineer"
         />
         <meta
           property="og:description"
-          content="Full-Stack Developer specializing in Next.js, React, and NestJS."
+          content="Engineering enterprise SaaS platforms, high-performance web applications, and autonomous AI conversational engines."
         />
         <meta
           property="og:image"
           content="https://kenzy.vercel.app/og-developer.jpg"
-        />{" "}
-        {/* Add this image */}
+        />
         <meta property="og:url" content="https://kenzy.vercel.app/developer" />
         <meta property="og:type" content="profile" />
+        
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Kanat Nazarov | Full-Stack Developer"
+          content="Kanat Nazarov | Senior Full-Stack Developer"
         />
         <meta
           name="twitter:description"
-          content="Full-Stack Developer | Next.js, React, NestJS"
+          content="Architecting ultra-low latency full-stack systems with Next.js, NestJS, and TypeScript."
         />
       </Head>
 
-      <div className={styles.wrapper} id="bio">
+      <div className="relative py-20 px-4 sm:px-8 md:px-12 lg:px-20 bg-black overflow-hidden" id="bio">
+        {/* Cinematic ambient background lighting effect */}
+        <div className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/[0.03] blur-[180px] rounded-full pointer-events-none" />
+
         <Container>
           <motion.div
-            className={styles.about}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start max-w-7xl mx-auto relative z-10"
             initial="hidden"
             animate="visible"
           >
+            {/* Left Content Column */}
             <motion.div
-              className={styles.text}
+              className="lg:col-span-7 xl:col-span-8 space-y-6"
               variants={{
-                hidden: { opacity: 0, x: -80 },
+                hidden: { opacity: 0, y: 30 },
                 visible: {
                   opacity: 1,
-                  x: 0,
-                  transition: { duration: 0.8, delay: 0.1 },
+                  y: 0,
+                  transition: { duration: 0.6, ease: "easeOut" },
                 },
               }}
             >
-              <br />
-              <motion.h1
-                className={styles.aboutTitle}
-                variants={{
-                  hidden: { opacity: 0, x: -20 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.2 } },
-                }}
-              >
-                Kanat Nazarov | Full-Stack Developer & Software Engineer
-              </motion.h1>
-
-              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-6">
-                I'm a <strong>full-stack developer</strong> with 5+ years of
-                professional experience building modern, scalable web
-                applications. I specialize in <strong>Next.js</strong>,{" "}
-                <strong>React</strong>, <strong>TypeScript</strong>, and{" "}
-                <strong>NestJS</strong>, delivering performant and user-focused
-                solutions from frontend to backend.
+              <p className="text-cyan-400 font-mono tracking-widest uppercase text-xs sm:text-sm">Systems & Architecture</p>
+              
+              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight text-white leading-none">
+                Kanat Nazarov
+              </h1>
+              <p className="text-lg sm:text-xl font-medium text-neutral-400 font-mono">
+                Senior Full-Stack Developer & Digital Growth Engineer
               </p>
 
-              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
-                My work spans SaaS platforms, enterprise dashboards, fintech
-                tools, and community applications — including a full-stack
-                diaspora platform connecting thousands of Central Asians in the
-                USA.
+              <div className="w-12 h-[1px] bg-cyan-500/50 my-6" />
+
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-300 font-light">
+                I am a <strong>Senior Full-Stack Developer</strong> and systems architect specializing in constructing modern, high-concurrency web ecosystems. My day-to-day work centers on optimizing production applications built on <strong>Next.js (App Router)</strong>, <strong>React 19</strong>, <strong>TypeScript</strong>, and <strong>NestJS</strong> backends.
               </p>
 
-              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
-                Currently focused on <strong>frontend engineering</strong> and{" "}
-                <strong>full-stack development</strong> in, I love creating
-                clean, accessible, and visually engaging experiences that scale.
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-300 font-light">
+                My architectural implementations span scalable enterprise SaaS CRMs, multi-tenant local automation engines, and real-time streaming architectures. This includes building autonomous conversational AI voice streams with sub-second latencies and engineered retrieval-augmented generation (RAG) datasets supporting open-access diaspora networks for over 20,000 active users.
               </p>
 
-              <p className="text-lg md:text-xl leading-relaxed text-gray-400 mt-4">
-                Outside coding, I play piano and guitar, compose music, and
-                explore the intersection of technology and creativity
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-300 font-light">
+                Operating directly at the intersection of technical engineering and organic visibility, I specialize in configuring deep semantic site frameworks, custom programmatic caching strategies, and structured JSON-LD architectures that achieve top search rankings and high-intent commercial web capture profiles.
+              </p>
+
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-400 font-light italic">
+                Outside of backend engineering and web optimization, I write and compose music across piano and guitar, blending algorithmic logic with sonic creativity.
               </p>
             </motion.div>
 
+            {/* Right Sticky Card Column */}
             <motion.div
-              className={styles.imageWrapper}
+              className="lg:col-span-5 xl:col-span-4 w-full flex justify-center lg:justify-end"
               variants={{
-                hidden: { opacity: 0 },
+                hidden: { opacity: 0, scale: 0.95 },
                 visible: {
                   opacity: 1,
-                  transition: { duration: 0.6, delay: 0.5 },
+                  scale: 1,
+                  transition: { duration: 0.6, delay: 0.2, ease: "easeOut" },
                 },
               }}
             >
-              <div className="sticky top-[35%] right-6 max-w-[380px] z-10">
-                <div className="rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 p-4">
-                  <Image
-                    src={me}
-                    alt="Kanat Nazarov - Full-Stack Developer"
-                    style={{ width: "100%" }}
-                    priority
-                  />
-                  <div className="flex items-center gap-4 mt-4">
+              <div className="lg:sticky lg:top-32 w-full max-w-[360px]">
+                <div className="relative group rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-900/60 to-neutral-950/90 border border-neutral-800/80 p-5 shadow-2xl transition-all duration-300 hover:border-cyan-500/30">
+                  
+                  {/* Subtle profile card inner top illumination */}
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-700/30 to-transparent" />
+                  
+                  <div className="relative rounded-xl overflow-hidden aspect-[4/5] w-full mb-5 bg-neutral-900 border border-neutral-800/50">
+                    <Image
+                      src={me}
+                      alt="Kanat Nazarov - Profile Portrait"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      priority
+                      sizes="(max-w-[360px]) 100vw"
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
-                      <p className="text-white font-bold text-xl">
+                      <p className="text-white font-bold text-lg tracking-tight transition-colors duration-200 group-hover:text-cyan-400">
                         Kanat Nazarov
                       </p>
-                      <p className="text-sm text-gray-400">
-                        Full-Stack Developer
+                      <p className="text-xs font-mono text-neutral-400 mt-0.5">
+                        New York City, NY
                       </p>
                     </div>
-                    <div className={styles.icons}>
+
+                    {/* Integrated Interactive Icon Ribbon */}
+                    <div className="flex items-center gap-2.5">
                       <a
                         href="https://github.com/kenzy51"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={styles.link}
+                        className="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center transition-all duration-200 hover:bg-neutral-800 hover:border-neutral-700 hover:scale-105"
                       >
                         <Image
-                          alt="GitHub - Kanat Nazarov"
+                          alt="GitHub Repository Access"
                           src={github}
-                          width={30}
+                          className="w-4 h-4 object-contain brightness-90"
                         />
                       </a>
                       <a
                         href="https://www.linkedin.com/in/kanat-nazar"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={styles.link}
+                        className="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center transition-all duration-200 hover:bg-neutral-800 hover:border-neutral-700 hover:scale-105"
                       >
                         <Image
-                          alt="LinkedIn - Kanat Nazarov"
+                          alt="LinkedIn Professional Verification"
                           src={linkedin}
-                          width={30}
+                          className="w-4 h-4 object-contain brightness-90"
                         />
                       </a>
                       <a
-                        href="https://drive.google.com/file/d/1InOj7W1f1rj8ItFg0YT4uLcdUJAUHGnS/view?usp=sharing"
+                        href="https://drive.google.com/file/d/1WsO4PQ5_DxbwlAMdbFjXmJKyiVI1uLBh/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={styles.link}
+                        className="h-8 px-3 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-xs font-mono tracking-wider font-bold text-neutral-300 transition-all duration-200 hover:bg-neutral-800 hover:border-neutral-700 hover:text-white hover:scale-105"
                       >
-                        <strong className="text-white">CV</strong>
+                        CV
                       </a>
                     </div>
                   </div>

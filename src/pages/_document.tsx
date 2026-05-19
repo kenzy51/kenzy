@@ -1,79 +1,29 @@
-// pages/_document.tsx
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" className="scroll-smooth bg-black selection:bg-cyan-500/30 selection:text-white">
       <Head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* Core SEO */}
-        <title>
-          Kanat Nazarov | Full-Stack Developer & Software Engineer 
-        </title>
-        <meta
-          name="description"
-          content="Kanat Nazarov — Full-Stack Developer with 5+ years in Next.js, React, NestJS, TypeScript. Building scalable web apps and community platforms."
-        />
-        <meta
-          name="keywords"
-          content="Kanat Nazarov, full stack developer, software engineer, frontend engineer, Next.js developer, React developer, NestJS, Kyrgyz developer USA"
-        />
-        {/* Author & Robots */}
-        <meta name="author" content="Kanat Nazarov" />
-        <meta name="robots" content="index, follow" />
-        {/* Open Graph — Social Sharing (LinkedIn, Facebook) */}
-        <meta
-          property="og:title"
-          content="Kanat Nazarov | Full-Stack Developer"
-        />
-        <meta
-          property="og:description"
-          content="Full-Stack Developer specializing in Next.js, React, and NestJS. Built real-world apps including Kyrgyz diaspora platform."
-        />
-        <meta
-          property="og:image"
-          content="https://kenzy.vercel.app/og-image.jpg"
-        />{" "}
-        {/* Add this image */}
-        <meta property="og:url" content="https://kenzy.vercel.app" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Kanat Nazarov Portfolio" />
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Kanat Nazarov | Full-Stack Developer"
-        />
-        <meta
-          name="twitter:description"
-          content="Full-Stack Developer | Next.js, React, NestJS"
-        />
-        <meta
-          name="twitter:image"
-          content="https://kenzy.vercel.app/og-image.jpg"
-        />
-        <meta
-          name="google-site-verification"
-          content="VgDRz5M8tNsT6gLPg4D6D7UmgkNA1AM2pqjnh70aX4k"
-        />
-        <link rel="icon" href="/mylogo.png" />
+        
+        {/* High-Performance Font Pre-connecting to prevent layout shifts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
         <link
-          href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&family=Manrope:wght@100;200;300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@100;200;300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
+        
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
         />
-        <link href="/output.css" rel="stylesheet" />
       </Head>
-
-      <body>
+      <body className="antialiased bg-black text-white selection:bg-cyan-500/20">
         <Main />
         <NextScript />
       </body>
