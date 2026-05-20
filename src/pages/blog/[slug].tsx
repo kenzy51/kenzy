@@ -56,7 +56,9 @@ const makeCustomComponents = (): PortableTextComponents => ({
         <div className="relative my-10 rounded-xl overflow-hidden bg-neutral-950 border border-neutral-800/80 shadow-2xl font-mono text-sm">
           {/* Top terminal tab block header layout bar */}
           <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-900/60 border-b border-neutral-800/80 text-xs text-neutral-400">
-            <span className="uppercase tracking-wider font-semibold">{language}</span>
+            <span className="uppercase tracking-wider font-semibold">
+              {language}
+            </span>
             <button
               onClick={executeCopy}
               className="flex items-center gap-1.5 hover:text-white transition-colors duration-200"
@@ -82,9 +84,21 @@ const makeCustomComponents = (): PortableTextComponents => ({
     },
   },
   block: {
-    h2: ({ children }) => <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-4 font-sans">{children}</h2>,
-    h3: ({ children }) => <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mt-8 mb-3 font-sans">{children}</h3>,
-    normal: ({ children }) => <p className="text-neutral-300 font-light leading-relaxed mb-6 text-base md:text-lg">{children}</p>,
+    h2: ({ children }) => (
+      <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-4 font-sans">
+        {children}
+      </h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mt-8 mb-3 font-sans">
+        {children}
+      </h3>
+    ),
+    normal: ({ children }) => (
+      <p className="text-neutral-300 font-light leading-relaxed mb-6 text-base md:text-lg">
+        {children}
+      </p>
+    ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-2 border-cyan-400 pl-5 italic text-neutral-400 my-8 bg-neutral-950/40 py-1 rounded-r-lg">
         {children}
@@ -124,14 +138,21 @@ export default function Post({ post }: PostProps) {
       <Head>
         <title>{post.title} | Technical Blog</title>
         <meta name="description" content={post.excerpt} />
-        {post.keywords && <meta name="keywords" content={post.keywords.join(", ")} />}
-        
+        {post.keywords && (
+          <meta name="keywords" content={post.keywords.join(", ")} />
+        )}
+
         {/* Open Graph Security Mapping Protocols */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
-        {post.image && <meta property="og:image" content={urlFor(post.image).width(1200).height(630).url()} />}
-        
+        {post.image && (
+          <meta
+            property="og:image"
+            content={urlFor(post.image).width(1200).height(630).url()}
+          />
+        )}
+
         {/* Dynamic Structural JSON-LD Engine for SGE Positioning */}
         <script
           type="application/ld+json"
@@ -139,16 +160,16 @@ export default function Post({ post }: PostProps) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TechArticle",
-              "headline": post.title,
-              "description": post.excerpt,
-              "keywords": post.keywords ? post.keywords.join(", ") : "",
-              "datePublished": post.date,
-              "author": {
+              headline: post.title,
+              description: post.excerpt,
+              keywords: post.keywords ? post.keywords.join(", ") : "",
+              datePublished: post.date,
+              author: {
                 "@type": "Person",
-                "name": post.author || "Kanat Nazarov",
-                "url": "https://kanatnazarov.vercel.app"
-              }
-            })
+                name: post.author || "Kanat Nazarov",
+                url: "https://kanatnazarov.vercel.app",
+              },
+            }),
           }}
         />
       </Head>
@@ -161,7 +182,9 @@ export default function Post({ post }: PostProps) {
               href="/blog"
               className="inline-flex items-center text-sm font-mono text-neutral-400 hover:text-cyan-400 mb-12 transition-colors group"
             >
-              <span className="mr-2 transform group-hover:-translate-x-1 transition-transform">←</span>
+              <span className="mr-2 transform group-hover:-translate-x-1 transition-transform">
+                ←
+              </span>
               BACK_TO_LOGS
             </Link>
 
@@ -181,7 +204,9 @@ export default function Post({ post }: PostProps) {
                 <span className="text-neutral-700">•</span>
                 <span className="text-neutral-300">{post.readTime}</span>
                 <span className="text-neutral-700">•</span>
-                <span className="text-neutral-400 font-bold">{post.author || "KANAT NAZAROV"}</span>
+                <span className="text-neutral-400 font-bold">
+                  {post.author || "KANAT NAZAROV"}
+                </span>
               </div>
             </header>
 
@@ -203,7 +228,10 @@ export default function Post({ post }: PostProps) {
             </div>
 
             <footer className="mt-24 pt-8 border-t border-neutral-900 text-xs font-mono text-neutral-500 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <Link href="/blog" className="hover:text-cyan-400 transition-colors">
+              <Link
+                href="/blog"
+                className="hover:text-cyan-400 transition-colors"
+              >
                 ← TERMINATE_VIEW
               </Link>
               <span>
@@ -219,7 +247,7 @@ export default function Post({ post }: PostProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await sanityClient.fetch(
-    `*[_type == "post" && defined(slug.current)][].slug.current`
+    `*[_type == "post" && defined(slug.current)][].slug.current`,
   );
 
   return {
@@ -250,7 +278,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   return {
     props: {
       post,
-      messages: (await import(`../../messages/${locale || "en"}.json`)).default,
     },
     revalidate: 60,
   };

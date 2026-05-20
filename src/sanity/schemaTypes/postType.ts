@@ -1,7 +1,7 @@
 // schemas/post.ts
 import { defineField, defineType } from "sanity";
 
-export default defineType({
+export const postType= defineType({
   name: "post",
   title: "Blog Post",
   type: "document",
