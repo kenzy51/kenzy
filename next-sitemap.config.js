@@ -1,14 +1,23 @@
 // next-sitemap.config.js
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://kenzy.vercel.app',
+  // 1. Updated to your verified production domain
+  siteUrl: 'https://kanatnazarov.com',
+  
+  // 2. Automatically generate the clean robots.txt file we just configured
   generateRobotsTxt: true,
-  sitemapSize: 1, // ← Force SINGLE sitemap (no splitting)
-  // Optional: Manually add pages if auto-detection fails
+  
+  // 3. Keep it all cleanly in one file (no sitemap-0.xml splits)
+  sitemapSize: 5000, 
+
+  // 4. Force trailing slashes or pathing behaviors to match Next.js routes
+  trailingSlash: false,
+
+  // 5. Explicit route mapping
   additionalPaths: async (config) => [
-    await config.transform(config, '/'),
+    // This maps your primary resume-style bio experience canvas
     await config.transform(config, '/developer'),
-    // Add other pages if you have them
-    // await config.transform(config, '/projects'),
+    // This maps your engineering blog home stream hub
+    await config.transform(config, '/blog'),
   ],
 };

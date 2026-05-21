@@ -6,7 +6,22 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import AnimatedCursor from "react-animated-cursor";
 import Head from "next/head";
-
+import localFont from "next/font/local";
+const brandonGrotesque = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Brandon_Grotesque_regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Brandon_Grotesque_bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-brandon", // Use this as a CSS variable if you want to reference it in SCSS
+});
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
@@ -14,7 +29,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const defaultTimeZone = "America/New_York";
 
   return (
-    <>
+    <main className={brandonGrotesque.className}>
+      {" "}
       <Head>
         <meta
           name="viewport"
@@ -23,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
         {/* Primary Global SEO Standby Data */}
         <title>
-          Kanat Nazarov |  Full-Stack Developer & AI Systems Engineer
+          Kanat Nazarov | Full-Stack Developer & AI Systems Engineer
         </title>
         <meta
           name="description"
@@ -81,7 +97,6 @@ export default function App({ Component, pageProps }: AppProps) {
           content="https://kanatnazarov.vercel.app/og-image.jpg"
         />
       </Head>
-
       <NextIntlClientProvider
         locale={router.locale}
         timeZone={defaultTimeZone}
@@ -135,6 +150,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Layout>
       </NextIntlClientProvider>
-    </>
+    </main>
   );
 }

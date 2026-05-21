@@ -136,7 +136,6 @@ const SingleCompany: React.FC<CompanyProps> = ({
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
     >
-      {/* Decorative vertical timeline axis rail for desktop layouts */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-neutral-800/80 hidden md:block">
         <motion.div 
           className="absolute top-2 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-cyan-500 border-2 border-black shadow-[0_0_10px_rgba(6,182,212,0.5)]"
@@ -149,23 +148,22 @@ const SingleCompany: React.FC<CompanyProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Timeline Metadata Block */}
         <div className="lg:col-span-4 space-y-1">
-          <span className="text-xs font-mono text-cyan-400 font-medium tracking-wider block uppercase">
+          <span className="text-xs font-mono text-cyan-400 font-bold tracking-widest block uppercase">
             {duration}
           </span>
-          <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors duration-200">
+          <h3 className="text-xl font-bold tracking-tight text-white uppercase group-hover:text-cyan-400 transition-colors duration-200">
             {title}
           </h3>
-          <p className="text-sm font-mono text-neutral-400">{company}</p>
+          <p className="text-sm font-medium text-neutral-400 tracking-wider uppercase">{company}</p>
         </div>
 
         {/* Timeline Sub-Card Information Architecture */}
         <div className="lg:col-span-8 group relative rounded-xl bg-gradient-to-br from-neutral-900/30 to-neutral-950/60 border border-neutral-800/50 p-6 backdrop-blur-xl transition-all duration-300 hover:border-neutral-700/60 hover:shadow-2xl hover:shadow-black/40">
           
-          {/* Subtle inside illumination accent */}
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
 
           {Array.isArray(description) ? (
-            <ul className="space-y-3.5 text-sm sm:text-base text-neutral-300 font-light leading-relaxed">
+            <ul className="space-y-4 text-sm sm:text-base text-neutral-300 font-light leading-relaxed tracking-wide">
               {description.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="mt-2 w-1.5 h-1.5 rounded-full bg-neutral-600 shrink-0 group-hover:bg-cyan-500 transition-colors duration-300" />
@@ -174,10 +172,9 @@ const SingleCompany: React.FC<CompanyProps> = ({
               ))}
             </ul>
           ) : (
-            <p className="text-sm sm:text-base text-neutral-300 font-light leading-relaxed">{description}</p>
+            <p className="text-sm sm:text-base text-neutral-300 font-light leading-relaxed tracking-wide">{description}</p>
           )}
 
-          {/* Inline Technology Badges */}
           {icons && icons.length > 0 && (
             <div className="flex flex-wrap gap-2.5 mt-6 pt-5 border-t border-neutral-900/60">
               {icons.map((icon, i) => (
@@ -202,7 +199,10 @@ const SingleCompany: React.FC<CompanyProps> = ({
 
 const Company: React.FC = () => {
   return (
-    <div className="relative space-y-4 md:space-y-0 mt-8">
+    // Applied a unified context wrapper layer to cleanly hook into Brandon Grotesque
+    <div 
+      className="relative space-y-4 md:space-y-0 mt-8" 
+    >
       {companiesData.map((company, index) => (
         <SingleCompany
           key={index}

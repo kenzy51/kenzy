@@ -20,7 +20,12 @@ const Experience = () => {
   const isSmall = useMediaQuery("sm");
 
   return (
-    <div className="relative py-24 px-4 sm:px-8 md:px-12 lg:px-20 bg-black overflow-hidden" id="experience">
+    // Added explicit style rule mapping to enforce Brandon Grotesque across the entire timeline module structure
+    <div 
+      className="relative py-24 px-4 sm:px-8 md:px-12 lg:px-20 bg-black overflow-hidden" 
+      id="experience"
+      style={{ fontFamily: "'Brandon Grotesque', sans-serif" }}
+    >
       {/* Cinematic ambient background glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/[0.02] blur-[150px] rounded-full pointer-events-none z-0" />
 
@@ -29,7 +34,7 @@ const Experience = () => {
           {/* Section Header Content */}
           <div className="mb-16 md:mb-24 text-center sm:text-left">
             <motion.p
-              className="text-cyan-400 font-mono tracking-widest uppercase text-xs sm:text-sm mb-3"
+              className="text-cyan-400 font-mono tracking-widest uppercase text-xs sm:text-sm mb-3 font-bold"
               initial={{ opacity: 0, y: -10 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
               transition={{ duration: 0.4 }}
@@ -37,7 +42,7 @@ const Experience = () => {
               Professional History
             </motion.p>
             <motion.h2
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white"
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-none"
               initial={{ opacity: 0, x: -30 }}
               animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -46,7 +51,7 @@ const Experience = () => {
             </motion.h2>
           </div>
 
-          {/* Core Timeline Grid Component */}
+          {/* Core Timeline Grid Component - Will now cleanly inherit the parent font definitions */}
           <Company />
         </div>
       </Container>

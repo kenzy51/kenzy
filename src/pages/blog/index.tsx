@@ -30,7 +30,7 @@ export default function Blog({ posts }: BlogProps) {
           content="Deep dives into Next.js architectures, low-latency conversational AI pipelines, technical SEO, and full-stack software engineering by Kanat Nazarov." 
         />
         <meta name="keywords" content="Kanat Nazarov blog, Next.js architecture blog, conversational AI engineer, full stack developer tutorials, technical SGE optimization" />
-        <link rel="canonical" href="https://kanatnazarov.vercel.app/blog" />
+        <link rel="canonical" href="https://kanatnazarov.com/blog" />
       </Head>
 
       <div className="min-h-screen bg-black text-white relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">

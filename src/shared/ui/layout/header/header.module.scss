@@ -119,7 +119,14 @@
     }
   }
 }
-
+.navLinks a, 
+.sidebarLinks a {
+  font-family: 'Brandon Grotesque', sans-serif !important; // Replaces the raw monospace layout
+  font-size: 14px;
+  font-weight: 700; // Bold typography makes Brandon Grotesque look incredibly premium
+  letter-spacing: 0.06em; // Adding slight track spacing refines the geometric aesthetic
+  text-transform: uppercase;
+}
 /* Activated item state mapped via react-scroll spy indicator */
 .activeAnchor {
   color: #22d3ee !important; // Cyan highlight active node state
