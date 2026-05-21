@@ -23,15 +23,15 @@ const nextConfig = {
     ],
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/developer',
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/developer',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 const mdxConfig = withMDX({
