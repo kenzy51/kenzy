@@ -1,6 +1,5 @@
 // components/Header.tsx
 import React from "react";
-import styles from "./header.module.scss";
 import logo from "../../../../../public/mylogo.png";
 import Image from "next/image";
 import Container from "../../container/Container";
@@ -15,32 +14,33 @@ const Header = () => {
   const t = useTranslations();
   const router = useRouter();
   const isBlogRoute = router.pathname.startsWith("/blog");
+const isStudioRoute = router.pathname.startsWith("/studio");
+  // Shared navigation array matrix
+  const navTargets = ["bio", "skills", "experience", "portfolio", "contact"];
 
   return (
     <>
-      {/* TOP NAVBAR: Logo & Sticked Blog Button Only */}
-      {/* Your premium font automatically injects via styles.headerWrapper config */}
-      <header
-        className={styles.headerWrapper}
-        style={{ fontFamily: "var(--font-brandon), sans-serif" }}
+      {/* TOP NAVBAR */}
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-neutral-900/40 bg-black/60 backdrop-blur-xl py-4"
+        style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
       >
         <Container>
-          <div className={styles.header}>
-            <div className={styles.logo}>
+          <div className="flex items-center justify-between h-12 w-full">
+            <div className="flex items-center transition-transform duration-200 hover:scale-[1.02]">
               <Link href="/developer">
-                <Image
-                  src={logo}
-                  alt="Logo"
-                  className={styles.logoImage}
-                  priority
-                />
+                <Image src={logo} alt="Logo" className="h-8 w-auto object-contain" priority />
               </Link>
             </div>
 
-            <nav className={styles.topNav}>
-              <Link
-                href="/blog"
-                className={`${styles.blogTab} ${isBlogRoute ? styles.blogTabActive : ""}`}
+            <nav className="flex items-center">
+              <Link 
+                href="/blog" 
+                className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
+                  isBlogRoute 
+                    ? "bg-white text-black border-white" 
+                    : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80 hover:text-white hover:border-neutral-700 hover:bg-neutral-900/60"
+                }`}
               >
                 Blog
               </Link>
@@ -49,72 +49,66 @@ const Header = () => {
         </Container>
       </header>
 
-      {/* RIGHT SIDEBAR: Fixed vertical index links (Hidden on Blog paths) */}
-      {/* Your scroll tabs and tracking icons inherit font rules seamlessly here */}
+      {/* MOBILE INLINE NAVIGATION BAR 
+          - Only displays on screens smaller than desktop layout boundaries (lg:hidden).
+          - Sticks directly right below your top navbar layout frame using a glassmorphic background layer.
+          - Features smooth overflow horizontal swipe tracking so links never clip or scale down too small.
+      */}
       {!isBlogRoute && (
-        <aside className={styles.rightSidebar}>
-          <nav className={styles.sidebarLinks}>
+        <nav 
+          className="lg:hidden fixed top-[80px] left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-md border-b border-neutral-900 overflow-x-auto scrollbar-none py-3 px-4 flex items-center justify-start gap-6 whitespace-nowrap mask-image-horizontal"
+          style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
+        >
+          {navTargets.map((target) => (
             <ScrollLink
-              to="bio"
+              key={target}
+              to={target}
               smooth={true}
               duration={500}
               spy={true}
-              activeClass={styles.activeAnchor}
+              offset={-140} // Custom offset handles both top bars perfectly on tap clicks
+              className="text-[11px] font-bold uppercase tracking-[0.15em] text-neutral-400 transition-colors duration-200 cursor-pointer"
+              activeClass="!text-cyan-400 border-b border-cyan-400 pb-1"
             >
-              <span>about</span>
+              {target === "bio" ? "about" : t(target)}
             </ScrollLink>
-            <ScrollLink
-              to="skills"
-              smooth={true}
-              duration={500}
-              spy={true}
-              activeClass={styles.activeAnchor}
-            >
-              <span>{t("skills")}</span>
-            </ScrollLink>
-            <ScrollLink
-              to="experience"
-              smooth={true}
-              duration={500}
-              spy={true}
-              activeClass={styles.activeAnchor}
-            >
-              <span>{t("experience")}</span>
-            </ScrollLink>
-            <ScrollLink
-              to="portfolio"
-              smooth={true}
-              duration={500}
-              spy={true}
-              activeClass={styles.activeAnchor}
-            >
-              <span>{t("portfolio")}</span>
-            </ScrollLink>
-            <ScrollLink
-              to="contact"
-              smooth={true}
-              duration={500}
-              spy={true}
-              activeClass={styles.activeAnchor}
-            >
-              <span>{t("contact")}</span>
-            </ScrollLink>
+          ))}
+        </nav>
+      )}
+
+      {/* DESKTOP FIXED RIGHT SIDEBAR 
+          - Standard static location blocks.
+          - Completely hidden on mobile/tablet viewports (hidden lg:flex).
+      */}
+      {!isBlogRoute && (
+        <aside 
+          className="hidden lg:flex fixed right-12 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-8 mix-blend-difference"
+          style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
+        >
+          <nav className="flex flex-col gap-8 items-center">
+            {navTargets.map((target) => (
+              <ScrollLink
+                key={target}
+                to={target}
+                smooth={true}
+                duration={500}
+                spy={true}
+                className="cursor-pointer opacity-40 hover:opacity-100 transition-all duration-300 text-white relative"
+                activeClass="!opacity-100 [&>span]:text-cyan-400"
+              >
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-200">
+                  {target === "bio" ? "about" : t(target)}
+                </span>
+              </ScrollLink>
+            ))}
           </nav>
 
-          {/* Social Media Anchors at the bottom of the sidebar list */}
-          <div className={styles.sidebarSocials}>
-            <a
-              href="https://github.com/kenzy51"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          {/* Desktop Footer Social Media Triggers */}
+          <div className="flex flex-col items-center gap-4 mt-4 pt-4 border-t border-neutral-800/60 w-full">
+            <a href="https://github.com/kenzy51" target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200">
               <Image alt="Github" src={github} width={18} height={18} />
             </a>
-            <a
-              href="https://www.linkedin.com/in/kanat-nazar"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://www.linkedin.com/in/kanat-nazar" target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200">
               <Image alt="LinkedIn" src={linkedin} width={18} height={18} />
             </a>
           </div>

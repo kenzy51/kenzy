@@ -1,8 +1,8 @@
-// pages/blog/index.tsx
+"use client";
+
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { sanityClient, urlFor } from "@/lib/sanity";
 import { GetStaticProps } from "next";
 
@@ -24,79 +24,79 @@ export default function Blog({ posts }: BlogProps) {
   return (
     <>
       <Head>
-        <title>Engineering Blog & Technical Insights | Kanat Nazarov</title>
+        <title>Engineering Blog & Full-Stack Insights | Kanat Nazarov</title>
         <meta 
           name="description" 
-          content="Deep dives into Next.js architectures, low-latency conversational AI pipelines, technical SEO, and full-stack software engineering by Kanat Nazarov." 
+          content="Practical tutorials and project retrospectives on Next.js, React, NestJS, and building fast web applications by Kanat Nazarov." 
         />
-        <meta name="keywords" content="Kanat Nazarov blog, Next.js architecture blog, conversational AI engineer, full stack developer tutorials, technical SGE optimization" />
+        <meta 
+          name="keywords" 
+          content="Kanat Nazarov blog, Next.js architecture blog, conversational AI engineer, full stack developer tutorials, technical SGE optimization" 
+        />
         <link rel="canonical" href="https://kanatnazarov.com/blog" />
       </Head>
 
-      <div className="min-h-screen bg-black text-white relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/[0.015] blur-[130px] rounded-full pointer-events-none" />
-
+      {/* DESIGN REFACTOR: 
+        - Shifted background to an elegant off-black (#0A0A0A) for readability.
+        - Bound your Brandon Grotesque font family variable utility rule cleanly.
+      */}
+      <div 
+        className="min-h-screen bg-[#0A0A0A] text-white relative pt-40 pb-32 px-4 sm:px-8 md:px-16 lg:px-24"
+        style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
+      >
         <div className="max-w-6xl mx-auto relative z-10">
-          <header className="mb-20 text-center">
-            <p className="text-cyan-400 font-mono tracking-widest uppercase text-xs sm:text-sm mb-3">
-              Logs & Technical Blueprints
+          
+          {/* HEADER REFACTOR:
+            - Balanced, understandable copywriting structured for busy recruiters.
+            - Focuses on real-world engineering value and tangible business growth.
+          */}
+          <header className="mb-24 text-left max-w-3xl border-b border-neutral-900 pb-10">
+            <p className="text-cyan-400 font-mono tracking-[0.2em] uppercase text-xs mb-3 font-bold">
+              Tech Stack & Project Retrospectives
             </p>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-white">
-              Blog & Insights
+            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white uppercase leading-tight mb-4">
+              Engineering <br />& Growth
             </h1>
-            <p className="text-neutral-400 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
-              Production retrospectives exploring full-stack engineering, infrastructure orchestration, and semantic design systems.
+            <p className="text-neutral-400 text-base sm:text-lg font-normal leading-relaxed tracking-wide">
+              Practical guides and case studies on building fast web applications, optimizing full-stack codebases, and implementing real-world AI tools that drive actual business results.
             </p>
           </header>
 
           {!posts || posts.length === 0 ? (
-            <div className="text-center py-24 border border-dashed border-neutral-900 rounded-2xl bg-neutral-950/20 backdrop-blur">
-              <p className="text-xl text-neutral-600 font-mono tracking-wider">
-                EXECUTION_FALLBACK: NO_ARTICLES_SYNCHRONIZED
-              </p>
-              <p className="text-xs text-neutral-500 font-mono mt-2">
-                Deploy a post via your studio dashboard at /studio to initialize data.
-              </p>
+            <div className="text-left py-16 border-t border-neutral-900 font-mono text-sm tracking-wider text-neutral-500">
+              No articles found. Deploy a post via your studio dashboard to view.
             </div>
           ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
-              {posts.map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="group block h-full">
-                  <Card className="h-full flex flex-col bg-gradient-to-b from-neutral-900/40 to-neutral-950/90 border-neutral-800/60 hover:border-cyan-500/30 transition-all duration-300 rounded-xl overflow-hidden shadow-2xl">
+            /* GRID REFACTOR:
+              - Clean 3-column structural layout for rapid scanning.
+              - Eliminates bulky border cards in favor of minimalist typography space.
+            */
+            <div className="grid gap-x-8 gap-y-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start">
+              {posts.map((post, index) => (
+                <article key={post.slug} className="group">
+                  <Link href={`/blog/${post.slug}`} className="block space-y-4">
                     
-                    <div className="w-full relative h-48 bg-neutral-950 overflow-hidden border-b border-neutral-900/40">
+                    {/* Clean Image Frame Wrapper Layout */}
+                    <div className="w-full relative aspect-[16/10] bg-[#121212] overflow-hidden rounded-lg border border-neutral-900 transition-all duration-300 group-hover:border-neutral-800">
                       {post.image ? (
                         <Image
-                          src={urlFor(post.image).width(600).height(350).url()}
+                          src={urlFor(post.image).width(600).height(375).url()}
                           alt={post.title}
                           fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                          className="object-cover transition-transform duration-500 scale-100 group-hover:scale-[1.02]"
                           sizes="(max-w-md) 100vw, 33vw"
-                          priority
+                          priority={index < 3}
                         />
                       ) : (
-                        <div className="w-full h-full bg-neutral-950 flex items-center justify-center font-mono text-xs text-neutral-700">
-                          IMAGE_STBY_ASSET
+                        <div className="w-full h-full bg-neutral-950 flex items-center justify-center font-mono text-xs text-neutral-800">
+                          IMAGE_PLACEHOLDER
                         </div>
                       )}
                     </div>
 
-                    <div className="flex flex-col flex-1 p-6 justify-between">
-                      <div className="space-y-3">
-                        <CardHeader className="p-0 space-y-0">
-                          <CardTitle className="text-lg font-bold leading-snug group-hover:text-cyan-400 transition-colors duration-200 text-white line-clamp-2">
-                            {post.title}
-                          </CardTitle>
-                        </CardHeader>
-                        
-                        <CardContent className="p-0">
-                          <p className="text-neutral-400 font-light line-clamp-3 text-sm leading-relaxed">
-                            {post.excerpt}
-                          </p>
-                        </CardContent>
-                      </div>
-
-                      <CardFooter className="p-0 pt-5 mt-6 flex items-center text-[11px] font-mono font-medium text-neutral-500 uppercase tracking-wider border-t border-neutral-900/60">
+                    {/* Metadata & Typography Blocks */}
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-neutral-500 uppercase">
                         <time dateTime={post.date}>
                           {new Date(post.date).toLocaleDateString('en-US', { 
                             month: 'short', 
@@ -104,12 +104,22 @@ export default function Blog({ posts }: BlogProps) {
                             year: 'numeric' 
                           })}
                         </time>
-                        <span className="mx-2 text-neutral-800">•</span>
-                        <span className="text-neutral-400">{post.readTime}</span>
-                      </CardFooter>
+                        <span>•</span>
+                        <span>{post.readTime}</span>
+                      </div>
+
+                      {/* Headings leverage premium geometric text scaling profiles */}
+                      <h2 className="text-xl font-bold tracking-tight text-white uppercase group-hover:text-cyan-400 transition-colors duration-200">
+                        {post.title}
+                      </h2>
+                      
+                      <p className="text-neutral-400 font-normal text-sm leading-relaxed line-clamp-2">
+                        {post.excerpt}
+                      </p>
                     </div>
-                  </Card>
-                </Link>
+
+                  </Link>
+                </article>
               ))}
             </div>
           )}
@@ -136,7 +146,7 @@ export const getStaticProps: GetStaticProps<BlogProps> = async ({ locale }) => {
   let messages = {};
   
   try {
-    // FIX: Dynamically import your translation dictionary JSON files
+    // Dynamic localization routing handler blocks
     const localeToLoad = locale || "en";
     const importedMessages = await import(`../../messages/${localeToLoad}.json`);
     messages = importedMessages.default || importedMessages;
