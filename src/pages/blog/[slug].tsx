@@ -54,7 +54,6 @@ const makeCustomComponents = (): PortableTextComponents => ({
 
       return (
         <div className="relative my-10 rounded-xl overflow-hidden bg-neutral-950 border border-neutral-800/80 shadow-2xl font-mono text-sm">
-          {/* Top terminal tab block header layout bar */}
           <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-900/60 border-b border-neutral-800/80 text-xs text-neutral-400">
             <span className="uppercase tracking-wider font-semibold">
               {language}
@@ -105,6 +104,30 @@ const makeCustomComponents = (): PortableTextComponents => ({
       </blockquote>
     ),
   },
+  /* FIX: Explicitly instruct the renderer how to style structural list tags */
+  list: {
+    bullet: ({ children }) => (
+      <ul className="list-disc pl-6 my-6 space-y-2 text-neutral-300 font-light text-base md:text-lg">
+        {children}
+      </ul>
+    ),
+    number: ({ children }) => (
+      <ol className="list-decimal pl-6 my-6 space-y-3 text-neutral-300 font-light text-base md:text-lg">
+        {children}
+      </ol>
+    ),
+  },
+  /* Adds matching padding to keep items beautifully separated */
+  listItem: {
+    bullet: ({ children }) => (
+      <li className="marker:text-cyan-500">{children}</li>
+    ),
+    number: ({ children }) => (
+      <li className="marker:text-cyan-400 marker:font-mono marker:text-sm">
+        {children}
+      </li>
+    ),
+  },
   marks: {
     link: ({ children, value }) => {
       const isExternal = !value.href.startsWith("/");
@@ -121,7 +144,6 @@ const makeCustomComponents = (): PortableTextComponents => ({
     },
   },
 });
-
 export default function Post({ post }: PostProps) {
   const components = makeCustomComponents();
 
