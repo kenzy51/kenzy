@@ -12,6 +12,16 @@ const nextConfig = {
     locales: ['en', 'ru'],
     defaultLocale: 'en',
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**', // Allows all image assets inside your datasets
+      },
+    ],
+  },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   async redirects() {
     return [
