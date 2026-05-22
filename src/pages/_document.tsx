@@ -5,13 +5,13 @@ export default function Document() {
     <Html lang="en" className="scroll-smooth bg-black selection:bg-cyan-500/30 selection:text-white">
       <Head>
         <meta charSet="utf-8" />
-     
         <link rel="icon" type="image/png" sizes="48x48" href="/mylogo.png" />
         <link rel="shortcut icon" href="/favicon.ico" />
         
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
+        {/* Optimized Font Delivery Loading Stack */}
         <link
           href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&family=Manrope:wght@100;200;300;400;500;600;700;800&display=swap"
           rel="stylesheet"

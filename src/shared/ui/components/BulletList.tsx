@@ -2,7 +2,7 @@ import React from "react";
 
 const BulletList = ({ text }: { text: string }) => {
   return (
-    <ul className="list-disc pl-5 space-y-2 text-sm">
+    <ul className="list-disc pl-5 space-y-2 text-m">
       {text
         .split("\n")
         .map((line, i) => line.trim())
