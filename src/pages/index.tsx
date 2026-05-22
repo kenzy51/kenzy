@@ -85,17 +85,7 @@ const Developer = () => {
         <meta property="og:url" content="https://kanatnazarov.vercel.app/developer" />
         <meta property="og:type" content="profile" />
         
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Kanat Nazarov | Full-Stack Developer"
-        />
-        <meta
-          name="twitter:description"
-          content="Architecting ultra-low latency full-stack systems with Next.js, NestJS, and TypeScript."
-        />
-        <meta name="twitter:image" content="https://kanatnazarov.vercel.app/og-developer.jpg" />
+     
       </Head>
 
       <div className="relative py-20 px-4 sm:px-8 md:px-12 lg:px-20 bg-black overflow-hidden" id="bio">

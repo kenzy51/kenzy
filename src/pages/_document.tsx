@@ -5,8 +5,10 @@ export default function Document() {
     <Html lang="en" className="scroll-smooth bg-black selection:bg-cyan-500/30 selection:text-white">
       <Head>
         <meta charSet="utf-8" />
+     
+        <link rel="icon" type="image/png" sizes="48x48" href="/mylogo.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         
-        {/* High-Performance Font Pre-connecting to prevent layout shifts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
