@@ -147,7 +147,6 @@ const Developer = () => {
               </p>
             </motion.div>
 
-            {/* Right Sticky Card Column */}
             <motion.div
               className="lg:col-span-5 xl:col-span-4 w-full flex justify-center lg:justify-end"
               variants={{

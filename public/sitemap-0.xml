@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://kanatnazarov.com</loc><lastmod>2026-05-21T21:53:52.389Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kanatnazarov.com/blog</loc><lastmod>2026-05-21T21:53:52.389Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kanatnazarov.com/developer</loc><lastmod>2026-05-21T21:53:52.389Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kanatnazarov.com/ru/blog</loc><lastmod>2026-05-21T21:53:52.389Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kanatnazarov.com/ru/developer</loc><lastmod>2026-05-21T21:53:52.389Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kanatnazarov.com/blog/why-next-js-and-sanity-io-is-the-ultimate-stack-for-modern-web-development</loc><lastmod>2026-05-21T21:53:52.389Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kanatnazarov.com/blog/why-next-js-and-react-are-the-best-stack-for-modern-web-development</loc><lastmod>2026-05-21T21:53:52.389Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>

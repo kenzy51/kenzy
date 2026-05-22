@@ -36,7 +36,7 @@ const Developer = () => {
                   name: "Fusion AI Agency",
                 },
               ],
-              url: "https://kenzy.vercel.app",
+              url: "https://kanatnazarov.com",
               sameAs: [
                 "https://github.com/kenzy51",
                 "https://www.linkedin.com/in/kanat-nazar",
@@ -80,9 +80,9 @@ const Developer = () => {
         />
         <meta
           property="og:image"
-          content="https://kenzy.vercel.app/og-developer.jpg"
+          content="https://kanatnazarov.com/og-developer.jpg"
         />
-        <meta property="og:url" content="https://kenzy.vercel.app/developer" />
+        <meta property="og:url" content="https://kanatnazarov.com/developer" />
         <meta property="og:type" content="profile" />
 
         {/* Twitter Card */}

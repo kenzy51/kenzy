@@ -92,8 +92,8 @@ const Footer = () => {
 
               {/* <LeadForm /> */}
             </div>
-            <a href="mailto:nazarovkanat7@gmail.com" className={styles.email}>
-              nazarovkanat7@gmail.com
+            <a href="mailto:kanatnazarov.dev@gmail.com" className={styles.email}>
+              kanatnazarov.dev@gmail.com
             </a>
 
             <div className={styles.icons}>
@@ -113,7 +113,7 @@ const Footer = () => {
               </a>
             </div>
             <div className={styles.bottom}>
-              <p>Designed and Developed by Kanat Full Stack</p>
+              <p>Designed and Developed by Kanat Nazarov</p>
               <p>Powered by NextJs 14</p>
             </div>
           </div>

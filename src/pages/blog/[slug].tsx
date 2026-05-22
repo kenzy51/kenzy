@@ -196,7 +196,7 @@ export default function Post({ post }: PostProps) {
         />
       </Head>
 
-      <div className="min-h-screen bg-black text-neutral-100 py-16 md:py-24">
+      <div className="min-h-screen bg-black text-neutral-100 py-16 md:py-24 mt-12">
         <Container>
           <div className="max-w-3xl mx-auto">
             {/* Context Back navigation anchor */}

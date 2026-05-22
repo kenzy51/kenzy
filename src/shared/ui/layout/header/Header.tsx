@@ -14,31 +14,34 @@ const Header = () => {
   const t = useTranslations();
   const router = useRouter();
   const isBlogRoute = router.pathname.startsWith("/blog");
-const isStudioRoute = router.pathname.startsWith("/studio");
+  const isStudioRoute = router.pathname.startsWith("/studio");
   // Shared navigation array matrix
   const navTargets = ["bio", "skills", "experience", "portfolio", "contact"];
-
+  if (isStudioRoute) return null;
   return (
     <>
       {/* TOP NAVBAR */}
-      <header 
+      <header
         className="fixed top-0 left-0 right-0 z-50 w-full border-b border-neutral-900/40 bg-black/60 backdrop-blur-xl py-4"
-        style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
+        style={{
+          fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif",
+        }}
       >
         <Container>
           <div className="flex items-center justify-between h-12 w-full">
-            <div className="flex items-center transition-transform duration-200 hover:scale-[1.02]">
+            <div className="flex items-center transition-transform duration-200 hover:scale-[1.02] ">
               <Link href="/developer">
-                <Image src={logo} alt="Logo" className="h-8 w-auto object-contain" priority />
+                <h4 className="bold leading-5">KANAT NAZAROV</h4>
+                {/* <Image src={logo} alt="Logo" className="h-12 w-auto object-contain" priority /> */}
               </Link>
             </div>
 
             <nav className="flex items-center">
-              <Link 
-                href="/blog" 
+              <Link
+                href="/blog"
                 className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
-                  isBlogRoute 
-                    ? "bg-white text-black border-white" 
+                  isBlogRoute
+                    ? "bg-white text-black border-white"
                     : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80 hover:text-white hover:border-neutral-700 hover:bg-neutral-900/60"
                 }`}
               >
@@ -48,16 +51,12 @@ const isStudioRoute = router.pathname.startsWith("/studio");
           </div>
         </Container>
       </header>
-
-      {/* MOBILE INLINE NAVIGATION BAR 
-          - Only displays on screens smaller than desktop layout boundaries (lg:hidden).
-          - Sticks directly right below your top navbar layout frame using a glassmorphic background layer.
-          - Features smooth overflow horizontal swipe tracking so links never clip or scale down too small.
-      */}
       {!isBlogRoute && (
-        <nav 
+        <nav
           className="lg:hidden fixed top-[80px] left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-md border-b border-neutral-900 overflow-x-auto scrollbar-none py-3 px-4 flex items-center justify-start gap-6 whitespace-nowrap mask-image-horizontal"
-          style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
+          style={{
+            fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif",
+          }}
         >
           {navTargets.map((target) => (
             <ScrollLink
@@ -75,15 +74,12 @@ const isStudioRoute = router.pathname.startsWith("/studio");
           ))}
         </nav>
       )}
-
-      {/* DESKTOP FIXED RIGHT SIDEBAR 
-          - Standard static location blocks.
-          - Completely hidden on mobile/tablet viewports (hidden lg:flex).
-      */}
       {!isBlogRoute && (
-        <aside 
+        <aside
           className="hidden lg:flex fixed right-12 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-8 mix-blend-difference"
-          style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
+          style={{
+            fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif",
+          }}
         >
           <nav className="flex flex-col gap-8 items-center">
             {navTargets.map((target) => (
@@ -105,10 +101,20 @@ const isStudioRoute = router.pathname.startsWith("/studio");
 
           {/* Desktop Footer Social Media Triggers */}
           <div className="flex flex-col items-center gap-4 mt-4 pt-4 border-t border-neutral-800/60 w-full">
-            <a href="https://github.com/kenzy51" target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200">
+            <a
+              href="https://github.com/kenzy51"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"
+            >
               <Image alt="Github" src={github} width={18} height={18} />
             </a>
-            <a href="https://www.linkedin.com/in/kanat-nazar" target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200">
+            <a
+              href="https://www.linkedin.com/in/kanat-nazar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"
+            >
               <Image alt="LinkedIn" src={linkedin} width={18} height={18} />
             </a>
           </div>

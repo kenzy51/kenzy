@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kanatnazarov.com
+
+# Sitemaps
+Sitemap: https://kanatnazarov.com/sitemap.xml

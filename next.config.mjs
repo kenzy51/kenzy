@@ -18,7 +18,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
         port: '',
-        pathname: '/**', // Allows all image assets inside your datasets
+        pathname: '/**',
       },
     ],
   },

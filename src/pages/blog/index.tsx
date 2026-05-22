@@ -36,20 +36,12 @@ export default function Blog({ posts }: BlogProps) {
         <link rel="canonical" href="https://kanatnazarov.com/blog" />
       </Head>
 
-      {/* DESIGN REFACTOR: 
-        - Shifted background to an elegant off-black (#0A0A0A) for readability.
-        - Bound your Brandon Grotesque font family variable utility rule cleanly.
-      */}
       <div 
-        className="min-h-screen bg-[#0A0A0A] text-white relative pt-40 pb-32 px-4 sm:px-8 md:px-16 lg:px-24"
+        className="min-h-screen bg-[#0A0A0A] text-white relative pt-32 pb-32 px-4 sm:px-8 md:px-16 lg:px-24"
         style={{ fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif" }}
       >
         <div className="max-w-6xl mx-auto relative z-10">
-          
-          {/* HEADER REFACTOR:
-            - Balanced, understandable copywriting structured for busy recruiters.
-            - Focuses on real-world engineering value and tangible business growth.
-          */}
+        
           <header className="mb-24 text-left max-w-3xl border-b border-neutral-900 pb-10">
             <p className="text-cyan-400 font-mono tracking-[0.2em] uppercase text-xs mb-3 font-bold">
               Tech Stack & Project Retrospectives
