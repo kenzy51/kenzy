@@ -1,7 +1,7 @@
 // schemas/post.ts
 import { defineField, defineType } from "sanity";
 
-export const postType= defineType({
+export const postType = defineType({
   name: "post",
   title: "Blog Post",
   type: "document",
@@ -20,6 +20,14 @@ export const postType= defineType({
         source: "title",
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required(),
+    }),
+    // ADD THIS FIELD TO YOUR SCHEMA
+    defineField({
+      name: "category",
+      title: "Category",
+      type: "reference",
+      to: [{ type: "category" }], // This must match the 'name' property of your category schema
       validation: (Rule) => Rule.required(),
     }),
     defineField({
