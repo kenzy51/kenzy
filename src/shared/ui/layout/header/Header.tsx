@@ -15,9 +15,11 @@ const Header = () => {
   const router = useRouter();
   const isBlogRoute = router.pathname.startsWith("/blog");
   const isStudioRoute = router.pathname.startsWith("/studio");
+  const isLifestyle = router.pathname.startsWith("/lifestyle");
   // Shared navigation array matrix
   const navTargets = ["bio", "skills", "experience", "portfolio", "contact"];
-  if (isStudioRoute) return null;
+  if ( isLifestyle) return null;
+  if ( isStudioRoute) return null;
   return (
     <>
       {/* TOP NAVBAR */}

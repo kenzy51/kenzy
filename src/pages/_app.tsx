@@ -110,7 +110,7 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
       >
         {/* Subtle low-latency user pointer tracking ring */}
-        <AnimatedCursor
+        {/* <AnimatedCursor
           innerSize={8}
           outerSize={24}
           color="255, 255, 255"
@@ -130,7 +130,7 @@ export default function App({ Component, pageProps }: AppProps) {
             "button",
             ".cursor-pointer",
           ]}
-        />
+        /> */}
 
         <AppProgressBar
           height="3px"
