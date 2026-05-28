@@ -13,18 +13,25 @@ import { useTranslations } from "next-intl";
 const Header = () => {
   const t = useTranslations();
   const router = useRouter();
+
+  // Route state checks
   const isBlogRoute = router.pathname.startsWith("/blog");
   const isStudioRoute = router.pathname.startsWith("/studio");
   const isLifestyle = router.pathname.startsWith("/lifestyle");
-  // Shared navigation array matrix
+
   const navTargets = ["bio", "skills", "experience", "portfolio", "contact"];
-  if (isLifestyle) return null;
+
+  // Hide header only for Studio routes
   if (isStudioRoute) return null;
+
   return (
     <>
-      {/* TOP NAVBAR */}
       <header
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-neutral-900/40 bg-black/60 backdrop-blur-xl py-4"
+        className={`fixed top-0 left-0 right-0 z-50 w-full border-b border-neutral-900/40 backdrop-blur-xl py-4 transition-colors duration-500 ${
+          isLifestyle
+            ? "bg-[#FAF7F2]/60" // Use your lifestyle page background color
+            : "bg-black/60" // Default black for other pages
+        }`}
         style={{
           fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif",
         }}
@@ -33,8 +40,11 @@ const Header = () => {
           <div className="flex items-center justify-between h-12 w-full">
             <div className="flex items-center transition-transform duration-200 hover:scale-[1.02] ">
               <Link href="/developer">
-                <h4 className="bold leading-5">KANAT NAZAROV</h4>
-                {/* <Image src={logo} alt="Logo" className="h-12 w-auto object-contain" priority /> */}
+                <h4
+                  className={`bold leading-5 ${isBlogRoute ? "text-black" : isLifestyle ? "text-[#1C1A17]" : "text-white"}`}
+                >
+                  KANAT NAZAROV
+                </h4>{" "}
               </Link>
             </div>
 
@@ -43,18 +53,22 @@ const Header = () => {
                 href="/blog"
                 className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
                   isBlogRoute
-                    ? "bg-white text-black border-white"
-                    : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80 hover:text-white hover:border-neutral-700 hover:bg-neutral-900/60"
+                    ? "bg-black text-white border-black" // Dark button on white background
+                    : isLifestyle
+                      ? "bg-[#FAF7F2] text-[#1C1A17] border-[#1C1A17]/20"
+                      : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80"
                 }`}
               >
                 Blog
-              </Link>{" "}
+              </Link>
               <Link
                 href="/lifestyle"
                 className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
-                  isBlogRoute
-                    ? "bg-white text-black border-white"
-                    : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80 hover:text-white hover:border-neutral-700 hover:bg-neutral-900/60"
+                  isLifestyle
+                    ? "bg-[#1C1A17] text-white border-[#1C1A17]"
+                    : isBlogRoute
+                      ? "bg-white text-black border-white"
+                      : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80 hover:text-white hover:border-neutral-700 hover:bg-neutral-900/60"
                 }`}
               >
                 lifestyle
@@ -63,37 +77,17 @@ const Header = () => {
           </div>
         </Container>
       </header>
-      {!isBlogRoute && (
-        <nav
-          className="lg:hidden fixed top-[80px] left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-md border-b border-neutral-900 overflow-x-auto scrollbar-none py-3 px-4 flex items-center justify-start gap-6 whitespace-nowrap mask-image-horizontal"
-          style={{
-            fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif",
-          }}
-        >
-          {navTargets.map((target) => (
-            <ScrollLink
-              key={target}
-              to={target}
-              smooth={true}
-              duration={500}
-              spy={true}
-              offset={-140} // Custom offset handles both top bars perfectly on tap clicks
-              className="text-[11px] font-bold uppercase tracking-[0.15em] text-neutral-400 transition-colors duration-200 cursor-pointer"
-              activeClass="!text-cyan-400 border-b border-cyan-400 pb-1"
-            >
-              {target === "bio" ? "about" : t(target)}
-            </ScrollLink>
-          ))}
-        </nav>
-      )}
-      {!isBlogRoute && (
-        <aside
-          className="hidden lg:flex fixed right-12 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-8 mix-blend-difference"
-          style={{
-            fontFamily: "var(--font-brandon), 'Brandon Grotesque', sans-serif",
-          }}
-        >
-          <nav className="flex flex-col gap-8 items-center">
+
+      {/* Only show navigation/sidebars on non-blog and non-lifestyle pages */}
+      {!isBlogRoute && !isLifestyle && (
+        <>
+          <nav
+            className="lg:hidden fixed top-[80px] left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-md border-b border-neutral-900 overflow-x-auto scrollbar-none py-3 px-4 flex items-center justify-start gap-6 whitespace-nowrap mask-image-horizontal"
+            style={{
+              fontFamily:
+                "var(--font-brandon), 'Brandon Grotesque', sans-serif",
+            }}
+          >
             {navTargets.map((target) => (
               <ScrollLink
                 key={target}
@@ -101,36 +95,60 @@ const Header = () => {
                 smooth={true}
                 duration={500}
                 spy={true}
-                className="cursor-pointer opacity-40 hover:opacity-100 transition-all duration-300 text-white relative"
-                activeClass="!opacity-100 [&>span]:text-cyan-400"
+                offset={-140}
+                className="text-[11px] font-bold uppercase tracking-[0.15em] text-neutral-400 transition-colors duration-200 cursor-pointer"
+                activeClass="!text-cyan-400 border-b border-cyan-400 pb-1"
               >
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-200">
-                  {target === "bio" ? "about" : t(target)}
-                </span>
+                {target === "bio" ? "about" : t(target)}
               </ScrollLink>
             ))}
           </nav>
 
-          {/* Desktop Footer Social Media Triggers */}
-          <div className="flex flex-col items-center gap-4 mt-4 pt-4 border-t border-neutral-800/60 w-full">
-            <a
-              href="https://github.com/kenzy51"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"
-            >
-              <Image alt="Github" src={github} width={18} height={18} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/kanat-nazar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"
-            >
-              <Image alt="LinkedIn" src={linkedin} width={18} height={18} />
-            </a>
-          </div>
-        </aside>
+          <aside
+            className="hidden lg:flex fixed right-12 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-8 mix-blend-difference"
+            style={{
+              fontFamily:
+                "var(--font-brandon), 'Brandon Grotesque', sans-serif",
+            }}
+          >
+            <nav className="flex flex-col gap-8 items-center">
+              {navTargets.map((target) => (
+                <ScrollLink
+                  key={target}
+                  to={target}
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  className="cursor-pointer opacity-40 hover:opacity-100 transition-all duration-300 text-white relative"
+                  activeClass="!opacity-100 [&>span]:text-cyan-400"
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-200">
+                    {target === "bio" ? "about" : t(target)}
+                  </span>
+                </ScrollLink>
+              ))}
+            </nav>
+
+            <div className="flex flex-col items-center gap-4 mt-4 pt-4 border-t border-neutral-800/60 w-full">
+              <a
+                href="https://github.com/kenzy51"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"
+              >
+                <Image alt="Github" src={github} width={18} height={18} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/kanat-nazar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"
+              >
+                <Image alt="LinkedIn" src={linkedin} width={18} height={18} />
+              </a>
+            </div>
+          </aside>
+        </>
       )}
     </>
   );

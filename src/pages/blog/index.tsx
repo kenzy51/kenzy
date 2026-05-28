@@ -22,6 +22,7 @@ interface BlogProps {
 }
 
 export default function Blog({ posts }: BlogProps) {
+  console.log(posts)
   return (
     <>
       <Head>
@@ -125,18 +126,19 @@ export default function Blog({ posts }: BlogProps) {
 }
 
 export const getStaticProps: GetStaticProps<BlogProps> = async ({ locale }) => {
-  const query = `*[_type == "post" && category->slug.current == "engineering"] | order(date desc) {
-  "slug": slug.current,
-  title,
-  date,
-  excerpt,
-  "category": category->title
-}`;
-
+  // This query fetches posts where category is "engineering" OR category is empty
+  const query = `*[_type == "post" && (category->slug.current == "engineering" || !defined(category))] | order(date desc) {
+    "slug": slug.current,
+    title,
+    date,
+    excerpt,
+    "category": category->title,
+    image
+  }`;
 
   try {
     const posts = await sanityClient.fetch(query);
-
+    console.log(posts)
     return {
       props: {
         posts: posts || [],
@@ -144,15 +146,7 @@ export const getStaticProps: GetStaticProps<BlogProps> = async ({ locale }) => {
       revalidate: 60,
     };
   } catch (err) {
-    console.error(
-      "Sanity index delivery compilation crash fallback active:",
-      err,
-    );
-
-    return {
-      props: {
-        posts: []      },
-      revalidate: 10,
-    };
+    console.error("Sanity fetch error:", err);
+    return { props: { posts: [] }, revalidate: 10 };
   }
 };
