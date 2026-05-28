@@ -69,8 +69,15 @@ export const postType = defineType({
           { title: "Kyrgyz", value: "kg" },
         ],
       },
-      initialValue: "en", 
+      initialValue: "en",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "translationOf",
+      title: "Translation of",
+      type: "reference",
+      to: [{ type: "post" }],
+      description: "Select the original English post if this is a translation.",
     }),
     defineField({
       name: "body",

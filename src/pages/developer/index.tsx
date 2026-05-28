@@ -11,7 +11,6 @@ import Footer from "@/shared/ui/layout/footer/Footer";
 const Index = () => {
   return (
     <>
-    
       <Developer />
       <Skills />
       <Experience />

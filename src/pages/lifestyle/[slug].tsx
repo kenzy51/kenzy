@@ -41,9 +41,15 @@ export default function PostPage({ post }: { post: any }) {
         </h4>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 prose-lg text-[#5A564E]">
+      <div
+        className="max-w-4xl mx-auto px-6 prose prose-lg 
+  prose-p:text-base 
+  prose-p:font-medium    /* Increased weight for better Cyrillic legibility */
+  prose-p:leading-8      /* More space between lines */
+  text-[#5A564E]"
+      >
+        {" "}
         <PortableText value={post.body} />
-
         {/* Bottom Navigation */}
         <div className="mt-20 pt-12 border-t border-[#EFEBE3] flex justify-between uppercase text-[10px] font-bold tracking-[0.2em]">
           {post.previous ? (
@@ -72,14 +78,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const post = await sanityClient.fetch(
-    `*[_type == "post" && slug.current == $slug && category->title == "Lifestyle & Performance"][0]{
-    title, image, body, date,
-    // ... rest of your next/previous logic
-  }`,
-    { slug: params?.slug },
+    `*[_type == "post" && slug.current == $slug][0]{
+      title, image, body, date, language,
+      "translationId": coalesce(translationOf->_id, _id),
+      // Find the sibling translation
+      "sibling": *[_type == "post" && (translationOf._ref == coalesce(translationOf._ref, ^._id) || _id == translationOf._ref) && language != $locale][0] {
+        "slug": slug.current
+      }
+    }`,
+    { slug: params?.slug, locale },
   );
-  if (!post) return { notFound: true };
+
   return { props: { post }, revalidate: 60 };
 };

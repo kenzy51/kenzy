@@ -1,22 +1,28 @@
-// components/LanguageSelector.tsx
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const LanguageSelector = () => {
-  const { locales, locale, asPath } = useRouter();
+interface LanguageSelectorProps {
+  post: any; 
+}
+
+const LanguageSelector = ({ post }: LanguageSelectorProps) => {
+  const { locale, locales = [], pathname } = useRouter();
+  
+  // Detect if we are on a lifestyle route
+  const isLifestyle = pathname.startsWith("/lifestyle");
 
   return (
-    <div className="flex items-center gap-1.5 ml-2">
-      {locales?.map((loc) => (
-        <Link 
-          key={loc} 
-          href={asPath} 
-          locale={loc}
-          className={`text-[10px] font-black uppercase tracking-[0.2em] transition-opacity ${
-            locale === loc ? "opacity-100 text-[#3c9d49]" : "opacity-80 hover:opacity-70"
-          }`}
+    <div className="flex gap-2">
+      {locales.map((l) => (
+        <Link
+          key={l}
+          href={post?.sibling?.slug ? `/lifestyle/${post.sibling.slug}` : `/lifestyle`}
+          locale={l}
+          className={`text-[10px] font-black uppercase tracking-[0.1em] transition-opacity ${
+            isLifestyle ? "text-[#1C1A17]" : "text-white"
+          } ${locale === l ? "opacity-100" : "opacity-30"}`}
         >
-          {loc}
+          {l.toUpperCase()}
         </Link>
       ))}
     </div>

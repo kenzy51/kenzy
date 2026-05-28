@@ -20,6 +20,7 @@ body {
     )
     rgb(var(--background-start-rgb));
   background: black;
+  -webkit-font-smoothing: antialiased; /* Essential for Russian character crispness */
 }
 
 a {
