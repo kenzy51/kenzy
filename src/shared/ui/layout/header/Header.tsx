@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import github from "../../../../../public/images/githubW.svg";
 import linkedin from "../../../../../public/images/socIcons/linkedin.webp";
 import { useTranslations } from "next-intl";
-
+import LanguageSelector from "@/components/LanguageSelector";
 const Header = () => {
   const t = useTranslations();
   const router = useRouter();
@@ -40,20 +40,29 @@ const Header = () => {
           <div className="flex items-center justify-between h-12 w-full">
             <div className="flex items-center transition-transform duration-200 hover:scale-[1.02] ">
               <Link href="/developer">
-                <h4
-                  className={`bold leading-5 ${isBlogRoute ? "text-black" : isLifestyle ? "text-[#1C1A17]" : "text-white"}`}
+                <h5
+                  className={`bold leading-5 transition-colors duration-500 
+    text-sm sm:text-base lg:text-lg 
+    ${
+      isBlogRoute
+        ? "text-white" // White on Blog
+        : isLifestyle
+          ? "text-[#1C1A17]" // Black on Lifestyle
+          : "text-white" // White on all other routes
+    }
+  `}
                 >
                   KANAT NAZAROV
-                </h4>{" "}
+                </h5>
               </Link>
             </div>
 
-            <nav className="flex items-center gap-3">
+            <nav className="flex items-center gap-2">
               <Link
                 href="/blog"
-                className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
+                className={`text-[9px] uppercase font-bold tracking-[0.2em] px-3 py-1.5 rounded border transition-all ${
                   isBlogRoute
-                    ? "bg-black text-white border-black" // Dark button on white background
+                    ? "bg-black text-white border-black"
                     : isLifestyle
                       ? "bg-[#FAF7F2] text-[#1C1A17] border-[#1C1A17]/20"
                       : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80"
@@ -63,16 +72,23 @@ const Header = () => {
               </Link>
               <Link
                 href="/lifestyle"
-                className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
+                className={`text-[9px] uppercase font-bold tracking-[0.2em] px-3 py-1.5 rounded border transition-all ${
                   isLifestyle
                     ? "bg-[#1C1A17] text-white border-[#1C1A17]"
                     : isBlogRoute
                       ? "bg-white text-black border-white"
-                      : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80 hover:text-white hover:border-neutral-700 hover:bg-neutral-900/60"
+                      : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80"
                 }`}
               >
-                lifestyle
+                Life
               </Link>
+
+              {/* The new aesthetic switcher */}
+              <div
+                className={`pl-2 border-l ${isLifestyle ? "border-[#1C1A17]/20" : "border-neutral-800"}`}
+              >
+                <LanguageSelector />
+              </div>
             </nav>
           </div>
         </Container>

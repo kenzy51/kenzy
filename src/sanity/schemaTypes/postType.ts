@@ -40,7 +40,8 @@ export const postType = defineType({
       name: "excerpt",
       title: "Meta Description / Excerpt",
       type: "text",
-      description: "Appears in Google Search Snippets. Keep it between 140-160 characters.",
+      description:
+        "Appears in Google Search Snippets. Keep it between 140-160 characters.",
       validation: (Rule) => Rule.max(160).required(),
     }),
     defineField({
@@ -48,13 +49,28 @@ export const postType = defineType({
       title: "Target SEO Keywords",
       type: "array",
       of: [{ type: "string" }],
-      description: "Add keywords like 'Low latency AI voice pipeline' or 'Next.js developer NYC'.",
+      description:
+        "Add keywords like 'Low latency AI voice pipeline' or 'Next.js developer NYC'.",
     }),
     defineField({
       name: "image",
       title: "Main Cover Image",
       type: "image",
       options: { hotspot: true },
+    }),
+    defineField({
+      name: "language",
+      type: "string",
+      title: "Language",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Russian", value: "ru" },
+          { title: "Kyrgyz", value: "kg" },
+        ],
+      },
+      initialValue: "en", 
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "body",

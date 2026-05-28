@@ -9,7 +9,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 const nextConfig = {
   reactStrictMode: true,
   i18n: {
-    locales: ["en", "ru"],
+    locales: ["en", "ru", "kg"],
     defaultLocale: "en",
   },
   images: {
