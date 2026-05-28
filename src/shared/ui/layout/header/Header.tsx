@@ -87,7 +87,7 @@ const Header = () => {
               <div
                 className={`pl-2 border-l ${isLifestyle ? "border-[#1C1A17]/20" : "border-neutral-800"}`}
               >
-                <LanguageSelector />
+                <LanguageSelector  />
               </div>
             </nav>
           </div>

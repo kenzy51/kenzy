@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 interface LanguageSelectorProps {
-  post: any; 
+  post?: any; // The ? makes this prop optional
 }
 
 const LanguageSelector = ({ post }: LanguageSelectorProps) => {
