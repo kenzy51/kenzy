@@ -29,11 +29,6 @@ export default function LifestyleJournal({ lifestylePosts }: LifestyleProps) {
               KANAT <span className="text-[#3B533E] font-bold tracking-[0.1em] lowercase bg-[#EFE9DC] px-2 py-0.5 rounded ml-1">insights</span>
             </span>
           </Link>
-          <nav className="hidden md:flex space-x-10 text-[10px] font-bold tracking-[0.25em] uppercase text-[#6E6A62]">
-            <Link href="/lifestyle/performance" className="hover:text-[#3B533E] transition-colors">Performance</Link>
-            <Link href="/lifestyle/nutrition" className="hover:text-[#3B533E] transition-colors">Nutrition</Link>
-            <Link href="/lifestyle/sonic-architecture" className="hover:text-[#3B533E] transition-colors">Audio</Link>
-          </nav>
           <Link href="/" className="text-[9px] font-bold tracking-widest uppercase border border-[#1C1A17] px-5 py-2.5 hover:bg-[#1C1A17] hover:text-[#FAF7F2] transition-all">
             Dev Portfolio
           </Link>

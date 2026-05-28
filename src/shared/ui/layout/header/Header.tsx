@@ -18,8 +18,8 @@ const Header = () => {
   const isLifestyle = router.pathname.startsWith("/lifestyle");
   // Shared navigation array matrix
   const navTargets = ["bio", "skills", "experience", "portfolio", "contact"];
-  if ( isLifestyle) return null;
-  if ( isStudioRoute) return null;
+  if (isLifestyle) return null;
+  if (isStudioRoute) return null;
   return (
     <>
       {/* TOP NAVBAR */}
@@ -38,7 +38,7 @@ const Header = () => {
               </Link>
             </div>
 
-            <nav className="flex items-center">
+            <nav className="flex items-center gap-3">
               <Link
                 href="/blog"
                 className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
@@ -48,6 +48,16 @@ const Header = () => {
                 }`}
               >
                 Blog
+              </Link>{" "}
+              <Link
+                href="/lifestyle"
+                className={`text-xs uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-lg border transition-all duration-300 ${
+                  isBlogRoute
+                    ? "bg-white text-black border-white"
+                    : "bg-neutral-950/40 text-neutral-400 border-neutral-800/80 hover:text-white hover:border-neutral-700 hover:bg-neutral-900/60"
+                }`}
+              >
+                lifestyle
               </Link>
             </nav>
           </div>
