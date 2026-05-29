@@ -8,7 +8,6 @@ interface LanguageSelectorProps {
 const LanguageSelector = ({ post }: LanguageSelectorProps) => {
   const { locale, locales = [], pathname } = useRouter();
   
-  // Detect if we are on a lifestyle route
   const isLifestyle = pathname.startsWith("/lifestyle");
 
   return (

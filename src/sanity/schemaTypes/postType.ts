@@ -22,12 +22,19 @@ export const postType = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    // ADD THIS FIELD TO YOUR SCHEMA
     defineField({
       name: "category",
       title: "Category",
       type: "reference",
-      to: [{ type: "category" }], // This must match the 'name' property of your category schema
+      to: [{ type: "category" }],
+      validation: (Rule) => Rule.required(),
+    }),
+    // ADDED AUTHOR FIELD HERE
+    defineField({
+      name: "author",
+      title: "Author",
+      type: "reference",
+      to: [{ type: "author" }],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -40,8 +47,7 @@ export const postType = defineType({
       name: "excerpt",
       title: "Meta Description / Excerpt",
       type: "text",
-      description:
-        "Appears in Google Search Snippets. Keep it between 140-160 characters.",
+      description: "Appears in Google Search Snippets. Keep it between 140-160 characters.",
       validation: (Rule) => Rule.max(160).required(),
     }),
     defineField({
@@ -49,8 +55,7 @@ export const postType = defineType({
       title: "Target SEO Keywords",
       type: "array",
       of: [{ type: "string" }],
-      description:
-        "Add keywords like 'Low latency AI voice pipeline' or 'Next.js developer NYC'.",
+      description: "Add keywords like 'Low latency AI voice pipeline' or 'Next.js developer NYC'.",
     }),
     defineField({
       name: "image",

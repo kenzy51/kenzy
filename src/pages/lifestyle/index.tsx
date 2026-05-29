@@ -13,6 +13,7 @@ interface Post {
   slug: string;
   date: string;
   image: any; // Add this
+  
 }
 
 interface LifestyleProps {
