@@ -188,18 +188,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: "blocking",
   };
 };
-
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  const lang = locale || "en";
+
   const post = await sanityClient.fetch(
     `*[_type == "post" && slug.current == $slug][0]{
       _id, title, excerpt, image, body, date, language,
       "author": author->{name, "imageUrl": image.asset->url}, 
       "comments": *[_type == "comment" && post._ref == ^._id && approved == true],
       "readTime": round(length(pt::text(body)) / 5 / 200),
-      "previous": *[_type == "post" && date < ^.date] | order(date desc)[0]{"slug": slug.current},
-      "next": *[_type == "post" && date > ^.date] | order(date asc)[0]{"slug": slug.current}
+      // Filter previous/next by category AND language
+      "previous": *[_type == "post" && date < ^.date && category->title == "Lifestyle & Performance" && language == $lang] | order(date desc)[0]{"slug": slug.current},
+      "next": *[_type == "post" && date > ^.date && category->title == "Lifestyle & Performance" && language == $lang] | order(date asc)[0]{"slug": slug.current}
     }`,
-    { slug: params?.slug, locale },
+    { slug: params?.slug, lang },
   );
 
   if (!post) return { notFound: true };
