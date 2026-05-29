@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Header from "./header/Header";
 import { useRouter } from "next/router";
+import Footer from "./footer/Footer";
 interface IChildren {
   children: ReactNode;
 }
@@ -13,6 +14,7 @@ const Layout = ({ children }: IChildren) => {
       {!isMusician && <Header />}
       {!isStudioRoute && <Header />}
       {children}
+      <Footer />
     </div>
   );
 };

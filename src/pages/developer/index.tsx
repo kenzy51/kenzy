@@ -15,7 +15,6 @@ const Index = () => {
       <Skills />
       <Experience />
       <Portfolio />
-      <Footer />
     </>
   );
 };

@@ -109,29 +109,6 @@ export default function App({ Component, pageProps }: AppProps) {
           return namespace ? `${namespace}.${key}` : key;
         }}
       >
-        {/* Subtle low-latency user pointer tracking ring */}
-        {/* <AnimatedCursor
-          innerSize={8}
-          outerSize={24}
-          color="255, 255, 255"
-          outerAlpha={0.15}
-          innerScale={0.7}
-          outerScale={1.4}
-          clickables={[
-            "a",
-            'input[type="text"]',
-            'input[type="email"]',
-            'input[type="number"]',
-            'input[type="submit"]',
-            'input[type="image"]',
-            "label[for]",
-            "select",
-            "textarea",
-            "button",
-            ".cursor-pointer",
-          ]}
-        /> */}
-
         <AppProgressBar
           height="3px"
           color="#06b6d4" 

@@ -286,7 +286,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     keywords,
     image,
     body,
-    author,
+    "author": author->name, // <--- CHANGE THIS: Dereference to get the name string
     "readTime": select(
       round(string::length(pt::text(body)) / 5 / 200) <= 1 => "1 min read",
       string(round(string::length(pt::text(body)) / 5 / 200)) + " min read"

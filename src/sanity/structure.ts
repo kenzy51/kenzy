@@ -1,6 +1,6 @@
-import type {StructureResolver} from 'sanity/structure'
+// src/sanity/structure.ts
+import type { StructureResolver } from 'sanity/structure'
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Blog')
@@ -8,8 +8,9 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('post').title('Posts'),
       S.documentTypeListItem('category').title('Categories'),
       S.documentTypeListItem('author').title('Authors'),
+      S.documentTypeListItem('comment').title('Comments'), // ADD THIS LINE
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() && !['post', 'category', 'author'].includes(item.getId()!),
+        (item) => item.getId() && !['post', 'category', 'author', 'comment'].includes(item.getId()!),
       ),
     ])
