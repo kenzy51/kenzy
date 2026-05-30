@@ -4,7 +4,27 @@ import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
+const components = {
+  types: {
+    image: ({ value }: { value: any }) => {
+      if (!value?.asset?._ref) return null;
 
+      return (
+        <div className="my-10 w-full flex justify-center">
+          <div className="max-w-[240px] overflow-hidden">
+            <Image
+              src={urlFor(value).url()}
+              alt={value.alt || "Post image"}
+              width={800}
+              height={500}
+              className="object-cover w-full h-auto rounded-lg"
+            />
+          </div>
+        </div>
+      );
+    },
+  },
+};
 // Component: Form to leave comments
 const CommentForm = ({ postId }: { postId: string }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -137,8 +157,8 @@ export default function PostPage({ post }: { post: any }) {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 prose prose-lg prose-p:text-base prose-p:font-medium prose-p:leading-8 text-[#5A564E]">
-        <PortableText value={post.body} />
+      <div className="max-w-4xl mx-auto px-6 prose-lg prose-p:text-base prose-p:font-medium prose-p:leading-8 text-[#5A564E]">
+        <PortableText value={post.body} components={components} />
 
         {/* Comments Section */}
         {post.comments && post.comments.length > 0 && (
