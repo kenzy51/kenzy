@@ -10,8 +10,9 @@ const components = {
       if (!value?.asset?._ref) return null;
 
       return (
-        <div className="my-10 w-full flex justify-center">
-          <div className="max-w-[240px] overflow-hidden">
+        <div className="my-10 w-full flex flex-col items-center justify-center">
+          {/* Image Container */}
+          <div className="max-w-[240px] overflow-hidden w-full">
             <Image
               src={urlFor(value).url()}
               alt={value.alt || "Post image"}
@@ -20,6 +21,13 @@ const components = {
               className="object-cover w-full h-auto rounded-lg"
             />
           </div>
+
+          {/* Caption Container */}
+          {value.caption && (
+            <p className=" text-[11px] font-semibold tracking-widest  text-[#9A958C] max-w-[auto] text-center leading-relaxed italic">
+              {value.caption}
+            </p>
+          )}
         </div>
       );
     },
@@ -84,7 +92,7 @@ const CommentForm = ({ postId }: { postId: string }) => {
 
 export default function PostPage({ post }: { post: any }) {
   if (!post) return null;
-
+  console.log(post.excerpt);
   return (
     <article className="bg-[#FAF7F2] min-h-screen pb-32 pt-28">
       {/* Dynamic SEO Metadata */}
@@ -138,7 +146,6 @@ export default function PostPage({ post }: { post: any }) {
           </div>
           {post?.author && (
             <div className="flex items-center gap-2 mt-2">
-              {/* Use a simple conditional check for the image string */}
               {post.author.imageUrl && (
                 <Image
                   src={post.author.imageUrl}
@@ -148,7 +155,6 @@ export default function PostPage({ post }: { post: any }) {
                   className="rounded-full"
                 />
               )}
-              {/* Ensure we only render a string, not an object */}
               <span className="text-[#1C1A17]">
                 BY {post.author.name ?? "Anonymous"}
               </span>
@@ -157,7 +163,7 @@ export default function PostPage({ post }: { post: any }) {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 prose-lg prose-p:text-base prose-p:font-medium prose-p:leading-8 text-[#5A564E]">
+      <div className="max-w-4xl mx-auto px-6 prose-xl prose-p:text-[18px] prose-p:font-medium prose-p:leading-8 text-[#5A564E]">
         <PortableText value={post.body} components={components} />
 
         {/* Comments Section */}

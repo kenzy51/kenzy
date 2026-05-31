@@ -114,11 +114,11 @@ export default function LifestyleJournal({ lifestylePosts }: LifestyleProps) {
                   {entry.category}
                 </span>
 
-                <h3 className="text-lg font-bold tracking-tight text-[#000000] mb-4 group-hover:text-[#3B533E] transition-colors">
+                <h3 className="text-[20px] uppercase font-bold tracking-tight text-[#000000] mb-4 group-hover:text-[#3B533E] transition-colors">
                   <Link href={`/lifestyle/${entry.slug}`}>{entry.title}</Link>
                 </h3>
 
-                <p className="text-[#5A564E] text-xs leading-relaxed mb-8 flex-grow">
+                <p className="text-[#5A564E] text-s leading-relaxed mb-8 flex-grow">
                   {entry.excerpt}
                 </p>
 
