@@ -29,7 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
   const defaultTimeZone = "America/New_York";
 
   return (
-    <main className={`${brandonGrotesque.className} ${brandonGrotesque.variable}`}>
+    <main
+      className={`${brandonGrotesque.className} ${brandonGrotesque.variable}`}
+    >
       <Head>
         <meta
           name="viewport"
@@ -37,10 +39,12 @@ export default function App({ Component, pageProps }: AppProps) {
         />
 
         {/* Primary Global SEO Data */}
-        <title>Kanat Nazarov | Full-Stack Developer & AI Systems Engineer</title>
+        <title>
+          Kanat Nazarov | Full-Stack Developer & Digital Growth Engineer
+        </title>
         <meta
           name="description"
-          content="Kanat Nazarov — Full-Stack Developer & Systems Architect based in NYC. Specializing in high-performance Next.js architectures, NestJS frameworks, and autonomous conversational AI pipelines."
+          content="Kanat Nazarov — Full-Stack Developer & Systems Architect operating at the intersection of high-performance web ecosystems, autonomous AI pipelines, and data-driven human performance."
         />
         <meta
           name="keywords"
@@ -70,7 +74,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:description"
-          content="Engineering enterprise SaaS platforms, high-performance web applications, and autonomous AI conversational engines."
+          content="Engineering enterprise SaaS platforms, autonomous AI voice streams, and high-performance frameworks fueled by data-driven life architecture."
         />
         <meta
           property="og:image"
@@ -81,7 +85,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
         {/* Twitter Protocol Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Kanat Nazarov | Full-Stack Developer" />
+        <meta
+          name="twitter:title"
+          content="Kanat Nazarov | Full-Stack Developer"
+        />
         <meta
           name="twitter:description"
           content="Architecting ultra-low latency full-stack systems with Next.js, NestJS, and TypeScript."
@@ -99,7 +106,7 @@ export default function App({ Component, pageProps }: AppProps) {
         onError={(error) => {
           if (error.code === "MISSING_MESSAGE") {
             console.warn(
-              `[next-intl Build Warning] Missing translation key: ${error.message}`
+              `[next-intl Build Warning] Missing translation key: ${error.message}`,
             );
           } else {
             console.error(error);
@@ -111,7 +118,7 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <AppProgressBar
           height="3px"
-          color="#06b6d4" 
+          color="#06b6d4"
           options={{ showSpinner: false }}
           shallowRouting
         />
