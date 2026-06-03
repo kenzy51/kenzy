@@ -38,7 +38,6 @@ export default function App({ Component, pageProps }: AppProps) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
 
-        {/* Primary Global SEO Data */}
         <title>
           Kanat Nazarov | Full-Stack Developer & Digital Growth Engineer
         </title>
@@ -54,13 +53,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/mylogo.png" />
 
-        {/* Global Verification Identifiers */}
         <meta
           name="google-site-verification"
           content="VgDRz5M8tNsT6gLPg4D6D7UmgkNA1AM2pqjnh70aX4k"
         />
 
-        {/* Core Open Graph Configuration Mappings */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Kanat Nazarov Portfolio" />
         <meta property="og:locale" content="en_US" />
@@ -70,7 +67,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:title"
-          content="Kanat Nazarov | Full-Stack Developer & AI Systems Engineer"
+          content="Kanat Nazarov | Full-Stack Engineer & Digital Creator"
         />
         <meta
           property="og:description"

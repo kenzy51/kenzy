@@ -1,6 +1,5 @@
 import Layout from "@/shared/ui/layout";
 import React, { useState } from "react";
-import "@/styles/Home.module.css";
 import Developer from "@/widgets/developerPage/Developers";
 import Skills from "@/widgets/developerPage/Skillset/Skills";
 import Experience from "@/widgets/developerPage/ExperienceHistory/Experience";
