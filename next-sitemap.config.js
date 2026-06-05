@@ -1,23 +1,58 @@
-// next-sitemap.config.js
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  // 1. Updated to your verified production domain
+  // 1. Главный подтвержденный продакшн-домен
   siteUrl: 'https://kanatnazarov.com',
   
-  // 2. Automatically generate the clean robots.txt file we just configured
+  // 2. Принудительная генерация чистого robots.txt
   generateRobotsTxt: true,
   
-  // 3. Keep it all cleanly in one file (no sitemap-0.xml splits)
+  // 3. Удерживаем все пути в одном файле без деления на sitemap-0.xml
   sitemapSize: 5000, 
 
-  // 4. Force trailing slashes or pathing behaviors to match Next.js routes
+  // 4. Соответствие роутингу Next.js (без слэша на конце)
   trailingSlash: false,
 
-  // 5. Explicit route mapping
-  additionalPaths: async (config) => [
-    // This maps your primary resume-style bio experience canvas
-    await config.transform(config, '/developer'),
-    // This maps your engineering blog home stream hub
-    await config.transform(config, '/blog'),
+  // 5. Исключаем базовые пути без локалей, чтобы Google не хватал пустые Vercel-шаблоны
+  exclude: ['/developer', '/blog', '/lifestyle'],
+
+  // 6. Семантическая склейка языковых версий для поисковых пауков
+  alternateRefs: [
+    {
+      href: 'https://kanatnazarov.com/en',
+      hreflang: 'en',
+    },
+    {
+      href: 'https://kanatnazarov.com/ru',
+      hreflang: 'ru',
+    },
   ],
+
+  // 7. 🔥 ИСПРАВЛЕНО: Явное дерево путей без роута /developer
+  additionalPaths: async (config) => {
+    const paths = [
+      // Локализованные корни (твоя новая главная страница)
+      '/en',
+      '/ru',
+      
+      // Твои контентные хабы-журналы
+      '/en/blog',
+      '/en/lifestyle',
+      '/ru/blog',
+      '/ru/lifestyle'
+    ];
+
+    return Promise.all(
+      paths.map((path) => config.transform(config, path))
+    );
+  },
+
+  // 8. Жесткие инструкции для индексации
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+      },
+    ],
+  },
 };

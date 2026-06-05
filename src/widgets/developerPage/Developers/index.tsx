@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Container from "@/shared/ui/container/Container";
 import React from "react";
 import Image from "next/image";
-import Head from "next/head";
 import github from "../../../../public/images/githubW.svg";
 import linkedin from "../../../../public/images/socIcons/linkedin.webp";
 import { useTranslations } from "next-intl";
@@ -15,82 +14,7 @@ const Developer = () => {
 
   return (
     <>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Kanat Nazarov",
-              alternateName: "Kenzy",
-              jobTitle: "Growth Systems Engineer & Automation Architect",
-              worksFor: [
-                {
-                  "@type": "Organization",
-                  name: "Tribeca Dental Studio",
-                },
-                {
-                  "@type": "Organization",
-                  name: "Fusion AI Agency",
-                },
-              ],
-              url: "https://kanatnazarov.com",
-              sameAs: [
-                "https://github.com/kenzy51",
-                "https://www.linkedin.com/in/kanat-nazar",
-              ],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "New York City",
-                addressRegion: "NY",
-                addressCountry: "US",
-              },
-              knowsAbout: [
-                "Next.js",
-                "React 19",
-                "NestJS",
-                "TypeScript",
-                "PostgreSQL",
-                "Redis Caching",
-                "Conversational AI Infrastructure",
-                "Technical SEO & SGE Optimization",
-                "Full-Stack Software Engineering",
-              ],
-            }),
-          }}
-        />
-        <title>
-          Kanat Nazarov | Growth Systems Engineer & Automation Architect
-        </title>
-        <meta
-          name="description"
-          content="Kanat Nazarov — Growth Systems Engineer and Automation Architect based in New York City. Engineering ultra-low latency conversational AI engines and high-performance full-stack web ecosystems."
-        />
-        <meta
-          name="keywords"
-          content="Kanat Nazarov, Kenzy, Growth Systems Engineer, Automation Architect, full stack developer NYC, software engineer New York, Next.js developer, NestJS, TypeScript architect"
-        />
-        <meta
-          property="og:title"
-          content="Kanat Nazarov | Growth Systems Engineer"
-        />
-        <meta
-          property="og:description"
-          content="Engineering high-performance web ecosystems, multi-tenant SaaS architectures, and autonomous AI conversational streams."
-        />
-        <meta
-          property="og:image"
-          content="https://kanatnazarov.com/og-developer.jpg"
-        />
-        <meta property="og:url" content="https://kanatnazarov.com/developer" />
-        <meta property="og:type" content="profile" />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
-      {/* 🎥 CINEMATIC BRAND HERO SECTION */}
-     {/* 🎥 CINEMATIC BRAND HERO SECTION */}
       <section className="relative w-full h-screen bg-black flex items-center justify-start overflow-hidden z-10">
-        {/* Background Video Loop */}
         <div className="absolute inset-0 w-full h-full z-0 select-none pointer-events-none">
           <video
             autoPlay
@@ -101,18 +25,15 @@ const Developer = () => {
           >
             <source src="/videos/kanat2.mov" type="video/mp4" />
           </video>
-          {/* Градиенты для идеального контраста белого текста */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-[1]" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-[1]" />
         </div>
 
-        {/* Brand Typographic Left-Aligned Unit — Поднят z-index до z-50 */}
-        <Container className="relative z-50 w-full px-6 sm:px-12 md:px-16 lg:px-24 flex flex-col items-start text-left">
+        <Container className="relative z-10 w-full px-6 sm:px-12 md:px-16 lg:px-24 flex flex-col items-start text-left">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            // 🔒 Жесткая фиксация стиля. Никакой скрипт не сможет перетереть это в opacity: 0
             style={{ opacity: 1, willChange: "transform, opacity" }}
             className="space-y-4 max-w-2xl sm:max-w-3xl select-text"
           >
@@ -121,7 +42,7 @@ const Developer = () => {
               Code. Systems. Audio. Strategy.
             </span>
 
-            {/* Имя (Защищено инлайновым стилем !important) */}
+            {/* Имя */}
             <h1 
               style={{ opacity: '1 !important' }} 
               className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white uppercase font-sans leading-[0.95]"
@@ -131,7 +52,7 @@ const Developer = () => {
 
             <div className="h-[2px] w-16 bg-cyan-500/60 my-6" />
 
-            {/* Описание (Защищено инлайновым стилем !important) */}
+            {/* Описание */}
             <p 
               style={{ opacity: '1 !important' }} 
               className="text-xs sm:text-sm md:text-base font-light text-neutral-300 tracking-[0.15em] uppercase max-w-xl leading-relaxed"
@@ -158,16 +79,17 @@ const Developer = () => {
           </motion.div>
         </Container>
       </section>
+
+      {/* 📑 BIOGRAPHY & PROFILE CONTAINER */}
       <div
         className="relative py-24 lg:py-36 px-4 sm:px-8 md:px-12 lg:px-20 bg-black border-t border-neutral-900"
         id="bio"
       >
-        {/* Subtle Cybernetic Background Glow */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.01] blur-[150px] rounded-full pointer-events-none" />
 
         <Container>
           <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start max-w-7xl mx-auto relative z-10">
-            {/* PORTRAIT CARD HERO UNIT (order-2 on mobile, pins to right on desktop) */}
+            {/* PORTRAIT CARD HERO UNIT */}
             <div className="w-full flex justify-center lg:justify-end order-2 lg:col-span-5 xl:col-span-4">
               <div className="lg:sticky lg:top-36 w-full max-w-[350px]">
                 <div className="relative group rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-900/40 to-neutral-950/80 border border-neutral-800/60 p-5 shadow-2xl transition-all duration-300 hover:border-cyan-500/20">
@@ -233,7 +155,6 @@ const Developer = () => {
               </div>
             </div>
 
-            {/* LEFT TEXT CONTENT TREE BLOCK (order-1 on mobile) */}
             <div className="space-y-8 order-1 lg:col-span-7 xl:col-span-8">
               <div className="space-y-2">
                 <span className="text-cyan-400 font-mono tracking-widest uppercase text-xs font-bold block">
@@ -248,8 +169,8 @@ const Developer = () => {
 
               <div className="space-y-6 text-neutral-300 font-light text-base sm:text-lg leading-relaxed tracking-wide">
                 <p>
-                  I am a <strong>Growth Systems Engineer</strong> and{" "}
-                  <strong>Automation Architect</strong> specializing in
+                  I am a <strong>Full-Stack Engineer</strong> and{" "}
+                  <strong>Digital Creator</strong> specializing in
                   constructing modern, high-concurrency web ecosystems. My core
                   workflow centers on optimizing production applications built
                   with <strong>Next.js</strong>, <strong>React 19</strong>,{" "}

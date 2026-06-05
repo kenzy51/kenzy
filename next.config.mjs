@@ -1,4 +1,3 @@
-// next.config.mjs
 import withMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -8,10 +7,13 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  
+  // 🔥 ИСПРАВЛЕНО: Оставляем только те локали, под которые полностью готова разметка и мета-теги
   i18n: {
-    locales: ["en", "ru", "kg"],
+    locales: ["en", "ru"],
     defaultLocale: "en",
   },
+  
   images: {
     remotePatterns: [
       {
@@ -23,20 +25,6 @@ const nextConfig = {
     ],
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/developer",
-        permanent: true,
-      },
-      {
-        source: "/musician",
-        destination: "/developer",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 const mdxConfig = withMDX({

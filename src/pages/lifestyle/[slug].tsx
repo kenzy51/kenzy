@@ -11,7 +11,6 @@ const components = {
 
       return (
         <div className="my-10 w-full flex flex-col items-center justify-center">
-          {/* Image Container */}
           <div className="max-w-[240px] overflow-hidden w-full">
             <Image
               src={urlFor(value).url()}
@@ -22,7 +21,6 @@ const components = {
             />
           </div>
 
-          {/* Caption Container */}
           {value.caption && (
             <p className=" text-[11px] font-semibold tracking-widest  text-[#9A958C] max-w-[auto] text-center leading-relaxed italic">
               {value.caption}
