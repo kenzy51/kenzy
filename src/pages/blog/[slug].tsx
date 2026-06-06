@@ -1,8 +1,8 @@
-// pages/blog/[slug].tsx
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { sanityClient, urlFor } from "@/lib/sanity";
@@ -11,6 +11,7 @@ import Container from "@/shared/ui/container/Container";
 
 interface PostProps {
   post: {
+    slug: string;
     title: string;
     date: string;
     excerpt: string;
@@ -19,10 +20,10 @@ interface PostProps {
     body: any;
     readTime: string;
     author?: string;
+    language: string;
   };
 }
 
-// Visual layout rendering configurations for Portable Text elements
 const makeCustomComponents = (): PortableTextComponents => ({
   types: {
     image: ({ value }) => {
@@ -104,7 +105,6 @@ const makeCustomComponents = (): PortableTextComponents => ({
       </blockquote>
     ),
   },
-  /* FIX: Explicitly instruct the renderer how to style structural list tags */
   list: {
     bullet: ({ children }) => (
       <ul className="list-disc pl-6 my-6 space-y-2 text-neutral-300 font-light text-base md:text-lg">
@@ -117,7 +117,6 @@ const makeCustomComponents = (): PortableTextComponents => ({
       </ol>
     ),
   },
-  /* Adds matching padding to keep items beautifully separated */
   listItem: {
     bullet: ({ children }) => (
       <li className="marker:text-cyan-500">{children}</li>
@@ -144,8 +143,11 @@ const makeCustomComponents = (): PortableTextComponents => ({
     },
   },
 });
+
 export default function Post({ post }: PostProps) {
   const components = makeCustomComponents();
+  const { locale, asPath } = useRouter();
+  const currentLang = locale || "en";
 
   if (!post) {
     return (
@@ -155,27 +157,33 @@ export default function Post({ post }: PostProps) {
     );
   }
 
+  const productionDomain = "https://kanatnazarov.com";
+  const canonicalUrl = `${productionDomain}${currentLang === 'en' ? '' : '/' + currentLang}${asPath}`;
+
+  // Локализация интерфейсных строк самого шаблона статьи
+  const ui = {
+    en: { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW" },
+    ru: { backBtn: "← НАЗАД К СТАТЬЯМ", terminateBtn: "← ЗАКРЫТЬ ПРОСМОТР" }
+  }[currentLang] || { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW" };
+
   return (
     <>
       <Head>
-        <title>{post.title} | Technical Blog</title>
+        <title>{post.title} | Kanat Nazarov</title>
         <meta name="description" content={post.excerpt} />
-        {post.keywords && (
-          <meta name="keywords" content={post.keywords.join(", ")} />
-        )}
+        {post.keywords && <meta name="keywords" content={post.keywords.join(", ")} />}
+        <link rel="canonical" href={canonicalUrl} />
 
-        {/* Open Graph Security Mapping Protocols */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
+        <meta property="og:url" content={canonicalUrl} />
         {post.image && (
-          <meta
-            property="og:image"
-            content={urlFor(post.image).width(1200).height(630).url()}
-          />
+          <meta property="og:image" content={urlFor(post.image).width(1200).height(630).url()} />
         )}
 
-        {/* Dynamic Structural JSON-LD Engine for SGE Positioning */}
+        <meta name="twitter:card" content="summary_large_image" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -186,10 +194,11 @@ export default function Post({ post }: PostProps) {
               description: post.excerpt,
               keywords: post.keywords ? post.keywords.join(", ") : "",
               datePublished: post.date,
+              url: canonicalUrl,
               author: {
                 "@type": "Person",
                 name: post.author || "Kanat Nazarov",
-                url: "https://kanatnazarov.vercel.app",
+                url: productionDomain, // 🔥 ИСПРАВЛЕНО: убран vercel.app
               },
             }),
           }}
@@ -199,15 +208,11 @@ export default function Post({ post }: PostProps) {
       <div className="min-h-screen bg-black text-neutral-100 py-16 md:py-24 mt-12">
         <Container>
           <div className="max-w-3xl mx-auto">
-            {/* Context Back navigation anchor */}
             <Link
               href="/blog"
               className="inline-flex items-center text-sm font-mono text-neutral-400 hover:text-cyan-400 mb-12 transition-colors group"
             >
-              <span className="mr-2 transform group-hover:-translate-x-1 transition-transform">
-                ←
-              </span>
-              BACK_TO_LOGS
+              {ui.backBtn}
             </Link>
 
             <header className="mb-14">
@@ -217,7 +222,7 @@ export default function Post({ post }: PostProps) {
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-mono text-neutral-400 uppercase tracking-wider">
                 <time>
-                  {new Date(post.date).toLocaleDateString("en-US", {
+                  {new Date(post.date).toLocaleDateString(currentLang, {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -244,17 +249,13 @@ export default function Post({ post }: PostProps) {
               </div>
             )}
 
-            {/* Structured Portable Text Parsing Injection Block */}
             <div className="mt-10">
               <PortableText value={post.body} components={components} />
             </div>
 
             <footer className="mt-24 pt-8 border-t border-neutral-900 text-xs font-mono text-neutral-500 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <Link
-                href="/blog"
-                className="hover:text-cyan-400 transition-colors"
-              >
-                ← TERMINATE_VIEW
+              <Link href="/blog" className="hover:text-cyan-400 transition-colors">
+                {ui.terminateBtn}
               </Link>
               <span>
                 © {new Date().getFullYear()} KANAT NAZAROV • SYSTEMS SYSTEM
@@ -268,34 +269,57 @@ export default function Post({ post }: PostProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await sanityClient.fetch(
-    `*[_type == "post" && defined(slug.current)][].slug.current`,
+  // Вытаскиваем слаги вместе со значением их языка
+  const posts = await sanityClient.fetch(
+    `*[_type == "post" && defined(slug.current)]{ "slug": slug.current, language }`,
   );
 
+  // Генерируем пути строго сопоставляя слаг с его родной локалью из Sanity
+  const paths = posts.map((post: { slug: string; language: string }) => ({
+    params: { slug: post.slug },
+    locale: post.language || "en", 
+  }));
+
   return {
-    paths: paths.map((slug: string) => ({ params: { slug } })),
+    paths,
     fallback: "blocking",
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const query = `*[_type == "post" && slug.current == $slug][0]{
+  const currentLocale = locale || "en";
+
+  const query = `*[_type == "post" && slug.current == $slug && language == $lang][0]{
+    "slug": slug.current,
     title,
     date,
     excerpt,
     keywords,
     image,
     body,
-    "author": author->name, // <--- CHANGE THIS: Dereference to get the name string
+    language,
+    "author": author->name,
     "readTime": select(
       round(string::length(pt::text(body)) / 5 / 200) <= 1 => "1 min read",
       string(round(string::length(pt::text(body)) / 5 / 200)) + " min read"
     )
   }`;
 
-  const post = await sanityClient.fetch(query, { slug: params?.slug });
+  const post = await sanityClient.fetch(query, { 
+    slug: params?.slug, 
+    lang: currentLocale 
+  });
 
-  if (!post) return { notFound: true };
+  // 🔥 ЭТО ТОТ САМЫЙ ХАК: Если перевода статьи на текущую локаль нет, мы не выкидываем 404,
+  // а принудительно перенаправляем пользователя на общий список блогов данной локали!
+  if (!post) {
+    return {
+      redirect: {
+        destination: currentLocale === "en" ? "/blog" : `/${currentLocale}/blog`,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
