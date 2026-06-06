@@ -267,11 +267,10 @@ export default function Post({ post }: PostProps) {
     </>
   );
 }
-
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Вытаскиваем слаги вместе со значением их языка
+  // Вытаскиваем слаги только тех постов, которые привязаны к техническому блогу ('tech')
   const posts = await sanityClient.fetch(
-    `*[_type == "post" && defined(slug.current)]{ "slug": slug.current, language }`,
+    `*[_type == "post" && category->slug.current == "tech" && defined(slug.current)]{ "slug": slug.current, language }`,
   );
 
   // Генерируем пути строго сопоставляя слаг с его родной локалью из Sanity
@@ -282,14 +281,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: "blocking",
+    fallback: "blocking", // На случай динамического добавления новых постов без пересборки
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const currentLocale = locale || "en";
 
-  const query = `*[_type == "post" && slug.current == $slug && language == $lang][0]{
+  const query = `*[_type == "post" && category->slug.current == "tech" && slug.current == $slug && language == $lang][0]{
     "slug": slug.current,
     title,
     date,
@@ -310,14 +309,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     lang: currentLocale 
   });
 
-  // 🔥 ЭТО ТОТ САМЫЙ ХАК: Если перевода статьи на текущую локаль нет, мы не выкидываем 404,
-  // а принудительно перенаправляем пользователя на общий список блогов данной локали!
+  // Если статья для данной локали не найдена, отдаем штатную 404 страницу Next.js
+  // Это предотвращает падение компилятора при сборке мультиязычных роутов
   if (!post) {
     return {
-      redirect: {
-        destination: currentLocale === "en" ? "/blog" : `/${currentLocale}/blog`,
-        permanent: false,
-      },
+      notFound: true,
+      revalidate: 60,
     };
   }
 

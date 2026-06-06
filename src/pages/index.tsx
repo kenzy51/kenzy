@@ -1,14 +1,26 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+
 import Developer from "@/widgets/developerPage/Developers";
 import Skills from "@/widgets/developerPage/Skillset/Skills";
 import Experience from "@/widgets/developerPage/ExperienceHistory/Experience";
 import Portfolio from "@/widgets/developerPage/Portfolio/Portfolio";
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export default function Index() {
   const { locale, asPath } = useRouter();
   const currentLang = locale || "en";
+  const pageWrapperRef = useRef<HTMLDivElement>(null);
   
   const productionDomain = "https://kanatnazarov.com";
   const currentPath = asPath === "/" ? "" : asPath;
@@ -56,8 +68,39 @@ export default function Index() {
     ]
   };
 
+  // 🚀 ИНИЦИАЛИЗАЦИЯ PREMUM SMOOTH SCROLL (LENIS + GSAP)
+  useGSAP(() => {
+    const lenis = new Lenis({
+      duration: 0.8,          // Время анимации доводки скролла (в секундах)
+      // @ts-ignore
+      ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Физическая кривая плавности (Exponential decay)
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,      // Плавный скролл колесиком мыши
+      wheelMultiplier: 1,     // Множитель скорости скролла
+      infinite: false,
+    });
+
+    // Синхронизируем Lenis с обновлениями GSAP ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
+
+    // Добавляем тикер GSAP, чтобы скролл обновлялся с частотой экрана (60fps/120fps/144fps)
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000); // Переводим секунды тикера в миллисекунды для Lenis
+    });
+
+    // Отключаем лаги сглаживания при резких скачках
+    gsap.ticker.lagSmoothing(0);
+
+    // Очистка при размонтировании страницы (Best Practice для предотвращения утечек памяти)
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
+    };
+  }, { scope: pageWrapperRef });
+
   return (
-    <>
+    <div ref={pageWrapperRef}>
       <Head>
         <title>{t.title}</title>
         <meta name="description" content={t.description} />
@@ -88,14 +131,18 @@ export default function Index() {
         />
       </Head>
 
-      <Developer />
-      <Skills />
-      <Experience />
-      <Portfolio />
-    </>
+      {/* Оборачиваем все блоки в семантический тег main */}
+      <main>
+        <Developer />
+        <Skills />
+        <Experience />
+        <Portfolio />
+      </main>
+    </div>
   );
 }
 
+// SSR локализация остается без изменений
 export async function getStaticProps(context: any) {
   const currentLocale = context.locale || "en";
   

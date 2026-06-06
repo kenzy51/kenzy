@@ -35,7 +35,7 @@ const Items = () => {
             variants={kenzyDeveloperHoverVariants}
             className={styles.title}
           >
-            <Link href="/developer">Kenzy Developer</Link>
+            <Link href="/">Kenzy Developer</Link>
           </motion.h5>
         </motion.div>
 

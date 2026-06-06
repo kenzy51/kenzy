@@ -39,7 +39,7 @@ const Header = () => {
         <Container>
           <div className="flex items-center justify-between h-12 w-full">
             <div className="flex items-center transition-transform duration-200 hover:scale-[1.02] ">
-              <Link href="/developer">
+              <Link href="/">
                 <h5
                   className={`bold leading-5 transition-colors duration-500 
     text-sm sm:text-base lg:text-lg 
