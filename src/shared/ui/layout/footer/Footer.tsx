@@ -28,7 +28,7 @@ const smallBlocksData = [
 ];
 
 const resume =
-  "https://drive.google.com/file/d/1WsO4PQ5_DxbwlAMdbFjXmJKyiVI1uLBh/view?usp=sharing";
+  "https://drive.google.com/file/d/1JWPsJjflPW5n1oZqexHczc4uq86wH6sX/view?usp=sharing";
 // Замени эту ссылку на прямую ссылку на свой трек/профиль, которую ты копировал в Spotify
 const spotifyArtistLink =
   "https://open.spotify.com/artist/5ImzIdakvtROU8R206Jjqj";
