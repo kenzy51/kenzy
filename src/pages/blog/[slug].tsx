@@ -95,7 +95,7 @@ const makeCustomComponents = (): PortableTextComponents => ({
       </h3>
     ),
     normal: ({ children }) => (
-      <p className="text-neutral-300 font-light leading-relaxed mb-6 text-base md:text-lg">
+      <p className="text-neutral-300 font-light leading-relaxed mb-6 text-[18px] md:text-[20px]">
         {children}
       </p>
     ),
