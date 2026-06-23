@@ -12,6 +12,7 @@ import Developer from "@/widgets/developerPage/Developers";
 import Skills from "@/widgets/developerPage/Skillset/Skills";
 import Experience from "@/widgets/developerPage/ExperienceHistory/Experience";
 import Portfolio from "@/widgets/developerPage/Portfolio/Portfolio";
+import Script from "next/script";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -128,6 +129,14 @@ export default function Index() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+         <Script id="fusion-ai-config" strategy="afterInteractive">
+          {`window.FusionAIChatConfig = { tenantSlug: "kanat" };`}
+        </Script>
+        
+        <Script
+          src="https://fusion-chat-production.vercel.app/embed.js"
+          strategy="afterInteractive"
         />
       </Head>
 
