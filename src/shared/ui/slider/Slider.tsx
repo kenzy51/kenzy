@@ -23,7 +23,7 @@ import redis from "../../../../public/images/skills/redis.svg";
 import next from "../../../../public/images/skills/nextjs3.webp";
 import java from "../../../../public/images/skills/java.png";
 import python from "../../../../public/images/skills/python.png";
-import net from "../../../../public/images/skills/net.png";
+import net from "../../../../public/images/skills/net.svg";
 import useMediaQuery from "@/shared/hooks/useMediaQuery";
 
 const imagesAll = [

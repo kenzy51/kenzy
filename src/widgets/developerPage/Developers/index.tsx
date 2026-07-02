@@ -38,7 +38,6 @@ const Developer = () => {
     const masterTimeline = gsap.timeline({ defaults: { ease: "power4.inOut" } });
 
     if (!hasLoadedBefore) {
-      // === ВАРИАНТ А: ПЕРВЫЙ ЗАХОД (ПОЛНЫЙ ЦИКЛ) ===
       const progressObj = { value: 0 };
       
       gsap.set(".main-content-wrapper", { visibility: "visible" });
@@ -52,8 +51,6 @@ const Developer = () => {
           setProgress(currentProgress);
           gsap.set(".loader-bar-fill", { width: `${currentProgress}%` });
 
-          // 🔥 ИСПРАВЛЕНО: Безопасный запуск видео. Если мобильный браузер блокирует 
-          // вызов .play(), мы подстраховываемся нативным атрибутом autoPlay в разметке.
           if (currentProgress > 25 && videoRef.current && videoRef.current.paused) {
             const playPromise = videoRef.current.play();
             if (playPromise !== undefined) {
@@ -105,7 +102,6 @@ const Developer = () => {
         );
 
     } else {
-      // === ВАРИАНТ Б: ПОВТОРНЫЙ ПЕРЕХОД ===
       gsap.set(".main-content-wrapper", { visibility: "visible" });
       
       if (videoRef.current) {
@@ -129,7 +125,6 @@ const Developer = () => {
         );
     }
 
-    // Скролл-анимации Bio-блока
     gsap.from(".bio-content-item", {
       scrollTrigger: {
         trigger: ".bio-trigger-element",
@@ -167,12 +162,10 @@ const Developer = () => {
   return (
     <div ref={mainContainerRef} className="bg-black w-full min-h-screen select-none relative">
       
-      {/* 1. ПОСТОЯННЫЙ ЭКРАН-ЗАГЛУШКА ДЛЯ ГИДРАТАЦИИ */}
       {hasLoadedBefore === null && (
         <div className="fixed inset-0 w-full h-screen bg-[#0a0a0a] z-[99999] flex flex-col justify-between p-10 sm:p-16" />
       )}
 
-      {/* 2. АКТИВНЫЙ ПРЕЛОАДЕР */}
       {hasLoadedBefore === false && (
         <div className="preloader-screen fixed inset-0 w-full h-screen bg-[#0a0a0a] z-[9999] flex flex-col justify-between p-10 sm:p-16 pointer-events-none overflow-hidden">
           <div className="w-full flex justify-between items-center opacity-40 font-mono text-[9px] tracking-[0.2em] text-neutral-500 uppercase">
@@ -197,30 +190,24 @@ const Developer = () => {
         </div>
       )}
 
-      {/* 3. ОСНОВНОЙ КОНТЕНТ СТРАНИЦЫ */}
       <div className="main-content-wrapper" style={{ visibility: hasLoadedBefore === null ? 'hidden' : 'visible' }}>
         
-        {/* 🌌 HERO SECTION */}
         <section className="relative w-full h-screen bg-black flex items-center justify-start overflow-hidden z-10">
           <div className="absolute inset-0 w-full h-full z-0 select-none pointer-events-none">
             {hasLoadedBefore !== null && (
-              /* 🔥 ИСПРАВЛЕНО: Бронорованный тег видео. 
-                 Добавлены strict-инструкции для аппаратного плеера iOS/Android */
               <video
                 ref={videoRef}
                 autoPlay
                 loop
                 muted
                 playsInline
-                // @ts-ignore - нативный WebKit атрибут для жесткой фиксации инлайна на iPhone
+                // @ts-ignore
                 playsinline="true"
                 preload="auto"
                 style={{ pointerEvents: "none" }}
                 id="hero-bg-video"
                 className="hero-video w-full h-full object-cover opacity-90 filter brightness-[0.75] contrast-[1.05]"
               >
-                {/* 🍏 Важно: Для мобилок .mp4 / .mov должен лежать ПЕРВЫМ и иметь четкий кодек H.264. 
-                    Если у тебя в видео-папке есть файл kanat2.mov или kanat2.mp4, укажи его верхним! */}
                 <source src="/videos/kanat2.mov" type="video/mp4" />
                 <source src="/videos/kanat2.mp4" type="video/mp4" />
                 <source src="/videos/kanat2.webm" type="video/webm" />
@@ -259,7 +246,6 @@ const Developer = () => {
           </Container>
         </section>
 
-        {/* 📑 BIOGRAPHY & PROFILE CONTAINER */}
         <div className="bio-trigger-element relative py-24 lg:py-36 px-4 sm:px-8 md:px-12 lg:px-20 bg-black border-t border-neutral-900" id="bio">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.01] blur-[150px] rounded-full pointer-events-none" />
 
@@ -297,9 +283,9 @@ const Developer = () => {
                         <a href="https://github.com/kenzy51" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-neutral-900/80 border border-neutral-800/80 flex items-center justify-center transition-all hover:bg-neutral-800 hover:border-neutral-700">
                           <Image alt="GitHub" src={github} className="w-4 h-4 opacity-70 hover:opacity-100" />
                         </a>
-                        <a href="https://www.linkedin.com/in/kanat-nazar" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-neutral-900/80 border border-neutral-800/80 flex items-center justify-center transition-all hover:bg-neutral-800 hover:border-neutral-700">
-                          <Image alt="LinkedIn" src={linkedin} className="w-4 h-4 opacity-70 hover:opacity-100" />
-                        </a>
+                        <span className="w-8 h-8 rounded-lg bg-neutral-900/80 border border-neutral-800/30 flex items-center justify-center cursor-not-allowed select-none" title="LinkedIn under construction">
+                          <Image alt="LinkedIn under construction" src={linkedin} className="w-4 h-4 opacity-20 grayscale" />
+                        </span>
                         <a href="https://drive.google.com/file/d/1LUudYEypSjBSYhlfYSOqhyA6GRTmhv_n/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="h-8 px-3 rounded-lg bg-neutral-900/80 border border-neutral-800/80 flex items-center justify-center text-[10px] font-mono font-bold text-neutral-400 transition-all hover:bg-neutral-800 hover:text-white">
                           CV
                         </a>
@@ -320,16 +306,16 @@ const Developer = () => {
 
                 <div className="space-y-6 text-neutral-300 font-light text-base sm:text-lg leading-relaxed tracking-wide">
                   <p className="bio-content-item">
-                    I am a <strong>Full-Stack Engineer</strong> and <strong>Digital Creator</strong> specializing in constructing modern, high-concurrency web ecosystems. My core workflow centers on optimizing production applications built with <strong>Next.js</strong>, <strong>React 19</strong>, <strong>TypeScript</strong>, and robust <strong>NestJS</strong> backends.
+                    I am a <strong>Full-Stack Software Engineer</strong> with over 4 years of professional experience specializing in constructing modern, high-concurrency web ecosystems. My workflow centers on optimizing production networks built with <strong>Next.js 15/16</strong>, <strong>React 19</strong>, <strong>TypeScript</strong>, and robust <strong>NestJS</strong> backends.
                   </p>
                   <p className="bio-content-item">
-                    My architectural implementations span scalable enterprise SaaS CRMs, multi-tenant local automation engines, and real-time streaming pipelines. This includes engineering autonomous conversational AI voice streams with sub-second latencies and designing optimized retrieval-augmented generation (RAG) datasets supporting open-access diaspora networks.
+                    My architectural implementations span scalable distributed microservices, multi-tenant workspace engines, and real-time streaming pipelines. This includes engineering high-throughput conversational AI streams with sub-second latencies and designing multi-tenant infrastructures featuring isolated <strong>MongoDB</strong> document schemes and advanced <strong>Redis</strong> conversation caching.
                   </p>
                   <p className="bio-content-item">
-                    Operating directly at the intersection of infrastructure development and organic brand visibility, I configure deep semantic site frameworks, custom programmatic caching strategies, and structured JSON-LD architectures that achieve exceptional search rankings and high-intent commercial web capture profiles.
+                    Operating directly at the intersection of core infrastructure development and agile product iteration, I construct strict server-side rendering pipelines, dynamic JSON-LD semantic models, and distributed rate limiters to ensure exceptional platform resilience, complete dataset isolation, and maximum engineering shipment velocity.
                   </p>
                   <p className="bio-content-item text-neutral-400 italic font-normal text-sm sm:text-base border-l border-neutral-800 pl-4 mt-8">
-                    Outside of backend engineering and web optimization, I write and compose music across piano and guitar, blending algorithmic logic with sonic creativity.
+                    Outside of backend engineering and system optimization, I write and compose music across piano and guitar, blending algorithmic logic with sonic creativity.
                   </p>
                 </div>
               </div>
