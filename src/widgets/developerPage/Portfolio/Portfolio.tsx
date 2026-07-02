@@ -21,6 +21,7 @@ import jira from "../../../../public/images/skills/jira.png";
 import ts from "../../../../public/images/skills/ts.png";
 import mui from "../../../../public/images/skills/mui.png";
 import mongo from "../../../../public/images/skills/mongodb.svg";
+import redis from "../../../../public/images/skills/redis.svg";
 
 const Portfolio = () => {
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
@@ -159,14 +160,14 @@ function PortfolioGrid({ onSelectCard }: { onSelectCard: (card: CardType) => voi
 
   const cards: CardType[] = [
     {
-      url: "/images/portfolio/fusionai.png", 
-      title: "Fusion AI Agency Platform",
-      technologies: [next, nest, postgres, git], 
-      description: "Autonomous multi-tenant conversational AI infrastructure driving organic lead triage systems.",
-      link: "https://www.fusionaiagency.com/",
-      problem: `Traditional medical and enterprise service channels suffer high customer churn and inflated CAC due to delayed front-desk triage, unoptimized lead flows, and zero automated voice/text follow-up frameworks. Fragmented third-party software structures add engineering overhead and leak sensitive client analytical tracking records.`,
-      solution: `I engineered a unified web engine utilizing Next.js (App Router) and Tailwind CSS to orchestrate state-of-the-art conversational pipelines. I constructed a secure backend middleware utilizing NestJS, Redis, and WebSockets to host 'Jessica,' an advanced autonomous intake AI agent. Implemented Deepgram Nova-2 streaming speech-to-text configurations alongside Groq-hosted Llama 3.3 models to yield human-parity voice interactions with an ultra-low <800ms Time to First Token (TTFT). Designed clean data schemas that deliver comprehensive dashboard utilities featuring real-time conversational voice playback, synchronized audio element controls, dynamic transcripts parsing raw prompting inputs, and a custom multi-tenant chatbot canvas.`,
-      outcome: `• Deployed production platform processing dynamic voice-to-text data feeds under sub-second speeds\n• Empowered seamless system navigation with integrated full text transcripts and synchronized voice playbacks\n• Built multi-tenant, standalone client dashboard systems lowering dependencies on generic third-party CRMs\n• Achieved peak UI performance metrics via React Server Components (RSC) and atomic CSS token optimization`,
+      url: "/images/portfolio/getfusionchat.png", // Путь к скриншоту getfusionchat
+      title: "GetFusionChat.com (Enterprise AI SaaS)",
+      technologies: [mongo, redis, next, react, nest, git, ts],
+      description: "Production-grade multi-tenant enterprise communication platform and analytical SaaS built from scratch.",
+      link: "https://getfusionchat.com/",
+      problem: `Enterprise and clinical service sectors lose up to 40% of inbound leads due to high latency front-desk operations, rigid third-party CRM software dependencies, and unoptimized multi-tenant message isolation structures during transaction traffic bursts.`,
+      solution: `I co-founded and solely architected the core infrastructure of GetFusionChat. I engineered an isolated multi-tenant document framework inside MongoDB combined with a high-speed Redis caching tier to isolate stateful conversation streams per workspace, cutting core database read overhead by 65%. To scale capabilities, I integrated custom autonomous AI features: engineered a real-time voice triage pipeline ('Jessica') utilizing Deepgram Nova-2 and Groq-hosted Llama 3.3 models to deliver human-parity streaming interactions under <800ms Time to First Token (TTFT), successfully deployed for enterprise clients like Tribeca Dental Studio. Built a distributed Token Bucket Rate Limiter inside Redis to safeguard third-party API bounds and managed automated Jest test loops across containerized Docker staging blocks.`,
+      outcome: `• Developed and deployed a high-concurrency multi-tenant SaaS infrastructure from a blank editor field\n• Reduced database execution read overhead by 65% via dynamic Redis workspace session caching\n• Integrated autonomous AI voice agents into live partner systems securing sub-second triage streams\n• Accelerated engineering shipment speed and code validation cycles by 2X using Claude Code CLI tools`,
       id: 12,
     },
     {
