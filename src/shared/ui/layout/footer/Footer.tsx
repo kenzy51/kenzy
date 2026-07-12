@@ -108,7 +108,7 @@ const Footer = () => {
                 <Github size={12} /> Github
               </a>
               <a
-                href="https://www.linkedin.com/in/kanat-nazar"
+                href="https://www.linkedin.com/in/kanatnazarov"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] hover:text-[#3B533E] transition-colors"
@@ -209,7 +209,7 @@ const Footer = () => {
               <Image alt="GitHub" src={git} width={26} />
             </a>
             <a
-              href="https://www.linkedin.com/in/kanat-nazar"
+              href="https://www.linkedin.com/in/kanatnazarov"
               target="_blank"
               rel="noreferrer"
               className="hover:opacity-80 transition-opacity"

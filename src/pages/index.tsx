@@ -50,7 +50,7 @@ export default function Index() {
     "image": `${productionDomain}/og-image.jpg`,
     "sameAs": [
       "https://github.com/kenzy51",
-      "https://www.linkedin.com/in/kanat-nazar"
+      "https://www.linkedin.com/in/kanatnazarov"
     ],
     "address": {
       "@type": "PostalAddress",

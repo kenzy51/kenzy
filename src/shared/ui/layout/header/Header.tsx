@@ -155,7 +155,7 @@ const Header = () => {
                 <Image alt="Github" src={github} width={18} height={18} />
               </a>
               <a
-                href="https://www.linkedin.com/in/kanat-nazar"
+                href="https://www.linkedin.com/in/kanatnazarov"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"
