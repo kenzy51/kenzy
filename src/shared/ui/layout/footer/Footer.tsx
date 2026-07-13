@@ -100,7 +100,7 @@ const Footer = () => {
             </div>
             <div className="grid grid-cols-2 gap-y-3 gap-x-4 mt-2">
               <a
-                href="https://github.com/kenzy51"
+                href="https://github.com/kanatnazarovdev"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] hover:text-[#3B533E] transition-colors"
@@ -201,7 +201,7 @@ const Footer = () => {
 
           <div className="flex gap-5 mt-4 items-center">
             <a
-              href="https://github.com/kenzy51"
+              href="https://github.com/kanatnazarovdev"
               target="_blank"
               rel="noreferrer"
               className="hover:opacity-80 transition-opacity"

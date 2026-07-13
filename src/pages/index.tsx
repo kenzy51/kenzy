@@ -49,7 +49,7 @@ export default function Index() {
     "url": productionDomain,
     "image": `${productionDomain}/og-image.jpg`,
     "sameAs": [
-      "https://github.com/kenzy51",
+      "https://github.com/kanatnazarovdev",
       "https://www.linkedin.com/in/kanatnazarov"
     ],
     "address": {

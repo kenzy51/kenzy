@@ -147,7 +147,7 @@ const Header = () => {
 
             <div className="flex flex-col items-center gap-4 mt-4 pt-4 border-t border-neutral-800/60 w-full">
               <a
-                href="https://github.com/kenzy51"
+                href="https://github.com/kanatnazarovdev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="opacity-50 hover:opacity-100 hover:scale-110 transition-all duration-200"

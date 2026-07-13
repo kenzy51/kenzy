@@ -336,7 +336,7 @@ const Developer = () => {
 
                       <div className="flex items-center gap-2">
                         <a
-                          href="https://github.com/kenzy51"
+                          href="https://github.com/kanatnazarovdev"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-8 h-8 rounded-lg bg-neutral-900/80 border border-neutral-800/80 flex items-center justify-center transition-all hover:bg-neutral-800 hover:border-neutral-700"
