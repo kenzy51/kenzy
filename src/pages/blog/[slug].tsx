@@ -49,8 +49,11 @@ const makeCustomComponents = (): PortableTextComponents => ({
     },
     code: ({ value }) => {
       const [copied, setCopied] = useState(false);
-      const language = value.language || "typescript";
-      const codeString = value.code || "";
+      const language = value?.language || "typescript";
+      const codeString = value?.code || "";
+
+      // Guard clause against empty blocks to prevent 500 runtime rendering crashes
+      if (!codeString) return null;
 
       const executeCopy = () => {
         navigator.clipboard.writeText(codeString);
@@ -82,19 +85,25 @@ const makeCustomComponents = (): PortableTextComponents => ({
             </button>
           </div>
           <div className="w-full overflow-x-auto text-sm">
-            <SyntaxHighlighter
-              language={language.toLowerCase()}
-              style={vscDarkPlus}
-              customStyle={{
-                margin: 0,
-                padding: "1.5rem",
-                background: "rgba(0, 0, 0, 0.4)",
-                fontSize: "0.875rem",
-                lineHeight: "1.625",
-              }}
-            >
-              {codeString}
-            </SyntaxHighlighter>
+            {SyntaxHighlighter ? (
+              <SyntaxHighlighter
+                language={language.toLowerCase()}
+                style={vscDarkPlus || {}}
+                customStyle={{
+                  margin: 0,
+                  padding: "1.5rem",
+                  background: "rgba(0, 0, 0, 0.4)",
+                  fontSize: "0.875rem",
+                  lineHeight: "1.625",
+                }}
+              >
+                {codeString}
+              </SyntaxHighlighter>
+            ) : (
+              <pre className="p-6 text-neutral-300 bg-black/40">
+                <code>{codeString}</code>
+              </pre>
+            )}
           </div>
         </div>
       );
@@ -146,10 +155,11 @@ const makeCustomComponents = (): PortableTextComponents => ({
   },
   marks: {
     link: ({ children, value }) => {
-      const isExternal = !value.href.startsWith("/");
+      const valueHref = value?.href || "#";
+      const isExternal = !valueHref.startsWith("/");
       return (
         <a
-          href={value.href}
+          href={valueHref}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
           className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 decoration-cyan-500/30 transition-colors font-medium"
@@ -209,7 +219,7 @@ export default function Post({ post }: PostProps) {
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:url" content={canonicalUrl} />
-        {post.image && (
+        {post.image?.asset && (
           <meta property="og:image" content={urlFor(post.image).width(1200).height(630).url()} />
         )}
 
@@ -268,7 +278,7 @@ export default function Post({ post }: PostProps) {
               </div>
             </header>
 
-            {post.image && (
+            {post.image?.asset && (
               <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-neutral-900 my-10 shadow-xl">
                 <Image
                   src={urlFor(post.image).url()}
@@ -284,7 +294,7 @@ export default function Post({ post }: PostProps) {
               <PortableText value={post.body} components={components} />
             </div>
 
-            {/* 🔥 NEW: Author Info Card Block */}
+            {/* Author Info Card Block */}
             <div className="mt-20 p-6 rounded-xl border border-neutral-800/60 bg-neutral-900/30 backdrop-blur-sm flex flex-col sm:flex-row items-center sm:items-start gap-5 shadow-xl">
               <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-neutral-700 shrink-0 shadow-md">
                 <Image
