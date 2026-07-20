@@ -3,16 +3,34 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Check, Copy, Github, Linkedin, Globe } from "lucide-react";
 import { sanityClient, urlFor } from "@/lib/sanity";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import Container from "@/shared/ui/container/Container";
 
-// Import a performant syntax highlighter to properly render code snippets
+// Анимационный движок
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+// Подсветка синтаксиса
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-// Dark theme that cleanly integrates with a pure black background design
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
+// Регистрируем плагин GSAP только на клиенте
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+interface AuthorData {
+  name: string;
+  role?: string;
+  bio?: any; // Изменено на any, так как это может быть массив структур PortableText (Rich Text)
+  image?: any;
+  githubUrl?: string;
+  linkedinUrl?: string;
+  websiteUrl?: string;
+}
 
 interface PostProps {
   post: {
@@ -24,8 +42,8 @@ interface PostProps {
     image: any;
     body: any;
     readTime: string;
-    author?: string;
     language: string;
+    authorData?: AuthorData;
   };
 }
 
@@ -52,7 +70,6 @@ const makeCustomComponents = (): PortableTextComponents => ({
       const language = value?.language || "typescript";
       const codeString = value?.code || "";
 
-      // Guard clause against empty blocks to prevent 500 runtime rendering crashes
       if (!codeString) return null;
 
       const executeCopy = () => {
@@ -64,13 +81,8 @@ const makeCustomComponents = (): PortableTextComponents => ({
       return (
         <div className="relative my-10 rounded-xl overflow-hidden bg-neutral-950 border border-neutral-800/80 shadow-2xl font-mono text-sm">
           <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-900/60 border-b border-neutral-800/80 text-xs text-neutral-400">
-            <span className="uppercase tracking-wider font-semibold">
-              {language}
-            </span>
-            <button
-              onClick={executeCopy}
-              className="flex items-center gap-1.5 hover:text-white transition-colors duration-200"
-            >
+            <span className="uppercase tracking-wider font-semibold">{language}</span>
+            <button onClick={executeCopy} className="flex items-center gap-1.5 hover:text-white transition-colors duration-200">
               {copied ? (
                 <>
                   <Check size={13} className="text-cyan-400" />
@@ -100,9 +112,7 @@ const makeCustomComponents = (): PortableTextComponents => ({
                 {codeString}
               </SyntaxHighlighter>
             ) : (
-              <pre className="p-6 text-neutral-300 bg-black/40">
-                <code>{codeString}</code>
-              </pre>
+              <pre className="p-6 text-neutral-300 bg-black/40"><code>{codeString}</code></pre>
             )}
           </div>
         </div>
@@ -110,48 +120,20 @@ const makeCustomComponents = (): PortableTextComponents => ({
     },
   },
   block: {
-    h2: ({ children }) => (
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-4 font-sans">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mt-8 mb-3 font-sans">
-        {children}
-      </h3>
-    ),
-    normal: ({ children }) => (
-      <p className="text-neutral-300 font-light leading-relaxed mb-6 text-[18px] md:text-[20px]">
-        {children}
-      </p>
-    ),
+    h2: ({ children }) => <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-4 font-sans">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mt-8 mb-3 font-sans">{children}</h3>,
+    normal: ({ children }) => <p className="text-neutral-300 font-light leading-relaxed mb-6 text-[18px] md:text-[20px]">{children}</p>,
     blockquote: ({ children }) => (
-      <blockquote className="border-l-2 border-cyan-400 pl-5 italic text-neutral-400 my-8 bg-neutral-950/40 py-1 rounded-r-lg">
-        {children}
-      </blockquote>
+      <blockquote className="border-l-2 border-cyan-400 pl-5 italic text-neutral-400 my-8 bg-neutral-950/40 py-1 rounded-r-lg">{children}</blockquote>
     ),
   },
   list: {
-    bullet: ({ children }) => (
-      <ul className="list-disc pl-6 my-6 space-y-2 text-neutral-300 font-light text-base md:text-lg">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol className="list-decimal pl-6 my-6 space-y-3 text-neutral-300 font-light text-base md:text-lg">
-        {children}
-      </ol>
-    ),
+    bullet: ({ children }) => <ul className="list-disc pl-6 my-6 space-y-2 text-neutral-300 font-light text-base md:text-lg">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal pl-6 my-6 space-y-3 text-neutral-300 font-light text-base md:text-lg">{children}</ol>,
   },
   listItem: {
-    bullet: ({ children }) => (
-      <li className="marker:text-cyan-500">{children}</li>
-    ),
-    number: ({ children }) => (
-      <li className="marker:text-cyan-400 marker:font-mono marker:text-sm">
-        {children}
-      </li>
-    ),
+    bullet: ({ children }) => <li className="marker:text-cyan-500">{children}</li>,
+    number: ({ children }) => <li className="marker:text-cyan-400 marker:font-mono marker:text-sm">{children}</li>,
   },
   marks: {
     link: ({ children, value }) => {
@@ -168,18 +150,56 @@ const makeCustomComponents = (): PortableTextComponents => ({
         </a>
       );
     },
-    code: ({ children }) => (
-      <code className="px-1.5 py-0.5 rounded bg-neutral-900 text-cyan-400 border border-neutral-800 font-mono text-sm">
-        {children}
-      </code>
-    ),
+    code: ({ children }) => <code className="px-1.5 py-0.5 rounded bg-neutral-900 text-cyan-400 border border-neutral-800 font-mono text-sm">{children}</code>,
   },
 });
+
+// Отдельные минималистичные компоненты рендеринга Rich Text исключительно для маленького био автора
+const authorBioComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <span className="text-sm text-neutral-400 font-light leading-relaxed">{children}</span>,
+  }
+};
 
 export default function Post({ post }: PostProps) {
   const components = makeCustomComponents();
   const { locale, asPath } = useRouter();
   const currentLang = locale || "en";
+  
+  const cardRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!post) return;
+
+    gsap.fromTo(headerRef.current, 
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.2 }
+    );
+
+    const element = cardRef.current;
+    if (element) {
+      gsap.fromTo(element,
+        { opacity: 0, y: 50, scale: 0.97 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          }
+        }
+      );
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, [post]);
 
   if (!post) {
     return (
@@ -193,19 +213,23 @@ export default function Post({ post }: PostProps) {
   const canonicalUrl = `${productionDomain}${currentLang === 'en' ? '' : '/' + currentLang}${asPath}`;
 
   const ui = {
-    en: { 
-      backBtn: "← BACK_TO_LOGS", 
-      terminateBtn: "← TERMINATE_VIEW",
-      aboutAuthor: "About the Author",
-      authorBio: "Product-minded Full-Stack Engineer specializing in high-performance web applications, scalable multi-tenant SaaS systems, and low-latency AI integrations."
-    },
-    ru: { 
-      backBtn: "← НАЗАД К СТАТЬЯМ", 
-      terminateBtn: "← ЗАКРЫТЬ ПРОСМОТР",
-      aboutAuthor: "Об авторе",
-      authorBio: "Продуктовый Full-Stack инженер, специализирующийся на высокопроизводительных веб-приложениях, масштабируемой архитектуре multi-tenant SaaS и AI-интеграциях с низкой задержкой."
-    }
-  }[currentLang] || { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW", aboutAuthor: "About the Author", authorBio: "" };
+    en: { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW" },
+    ru: { backBtn: "← НАЗАД К СТАТЬЯМ", terminateBtn: "← ЗАКРЫТЬ ПРОСМОТР" }
+  }[currentLang] || { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW" };
+
+  // Дефолтный фоллбэк на случай, если связи в Sanity пустые
+  const defaultBio = "Product-minded Full-Stack Engineer specializing in high-performance architectures, scalable multi-tenant SaaS platforms, and intelligent AI automation loops.";
+  
+  const author = post.authorData || {
+    name: "Kanat Nazarov",
+    role: "Systems & Full-Stack Engineer",
+    bio: defaultBio,
+    githubUrl: "https://github.com/kanatnazarovdev",
+    linkedinUrl: "https://linkedin.com/in/kanatnazarov/",
+    websiteUrl: "https://kanatnazarov.com"
+  };
+
+  const displayName = author.name || "Kanat Nazarov";
 
   return (
     <>
@@ -214,53 +238,25 @@ export default function Post({ post }: PostProps) {
         <meta name="description" content={post.excerpt} />
         {post.keywords && <meta name="keywords" content={post.keywords.join(", ")} />}
         <link rel="canonical" href={canonicalUrl} />
-
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:url" content={canonicalUrl} />
-        {post.image?.asset && (
-          <meta property="og:image" content={urlFor(post.image).width(1200).height(630).url()} />
-        )}
-
+        {post.image?.asset && <meta property="og:image" content={urlFor(post.image).width(1200).height(630).url()} />}
         <meta name="twitter:card" content="summary_large_image" />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "TechArticle",
-              headline: post.title,
-              description: post.excerpt,
-              keywords: post.keywords ? post.keywords.join(", ") : "",
-              datePublished: post.date,
-              url: canonicalUrl,
-              author: {
-                "@type": "Person",
-                name: post.author || "Kanat Nazarov",
-                url: productionDomain,
-              },
-            }),
-          }}
-        />
       </Head>
 
       <div className="min-h-screen bg-black text-neutral-100 py-16 md:py-24 mt-12">
         <Container>
           <div className="max-w-3xl mx-auto">
-            <Link
-              href="/blog"
-              className="inline-flex items-center text-sm font-mono text-neutral-400 hover:text-cyan-400 mb-12 transition-colors group"
-            >
+            <Link href="/blog" className="inline-flex items-center text-sm font-mono text-neutral-400 hover:text-cyan-400 mb-12 transition-colors group">
               {ui.backBtn}
             </Link>
 
-            <header className="mb-14">
+            <header ref={headerRef} className="mb-14 opacity-0">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-white leading-tight">
                 {post.title}
               </h1>
-
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-mono text-neutral-400 uppercase tracking-wider">
                 <time>
                   {new Date(post.date).toLocaleDateString(currentLang, {
@@ -272,21 +268,13 @@ export default function Post({ post }: PostProps) {
                 <span className="text-neutral-700">•</span>
                 <span className="text-neutral-300">{post.readTime}</span>
                 <span className="text-neutral-700">•</span>
-                <span className="text-neutral-400 font-bold">
-                  {post.author || "KANAT NAZAROV"}
-                </span>
+                <span className="text-neutral-400 font-bold">{displayName.toUpperCase()}</span>
               </div>
             </header>
 
             {post.image?.asset && (
               <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-neutral-900 my-10 shadow-xl">
-                <Image
-                  src={urlFor(post.image).url()}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
+                <Image src={urlFor(post.image).url()} alt={post.title} fill className="object-cover" priority />
               </div>
             )}
 
@@ -294,41 +282,54 @@ export default function Post({ post }: PostProps) {
               <PortableText value={post.body} components={components} />
             </div>
 
-            {/* Author Info Card Block */}
-            <div className="mt-20 p-6 rounded-xl border border-neutral-800/60 bg-neutral-900/30 backdrop-blur-sm flex flex-col sm:flex-row items-center sm:items-start gap-5 shadow-xl">
-              <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-neutral-700 shrink-0 shadow-md">
+            {/* Карточка автора с поддержкой Rich Text био и GSAP ScrollTrigger */}
+            <div 
+              ref={cardRef} 
+              className="mt-20 p-6 rounded-xl border border-neutral-800/60 bg-neutral-900/30 backdrop-blur-sm flex flex-col sm:flex-row items-center sm:items-start gap-5 shadow-xl opacity-0"
+            >
+              <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-neutral-700 shrink-0 shadow-md bg-neutral-950">
                 <Image
-                  src="/images/author.jpg" 
-                  alt="Kanat Nazarov"
+                  src={author.image?.asset ? urlFor(author.image).width(200).height(200).url() : "/images/author.jpg"} 
+                  alt={displayName}
                   fill
                   className="object-cover"
                 />
               </div>
-              <div className="flex-1 text-center sm:text-left">
+              <div className="flex-1 text-center sm:text-left w-full">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                   <div>
-                    <h4 className="text-lg font-bold text-white tracking-tight">
-                      Kanat Nazarov
-                    </h4>
+                    <h4 className="text-lg font-bold text-white tracking-tight">{displayName}</h4>
                     <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider">
-                      Systems & Full-Stack Engineer
+                      {author.role || "Systems & Full-Stack Engineer"}
                     </span>
                   </div>
                   <div className="flex items-center justify-center sm:justify-end gap-3 text-neutral-400 mt-1 sm:mt-0">
-                    <a href="https://github.com/kanatnazarovdev" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                      <Github size={16} />
-                    </a>
-                    <a href="https://linkedin.com/in/kanatnazarov/" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
-                      <Linkedin size={16} />
-                    </a>
-                    <a href="https://kanatnazarov.com" className="hover:text-white transition-colors">
-                      <Globe size={16} />
-                    </a>
+                    {author.githubUrl && (
+                      <a href={author.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                        <Github size={16} />
+                      </a>
+                    )}
+                    {author.linkedinUrl && (
+                      <a href={author.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+                        <Linkedin size={16} />
+                      </a>
+                    )}
+                    {author.websiteUrl && (
+                      <a href={author.websiteUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                        <Globe size={16} />
+                      </a>
+                    )}
                   </div>
                 </div>
-                <p className="text-sm text-neutral-400 font-light leading-relaxed">
-                  {ui.authorBio}
-                </p>
+                
+                {/* Исправлено: Рендерим био через PortableText, если это массив объектов, иначе как строку */}
+                <div className="text-sm text-neutral-400 font-light leading-relaxed">
+                  {author.bio && typeof author.bio === "object" ? (
+                    <PortableText value={author.bio} components={authorBioComponents} />
+                  ) : (
+                    <span>{author.bio || defaultBio}</span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -336,9 +337,7 @@ export default function Post({ post }: PostProps) {
               <Link href="/blog" className="hover:text-cyan-400 transition-colors">
                 {ui.terminateBtn}
               </Link>
-              <span>
-                © {new Date().getFullYear()} KANAT NAZAROV • SYSTEMS SYSTEM
-              </span>
+              <span>© {new Date().getFullYear()} KANAT NAZAROV • SYSTEMS SYSTEM</span>
             </footer>
           </div>
         </Container>
@@ -351,16 +350,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await sanityClient.fetch(
     `*[_type == "post" && category->slug.current == "tech" && defined(slug.current)]{ "slug": slug.current, language }`,
   );
-
   const paths = posts.map((post: { slug: string; language: string }) => ({
     params: { slug: post.slug },
     locale: post.language || "en", 
   }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
+  return { paths, fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
@@ -375,7 +369,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     image,
     body,
     language,
-    "author": author->name,
+    "authorData": author->{
+      name,
+      role,
+      bio,
+      image,
+      githubUrl,
+      linkedinUrl,
+      websiteUrl
+    },
     "readTime": select(
       round(string::length(pt::text(body)) / 5 / 200) <= 1 => "1 min read",
       string(round(string::length(pt::text(body)) / 5 / 200)) + " min read"
@@ -388,16 +390,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   });
 
   if (!post) {
-    return {
-      notFound: true,
-      revalidate: 60,
-    };
+    return { notFound: true, revalidate: 60 };
   }
 
-  return {
-    props: {
-      post,
-    },
-    revalidate: 60,
-  };
+  return { props: { post }, revalidate: 60 };
 };
