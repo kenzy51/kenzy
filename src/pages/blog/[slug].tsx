@@ -4,10 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, Github, Linkedin, Globe } from "lucide-react";
 import { sanityClient, urlFor } from "@/lib/sanity";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import Container from "@/shared/ui/container/Container";
+
+// Import a performant syntax highlighter to properly render code snippets
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// Dark theme that cleanly integrates with a pure black background design
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 interface PostProps {
   post: {
@@ -76,9 +81,21 @@ const makeCustomComponents = (): PortableTextComponents => ({
               )}
             </button>
           </div>
-          <pre className="p-6 overflow-x-auto text-neutral-300 leading-relaxed text-sm bg-black/40">
-            <code>{codeString}</code>
-          </pre>
+          <div className="w-full overflow-x-auto text-sm">
+            <SyntaxHighlighter
+              language={language.toLowerCase()}
+              style={vscDarkPlus}
+              customStyle={{
+                margin: 0,
+                padding: "1.5rem",
+                background: "rgba(0, 0, 0, 0.4)",
+                fontSize: "0.875rem",
+                lineHeight: "1.625",
+              }}
+            >
+              {codeString}
+            </SyntaxHighlighter>
+          </div>
         </div>
       );
     },
@@ -141,6 +158,11 @@ const makeCustomComponents = (): PortableTextComponents => ({
         </a>
       );
     },
+    code: ({ children }) => (
+      <code className="px-1.5 py-0.5 rounded bg-neutral-900 text-cyan-400 border border-neutral-800 font-mono text-sm">
+        {children}
+      </code>
+    ),
   },
 });
 
@@ -160,11 +182,20 @@ export default function Post({ post }: PostProps) {
   const productionDomain = "https://kanatnazarov.com";
   const canonicalUrl = `${productionDomain}${currentLang === 'en' ? '' : '/' + currentLang}${asPath}`;
 
-  // Локализация интерфейсных строк самого шаблона статьи
   const ui = {
-    en: { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW" },
-    ru: { backBtn: "← НАЗАД К СТАТЬЯМ", terminateBtn: "← ЗАКРЫТЬ ПРОСМОТР" }
-  }[currentLang] || { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW" };
+    en: { 
+      backBtn: "← BACK_TO_LOGS", 
+      terminateBtn: "← TERMINATE_VIEW",
+      aboutAuthor: "About the Author",
+      authorBio: "Product-minded Full-Stack Engineer specializing in high-performance web applications, scalable multi-tenant SaaS systems, and low-latency AI integrations."
+    },
+    ru: { 
+      backBtn: "← НАЗАД К СТАТЬЯМ", 
+      terminateBtn: "← ЗАКРЫТЬ ПРОСМОТР",
+      aboutAuthor: "Об авторе",
+      authorBio: "Продуктовый Full-Stack инженер, специализирующийся на высокопроизводительных веб-приложениях, масштабируемой архитектуре multi-tenant SaaS и AI-интеграциях с низкой задержкой."
+    }
+  }[currentLang] || { backBtn: "← BACK_TO_LOGS", terminateBtn: "← TERMINATE_VIEW", aboutAuthor: "About the Author", authorBio: "" };
 
   return (
     <>
@@ -198,7 +229,7 @@ export default function Post({ post }: PostProps) {
               author: {
                 "@type": "Person",
                 name: post.author || "Kanat Nazarov",
-                url: productionDomain, // 🔥 ИСПРАВЛЕНО: убран vercel.app
+                url: productionDomain,
               },
             }),
           }}
@@ -253,7 +284,45 @@ export default function Post({ post }: PostProps) {
               <PortableText value={post.body} components={components} />
             </div>
 
-            <footer className="mt-24 pt-8 border-t border-neutral-900 text-xs font-mono text-neutral-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+            {/* 🔥 NEW: Author Info Card Block */}
+            <div className="mt-20 p-6 rounded-xl border border-neutral-800/60 bg-neutral-900/30 backdrop-blur-sm flex flex-col sm:flex-row items-center sm:items-start gap-5 shadow-xl">
+              <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-neutral-700 shrink-0 shadow-md">
+                <Image
+                  src="/images/author.jpg" 
+                  alt="Kanat Nazarov"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                  <div>
+                    <h4 className="text-lg font-bold text-white tracking-tight">
+                      Kanat Nazarov
+                    </h4>
+                    <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider">
+                      Systems & Full-Stack Engineer
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-center sm:justify-end gap-3 text-neutral-400 mt-1 sm:mt-0">
+                    <a href="https://github.com/kanatnazarovdev" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                      <Github size={16} />
+                    </a>
+                    <a href="https://linkedin.com/in/kanatnazarov/" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+                      <Linkedin size={16} />
+                    </a>
+                    <a href="https://kanatnazarov.com" className="hover:text-white transition-colors">
+                      <Globe size={16} />
+                    </a>
+                  </div>
+                </div>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed">
+                  {ui.authorBio}
+                </p>
+              </div>
+            </div>
+
+            <footer className="mt-16 pt-8 border-t border-neutral-900 text-xs font-mono text-neutral-500 flex flex-col sm:flex-row justify-between items-center gap-4">
               <Link href="/blog" className="hover:text-cyan-400 transition-colors">
                 {ui.terminateBtn}
               </Link>
@@ -267,13 +336,12 @@ export default function Post({ post }: PostProps) {
     </>
   );
 }
+
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Вытаскиваем слаги только тех постов, которые привязаны к техническому блогу ('tech')
   const posts = await sanityClient.fetch(
     `*[_type == "post" && category->slug.current == "tech" && defined(slug.current)]{ "slug": slug.current, language }`,
   );
 
-  // Генерируем пути строго сопоставляя слаг с его родной локалью из Sanity
   const paths = posts.map((post: { slug: string; language: string }) => ({
     params: { slug: post.slug },
     locale: post.language || "en", 
@@ -281,7 +349,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: "blocking", // На случай динамического добавления новых постов без пересборки
+    fallback: "blocking",
   };
 };
 
@@ -309,8 +377,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     lang: currentLocale 
   });
 
-  // Если статья для данной локали не найдена, отдаем штатную 404 страницу Next.js
-  // Это предотвращает падение компилятора при сборке мультиязычных роутов
   if (!post) {
     return {
       notFound: true,
