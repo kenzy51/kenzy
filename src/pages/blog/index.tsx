@@ -35,7 +35,7 @@ export default function Blog({ posts }: BlogProps) {
       gsap.fromTo(
         headerRef.current,
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" }
+        { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" },
       );
 
       // 2. Каскадное появление карточек статей (Stagger)
@@ -51,7 +51,7 @@ export default function Blog({ posts }: BlogProps) {
             ease: "power3.out",
             stagger: 0.12, // Задержка между появлением каждой карточки
             delay: 0.15,
-          }
+          },
         );
       }
     });
@@ -113,8 +113,8 @@ export default function Blog({ posts }: BlogProps) {
         }}
       >
         <div className="max-w-6xl mx-auto relative z-10">
-          <header 
-            ref={headerRef} 
+          <header
+            ref={headerRef}
             className="mb-24 text-left max-w-3xl border-b border-neutral-900 pb-10 opacity-0"
           >
             <p className="text-cyan-400 font-mono tracking-[0.2em] uppercase text-xs mb-3 font-bold">
@@ -136,16 +136,14 @@ export default function Blog({ posts }: BlogProps) {
               view.
             </div>
           ) : (
-            <div 
+            <div
               ref={gridRef}
               className="grid gap-x-8 gap-y-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start"
             >
               {posts.map((post, index) => (
                 <article key={post.slug} className="group opacity-0">
                   <Link href={`/blog/${post.slug}`} className="block space-y-4">
-                    
-                    {/* Контейнер обложки с 3D-эффектом и аппаратным ускорением */}
-                    <div 
+                    <div
                       onMouseMove={handleMouseMove}
                       onMouseLeave={handleMouseLeave}
                       className="w-full relative aspect-[16/10] bg-[#121212] overflow-hidden rounded-lg border border-neutral-900 transition-colors duration-300 group-hover:border-neutral-800 shadow-xl will-change-transform select-none"
@@ -167,7 +165,6 @@ export default function Blog({ posts }: BlogProps) {
                       )}
                     </div>
 
-                    {/* Метаданные и Типографика */}
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-neutral-500 uppercase">
                         <time dateTime={post.date}>
@@ -177,8 +174,6 @@ export default function Blog({ posts }: BlogProps) {
                             year: "numeric",
                           })}
                         </time>
-                        <span>•</span>
-                        <span>{post.readTime}</span>
                       </div>
 
                       <h2 className="text-xl font-bold tracking-tight text-white uppercase group-hover:text-cyan-400 transition-colors duration-200">
@@ -218,7 +213,7 @@ export const getStaticProps: GetStaticProps<BlogProps> = async ({ locale }) => {
 
   try {
     const posts = await sanityClient.fetch(query, { lang: currentLocale });
-    
+
     return {
       props: {
         posts: posts || [],

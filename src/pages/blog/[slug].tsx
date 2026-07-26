@@ -10,6 +10,9 @@ import { sanityClient, urlFor } from "@/lib/sanity";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import Container from "@/shared/ui/container/Container";
 
+// Import your newly created TechCommentForm component
+import { TechCommentForm } from "@/shared/ui/forms/CommentForm";
+
 // GSAP Animation Engine
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -39,8 +42,16 @@ interface AuthorData {
   websiteUrl?: string;
 }
 
+interface Comment {
+  _id: string;
+  name: string;
+  comment: string;
+  _createdAt?: string;
+}
+
 interface PostProps {
   post: {
+    _id: string;
     slug: string;
     title: string;
     date: string;
@@ -50,6 +61,7 @@ interface PostProps {
     body: any;
     readTime: string;
     language: string;
+    comments?: Comment[];
     authorData?: AuthorData;
   };
 }
@@ -134,7 +146,7 @@ const makeCustomComponents = (): PortableTextComponents => ({
       );
     },
     code: CodeBlock,
-    codeBlock: CodeBlock, // Catches schema variants named codeBlock
+    codeBlock: CodeBlock,
   },
   block: {
     h2: ({ children }) => (
@@ -353,9 +365,42 @@ export default function Post({ post }: PostProps) {
               </div>
             )}
 
+            {/* Post Content */}
             <div className="mt-10">
               <PortableText value={post.body} components={components} />
             </div>
+
+            {/* Comments Section */}
+            <section className="mt-16 pt-12 border-t border-neutral-900">
+              {post.comments && post.comments.length > 0 && (
+                <div className="mb-12">
+                  <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] mb-8 text-neutral-400 flex items-center gap-2">
+                    <span>Logs & Discussion</span>
+                    <span className="px-2 py-0.5 rounded bg-neutral-900 text-cyan-400 text-[10px] border border-neutral-800">
+                      {post.comments.length}
+                    </span>
+                  </h3>
+                  <div className="space-y-6">
+                    {post.comments.map((c) => (
+                      <div
+                        key={c._id}
+                        className="p-4 rounded-lg bg-neutral-950 border border-neutral-800/80 pl-5 border-l-2 border-l-cyan-500"
+                      >
+                        <p className="text-sm text-neutral-300 font-light leading-relaxed">
+                          "{c.comment}"
+                        </p>
+                        <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-400 mt-3 block">
+                          — {c.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Imported Separate TechCommentForm Component */}
+              <TechCommentForm postId={post._id} />
+            </section>
 
             {/* Author Profile Box */}
             <div
@@ -464,6 +509,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const currentLocale = locale || "en";
 
   const query = `*[_type == "post" && category->slug.current == "tech" && slug.current == $slug && (language == $lang || !defined(language))][0]{
+    _id,
     "slug": slug.current,
     title,
     date,
@@ -472,6 +518,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     image,
     body,
     language,
+    "comments": *[_type == "comment" && post._ref == ^._id && approved == true] | order(_createdAt desc),
     "authorData": author->{
       name,
       role,
@@ -492,7 +539,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return { notFound: true, revalidate: 60 };
   }
 
-  // Compute read time safely without pt::text() crashing GROQ
+  // Compute read time safely
   const textContent = JSON.stringify(post.body || "");
   const wordCount = textContent.split(/\s+/).length;
   const minutes = Math.max(1, Math.round(wordCount / 200));
