@@ -52,14 +52,11 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="author" content="Kanat Nazarov" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="icon" href="/mylogo.png" />
-
         <meta
           name="google-site-verification"
           content="VgDRz5M8tNsT6gLPg4D6D7UmgkNA1AM2pqjnh70aX4k"
         />
 
-        {/* 🔥 ИСПРАВЛЕНО: Никаких .vercel.app ссылок! Только чистый домен .com */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Kanat Nazarov" />
         <meta property="og:locale" content={router.locale === "ru" ? "ru_RU" : "en_US"} />
@@ -79,7 +76,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
-        {/* Twitter Card Protocols */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Kanat Nazarov | Systems Architect" />
         <meta name="twitter:description" content="Architecting ultra-low latency full-stack systems with Next.js, NestJS, and TypeScript." />

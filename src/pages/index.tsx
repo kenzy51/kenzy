@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import Head from "next/head";
+import Script from "next/script";
 import { useRouter } from "next/router";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,7 +13,6 @@ import Developer from "@/widgets/developerPage/Developers";
 import Skills from "@/widgets/developerPage/Skillset/Skills";
 import Experience from "@/widgets/developerPage/ExperienceHistory/Experience";
 import Portfolio from "@/widgets/developerPage/Portfolio/Portfolio";
-import Script from "next/script";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -39,61 +39,81 @@ export default function Index() {
   };
 
   const t = content[currentLang as keyof typeof content] || content.en;
-
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Kanat Nazarov",
-    "alternateName": "Kenzy",
-    "jobTitle": "Full-Stack Engineer & Digital Creator",
-    "url": productionDomain,
-    "image": `${productionDomain}/og-image.jpg`,
-    "sameAs": [
-      "https://github.com/kanatnazarovdev",
-      "https://www.linkedin.com/in/kanatnazarov"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "New York City",
-      "addressRegion": "NY",
-      "addressCountry": "US"
-    },
-    "knowsAbout": [
-      "Full-Stack Software Engineering",
-      "Next.js & React 19 Architecture",
-      "NestJS & TypeScript Systems",
-      "Conversational AI Voice Infrastructure",
-      "Technical SEO & SGE Optimization",
-      "Systems Automation",
-      "Audio Production & Sound Design"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${productionDomain}/#person`,
+        "name": "Kanat Nazarov",
+        "alternateName": "Kanat",
+        "jobTitle": "Full-Stack Engineer & Digital Creator",
+        "url": productionDomain,
+        "image": `${productionDomain}/og-image.jpg`,
+        "sameAs": [
+          "https://github.com/kanatnazarovdev",
+          "https://www.linkedin.com/in/kanatnazarov"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "New York City",
+          "addressRegion": "NY",
+          "addressCountry": "US"
+        },
+        "knowsAbout": [
+          "Full-Stack Software Engineering",
+          "Next.js & React Architecture",
+          "NestJS & TypeScript Systems",
+          "Conversational AI Voice Infrastructure",
+          "Technical SEO & SGE Optimization",
+          "Systems Automation"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${productionDomain}/#website`,
+        "url": productionDomain,
+        "name": "Kanat Nazarov",
+        "publisher": {
+          "@id": `${productionDomain}/#person`
+        },
+        "hasPart": [
+          {
+            "@type": "WebPage",
+            "name": "Blog",
+            "url": `${productionDomain}/blog`
+          },
+          {
+            "@type": "WebPage",
+            "name": "Life & Philosophy",
+            "url": `${productionDomain}/lifestyle`
+          }
+        ]
+      }
     ]
   };
 
-  // 🚀 ИНИЦИАЛИЗАЦИЯ PREMUM SMOOTH SCROLL (LENIS + GSAP)
+  // 🚀 ИНИЦИАЛИЗАЦИЯ PREMIUM SMOOTH SCROLL (LENIS + GSAP)
   useGSAP(() => {
     const lenis = new Lenis({
-      duration: 0.8,          // Время анимации доводки скролла (в секундах)
+      duration: 0.8,
       // @ts-ignore
-      ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Физическая кривая плавности (Exponential decay)
+      ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
-      smoothWheel: true,      // Плавный скролл колесиком мыши
-      wheelMultiplier: 1,     // Множитель скорости скролла
+      smoothWheel: true,
+      wheelMultiplier: 1,
       infinite: false,
     });
 
-    // Синхронизируем Lenis с обновлениями GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    // Добавляем тикер GSAP, чтобы скролл обновлялся с частотой экрана (60fps/120fps/144fps)
     gsap.ticker.add((time) => {
-      lenis.raf(time * 1000); // Переводим секунды тикера в миллисекунды для Lenis
+      lenis.raf(time * 1000);
     });
 
-    // Отключаем лаги сглаживания при резких скачках
     gsap.ticker.lagSmoothing(0);
 
-    // Очистка при размонтировании страницы (Best Practice для предотвращения утечек памяти)
     return () => {
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
@@ -130,28 +150,28 @@ export default function Index() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
-         <Script id="fusion-ai-config" strategy="afterInteractive">
-          {`window.FusionAIChatConfig = { tenantSlug: "kanat" };`}
-        </Script>
-        
-        <Script
-          src="https://fusion-chat-production.vercel.app/embed.js"
-          strategy="afterInteractive"
-        />
       </Head>
 
-      {/* Оборачиваем все блоки в семантический тег main */}
       <main>
         <Developer />
         <Skills />
         <Experience />
         <Portfolio />
       </main>
+
+      {/* 🚀 Next/Script компоненты перенесены из <Head> в тело компонента */}
+      <Script id="fusion-ai-config" strategy="afterInteractive">
+        {`window.FusionAIChatConfig = { tenantSlug: "kanat" };`}
+      </Script>
+      
+      <Script
+        src="https://fusion-chat-production.vercel.app/embed.js"
+        strategy="afterInteractive"
+      />
     </div>
   );
 }
 
-// SSR локализация остается без изменений
 export async function getStaticProps(context: any) {
   const currentLocale = context.locale || "en";
   
