@@ -160,14 +160,14 @@ export default function Index() {
       </main>
 
       {/* 🚀 Next/Script компоненты перенесены из <Head> в тело компонента */}
-      <Script id="fusion-ai-config" strategy="afterInteractive">
+      {/* <Script id="fusion-ai-config" strategy="afterInteractive">
         {`window.FusionAIChatConfig = { tenantSlug: "kanat" };`}
       </Script>
       
       <Script
         src="https://fusion-chat-production.vercel.app/embed.js"
         strategy="afterInteractive"
-      />
+      /> */}
     </div>
   );
 }
