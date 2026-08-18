@@ -1,5 +1,4 @@
 import Layout from "@/shared/ui/layout";
-// @ts-expect-error CSS side-effect imports are handled by Next.js at build time.
 import "@/styles/globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { AppProgressBar } from "next-nprogress-bar";
@@ -28,7 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const defaultTimeZone = "America/New_York";
   
-  // 🔒 Твой единый, главный продакшн-домен для склеивания зеркал в Google
   const productionDomain = "https://kanatnazarov.com"; 
   const currentPath = router.asPath === "/" ? "" : router.asPath;
   const fullCurrentUrl = `${productionDomain}${router.locale === 'en' ? '' : '/' + router.locale}${currentPath}`;
