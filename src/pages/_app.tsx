@@ -1,4 +1,5 @@
 import Layout from "@/shared/ui/layout";
+// @ts-expect-error CSS side-effect imports are handled by Next.js at build time.
 import "@/styles/globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { AppProgressBar } from "next-nprogress-bar";
