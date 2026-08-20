@@ -116,7 +116,7 @@ const Header = () => {
       </header>
 
       {/* Only show navigation/sidebars on main homepage routes */}
-      {!isBlogRoute && !isLifestyle && (
+      {!isBlogRoute && !isLifestyle && !isWorksRoute && (
         <>
           <nav
             className="lg:hidden fixed top-[80px] left-0 right-0 z-40 w-full bg-black/80 backdrop-blur-md border-b border-neutral-900 overflow-x-auto scrollbar-none py-3 px-4 flex items-center justify-start gap-6 whitespace-nowrap mask-image-horizontal"
