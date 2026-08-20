@@ -24,63 +24,28 @@ import angular from "../../../../../public/images/skills/angular.svg";
 import websockets from "../../../../../public/images/skills/websockets.svg";
 const companiesData = [
   {
-    title: "Lead Full-Stack & Systems Infrastructure Engineer",
-    company: "Fusion AI Agency",
-    duration: "March 2025 - Present",
+    title: "Senior Lead Web Developer & Technical Architect",
+    company: "Fusion AI Agency / Enterprise Contracts",
+    duration: "Jan 2020 - Present",
     description: [
-      "Architected and deployed autonomous enterprise AI Voice agents for strategic clinical networks (including Tribeca Dental Studio), integrating Deepgram (Nova-2) and Groq (Llama 3.3) to secure a <800ms Time to First Token (TTFT) for human-parity voice triage pipelines.",
-      "Engineered high-performance, multi-tenant SPA applications, dynamic e-commerce pipelines, and custom reservation engines for premium commercial clients (including AI Soul Spa Salon) utilizing Next.js 15/16 and Tailwind CSS v4.",
-      "Eliminated heavy reliance on third-party CRMs by developing a secure, custom middleware and high-velocity lead-tracking data architecture that seamlessly mapped user lifecycles into automated text and voice engagement funnels.",
-      "Designed an advanced Technical SEO framework leveraging dynamic JSON-LD schemas and semantic HTML tailored for AI-Driven Search (SGE), driving a 900% increase in organic traffic and Top-3 web positions for competitive commercial keywords."
+      "Engineered end-to-end full-stack website migrations from legacy platforms to Next.js 15 App Router and Tailwind CSS integrated with headless Sanity CMS.",
+      "Designed custom Sanity Studio content models, schema structures, and complex GROQ queries for dynamic profile and service endpoints.",
+      "Configured dynamic metadata loops, alternate language tags, and automated XML sitemaps within Next.js to preserve organic search traffic during enterprise transitions.",
+      "Architected state management (Zustand, Context API) and RESTful/GraphQL API integrations, enforcing WCAG accessibility compliance and achieving zero-CLS layouts with sub-800ms response times."
     ],
     icons: [next, nest, postgres, redis, git],
   },
   {
-    title: "Founding Full-Stack & Core Platform Engineer",
-    company: "GetFusionChat (AI Startup Ecosystem)",
-    duration: "August 2021 - March 2025",
+    title: "Co-Founder & Principal Software Engineer",
+    company: "Get Fusion Chat",
+    duration: "Aug 2024 - Present",
     description: [
-      "Co-founded and architected a production-grade multi-tenant enterprise AI communication and analytical SaaS platform from a blank editor field to a fully operational, horizontally scaling cloud network.",
-      "Designed a highly resilient multi-tenant document schema inside MongoDB combined with an isolated Redis caching tier to isolate stateful conversation blocks per workspace, dropping primary read operations overhead by 65%.",
-      "Engineered high-velocity automated data ingestion and Graph RAG pipelines in Python to transform unstructured clinical and business logs into tightly indexed, context-aware vector knowledge models.",
-      "Built a custom distributed Token Bucket Rate Limiter inside Redis to strictly safeguard underlying LLM and third-party endpoints against transactional spikes and prevent system resource starvation.",
-      "Leveraged advanced agentic execution environments including Claude Code CLI and Cursor to accelerate development loops, boilerplate scaffolding, and automated unit testing (Jest), doubling shipment velocity."
+      "Co-founded and architected a multi-tenant web application utilizing React, Next.js, TypeScript, Python, and PostgreSQL.",
+      "Engineered modular UI components and editor workflows with Next.js Server Components and dynamic asset imports (next/dynamic), cutting bundle overhead by 77%.",
+      "Integrated automated CI/CD pipelines via GitHub Actions and deployed low-latency production applications on Vercel and cloud infrastructure.",
+      "Mentored engineering staff, established code review standards, and drove architectural discussions across cross-functional product teams."
     ],
     icons: [mongo, redis, next, react, nest, git, ts],
-  },
-  {
-    title: "Frontend Software Engineer",
-    company: "StreamTech",
-    duration: "March 2023 - March 2025",
-    description: [
-      "Engineered the core frontend systems of a tier-1 Central Asian sports betting platform supporting over 500,000 monthly active users and digesting dense, real-time WebSocket data updates for thousands of concurrent live match odds.",
-      "Enforced rigid architectural consistency by introducing Feature-Sliced Design (FSD) patterns, dividing complex business rules into a structured 7-layer hierarchy to slice onboarding overhead and technical debt by 40%.",
-      "Orchestrated a zero-downtime framework migration from React 14 to React 18, applying Concurrent Mode and Suspense strategies to preserve fluid interactive speeds during catastrophic traffic bursts.",
-      "Spearheaded enterprise dashboard UI modules utilizing FSD 'Entities' to capture comprehensive user risk profiling, maintaining state integrity across high-concurrency interfaces with TanStack Table and Redux Toolkit/MobX."
-    ],
-    icons: [react, ts, fsd, redux, git, websockets],
-  },
-  {
-    title: "Frontend Developer",
-    company: "DATAXWAY",
-    duration: "February 2022 - February 2023",
-    description: [
-      "Directed complete performance profile analyses across multiple extensive web systems, employing granular code-splitting and asset minification to slash Time to Interactive (TTI) benchmarks by 30%.",
-      "Collaborated intimately with internal engineering squads to lock in strict API contracts and automated JSON schema validation rules, expediting feature sprint shipments by 20%.",
-      "Maintained data flow across fast-paced Agile sprints using Redux Toolkit, managing complex global application states and binding real-time UI components cleanly with underlying RESTful endpoints."
-    ],
-    icons: [react, redux, git, ts, framer, angular],
-  },
-  {
-    title: "Full-Stack Developer",
-    company: "Discovery Studio",
-    duration: "August 2021 - February 2022",
-    description: [
-      "Engineered a cross-platform mobile festival application using React Native and Expo, integrating live event tracking systems, interactive vector map layouts, and local push schedules.",
-      "Enforced client-side persistence mechanisms via React Native AsyncStorage and Redux, protecting full application utility for attendees during periods of zero internet connectivity.",
-      "Built optimized CRUD endpoints and ironclad JWT-based authentication guards inside a cohesive MEAN stack layout to manage legacy enterprise modules and production data flows."
-    ],
-    icons: [react, antd, nest, postgres, git, jira, angular],
   }
 ];
 interface CompanyProps {
