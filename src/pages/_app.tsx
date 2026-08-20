@@ -22,7 +22,7 @@ const brandonGrotesque = localFont({
   ],
   variable: "--font-brandon",
 });
-
+console.log(process.version);
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const defaultTimeZone = "America/New_York";
